@@ -1,0 +1,7 @@
+ja:
+  enums:
+    rank:
+      rank:
+        first_place: "1位"
+        second_place: "2位"
+        third_place: "3位"

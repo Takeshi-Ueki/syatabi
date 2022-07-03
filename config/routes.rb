@@ -1,3 +1,36 @@
 Rails.application.routes.draw do
+
+  devise_for :users, skip: [:passwords], controllers: {
+    registrations: "public/registrations",
+    sessions: "public/sessions"
+  }
+
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
+    sessions: "admin/sessions"
+  }
+
+  scope module: :public do
+    root "homes#top"
+
+    get 'users/:id/check' => 'users#check', as: "user_check"
+    patch 'users/:id/withdraw' => 'users#withdraw', as: "user_withdraw"
+    resources :users, only: [:show, :edit, :update]
+
+    resources :ranks, only: [:new, :create, :destroy]
+    resources :lists, only: [:index, :create, :destroy]
+
+    get 'posts/search_tag'
+    resources :posts do
+      resource :post_comments, only: [:create, :destroy]
+      resource :favorites, only: [:create, :destroy]
+      resources :diaries, only: [:new, :create, :show, :edit, :update, :destroy]
+    end
+  end
+
+  namespace :admin do
+    resources :users, only: [:index, :show, :edit, :update]
+    resources :posts, only: [:index, :show, :edit, :update]
+  end
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
