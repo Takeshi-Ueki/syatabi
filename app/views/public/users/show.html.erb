@@ -1,2 +1,30 @@
-<h1>Public::Users#show</h1>
-<p>Find me in app/views/public/users/show.html.erb</p>
+<div class="row">
+  <div class="col-lg-6 offset-1">
+    <div class="row">
+      <div class="col-4">
+        <%= image_tag @user.get_profile_image(150, 150), class: "profile-img" %>
+      </div>
+      <div class="col-8">
+        <% if @user.profile.blank? %>
+          プロフィールを設定していません
+        <% else %>
+          <%= @user.profile %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col my-5">
+        <%= link_to "編集する", edit_user_path, class: "btn btn-success btn-lg" %>
+      </div>
+    </div>
+    <div class="row">
+      投稿がきます
+    </div>
+  </div>
+
+  <div class="col-lg-5">
+    <div>
+      ランキング
+    </div>
+  </div>
+</div>

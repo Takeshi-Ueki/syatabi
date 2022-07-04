@@ -1,0 +1,142 @@
+@import '~bootstrap/scss/bootstrap';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+body{
+  background-color: #DDD;
+  font-family:'メイリオ', 'Yu Gothic', '游ゴシック', YuGothic, 'Meiryo', sans-serif;
+  color: #555;
+}
+
+main{
+  margin-top: 100px;
+}
+
+ul{
+  padding-inline-start: 0 !important;
+}
+
+li{
+  list-style: none;
+}
+
+.logo{
+  z-index: 1;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  color: #555;
+  background-color: #DDD;
+}
+
+.btn{
+  border-radius: 30px;
+  padding: 10px 32px;
+}
+
+.form-label{
+  font-size: 0.75rem;
+}
+
+// サイドバー
+.open, .close{
+  display: none;
+}
+
+.menu-btn{
+  position: absolute;
+  top: -200px;
+  left: -200px;
+}
+
+
+.sidebar{
+  background: linear-gradient(to bottom, #222, #555);
+  height: 100vh;
+  li:nth-child(1){
+    margin-top: 200px;
+  }
+  .btn{
+    width: 200px;
+    background-color: #DDD;
+    color: #555;
+    font-size: 1.25rem;
+    border-radius: 30px;
+    box-shadow: 2px 2px 4px #222;
+  }
+  .btn:hover{
+    background-color: #BBB;
+  }
+}
+
+#logout_sidebar{
+  background: linear-gradient(to bottom, #EEE, #AAA);
+  // background-color: #FFF;
+  .btn{
+    background-color: #555;
+    color: #DDD;
+  }
+  .btn:hover{
+    background-color: #777;
+  }
+}
+
+// ログインフォーム
+.login-form{
+  border: solid 1px #555;
+  border-radius: 5px;
+}
+
+// public/user
+.profile-img{
+  border-radius: 50%;
+}
+
+
+
+
+@media screen and (max-width: 992px){
+  main {
+    width: 100%;
+  }
+
+  // サイドバー
+  .open, .close {
+    display: block;
+  }
+
+  .open {
+    position: absolute;
+    z-index: 2;
+    right: 30px;
+    top: 20px;
+    font-size: 2rem;
+    padding: 0 5px;
+    color: #BBB;
+  }
+
+  .sidebar{
+    position: absolute;
+    z-index: 1;
+    right: -250px;
+    min-height: 100vh;
+    width: 250px;
+    background-color: #333;
+    transition: all 0.2s;
+  }
+
+  input[type="checkbox"]:checked ~ .sidebar {
+    right: 0px;
+  }
+  input[type="checkbox"]:checked ~ .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(3,3,3,0.3);
+  }
+}
+
+@media screen and (max-width: 575px){
+  .login-form{
+    border: none;
+  }
+}
