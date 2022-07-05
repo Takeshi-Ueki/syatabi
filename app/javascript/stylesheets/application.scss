@@ -100,6 +100,16 @@ li{
   right: -50px;
 }
 
+.comment-wrapper{
+  border-top: 1px solid #555;
+  .comment-btn{
+    padding: 8px 16px;
+  }
+
+  .comment-delete-btn{
+    float: right;
+  }
+}
 @media screen and (max-width: 992px){
   main {
     width: 100%;
@@ -150,5 +160,8 @@ li{
 @media screen and (max-width: 575px){
   .login-form{
     border: none;
+  }
+  .post-show-img{
+    width: 350px;
   }
 }

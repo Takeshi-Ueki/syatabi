@@ -1,17 +1,52 @@
 <div class="row main-top">
-  <div class="col-10 offset-1">
+  <div class="col-12 col-xl-8 ml-xl-4">
     <% if @post.user == current_user %>
       <div class="text-right">
         <%= link_to "編集する", edit_post_path(@post.id), class: "btn btn-success" %>
       </div>
     <% end %>
+    <div class="p-3"><%= @post.body %></div>
     <div class="row mt-5 mb-3">
       <% @post.images.each do |image| %>
         <div class="col-12 text-center py-3">
-          <%= image_tag image.variant(resize_to_limit: [750, 750]) %>
+          <%= image_tag image.variant(resize_to_limit: [550, 550]), class: "post-show-img" %>
         </div>
       <% end %>
     </div>
-    <div class="p-3"><%= @post.body %></div>
+  </div>
+  <div class="col-8 col-xl-3 ml-xl-4">
+    <%= form_with model: [@post, @post_comment] do |f| %>
+      <div class="row">
+        <div class="col-12 my-3">
+            <%= image_tag @post.user.get_profile_image(75, 75), class: "profile-img ml-3" %>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="form-group col-12">
+          <%= f.text_area :comment, rows: '3', placeholder: "コメントを入力", class: "form-control" %>
+        </div>
+        <div class="col-12 text-right">
+          <%= f.submit "送信する", class: "btn btn-primary comment-btn" %>
+        </div>
+      </div>
+    <% end %>
+
+    <% @post.post_comments.each do |post_comment| %>
+      <div class="row my-4 comment-wrapper">
+        <div class="col-12 my-3">
+          <%= image_tag post_comment.user.get_profile_image(75, 75), class: "profile-img" %>
+          <span class="ml-2"><%= post_comment.user.name %></span>
+          <% if post_comment.user == current_user %>
+            <span class="comment-delete-btn mt-3">
+              <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "btn btn-danger comment-btn" %>
+            </span>
+          <% end %>
+        </div>
+        <div class="col-12">
+          <%= post_comment.comment %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

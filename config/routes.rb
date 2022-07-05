@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
     get 'posts/search_tag'
     resources :posts do
-      resource :post_comments, only: [:create, :destroy]
+      resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
       resources :diaries, only: [:new, :create, :show, :edit, :update, :destroy]
     end
