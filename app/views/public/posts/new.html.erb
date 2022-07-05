@@ -1,2 +1,30 @@
-<h1>Public::Posts#new</h1>
-<p>Find me in app/views/public/posts/new.html.erb</p>
+<div class="row main-top">
+  <div class="col-lg-6 mx-auto mb-5 p-3 text-center post-introduction">
+    <p>地図から場所を登録することができます</p>
+    <p>登録したい場所をクリックするとピンを立てられます</p>
+    <p>近くの場所まで検索で移動することができます</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-5 ml-lg-5">
+    <%= form_with model: @post do |f| %>
+      <div class="custom-file">
+        <%= f.label :images, "景色の画像(３枚まで投稿できます)", class: "custom-file-label" %>
+        <%= f.file_field :images, multiple: true, class: "custom-file-input" %>
+      </div>
+
+      <div class="form-group mt-5">
+        <%= f.label :body, "内容(255文字まで)" %>
+        <%= f.text_area :body, rows: "10", placeholder: "どこに行きましたか？", class: "form-control" %>
+      </div>
+
+      <div class="text-center my-5">
+        <%= f.submit "投稿する", class: "btn btn-primary post-btn" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-lg-6">
+    <div id="map">Mapがきます</div>
+  </div>
+</div>

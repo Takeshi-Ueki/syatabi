@@ -1,10 +1,11 @@
-<div class="row">
-  <div class="col-lg-6 offset-1">
-    <div class="row">
-      <div class="col-4">
-        <%= image_tag @user.get_profile_image(150, 150), class: "profile-img" %>
+<div class="row main-top">
+  <div class="col-lg-6 offset-lg-1">
+    <div class="row py-4">
+      <div class="col-12 col-md-6 col-xl-5 text-center">
+        <div><%= image_tag @user.get_profile_image(150, 150), class: "profile-img" %></div>
+        <div class="py-3"><%= @user.name %></div>
       </div>
-      <div class="col-8">
+      <div class="col-12 col-md-6 col-xl-7">
         <% if @user.profile.blank? %>
           プロフィールを設定していません
         <% else %>
@@ -13,12 +14,25 @@
       </div>
     </div>
     <div class="row text-center">
-      <div class="col my-5">
+      <div class="col mb-5 py-5">
         <%= link_to "編集する", edit_user_path, class: "btn btn-success btn-lg" %>
       </div>
     </div>
     <div class="row">
-      投稿がきます
+      <div class="col-12">
+        <% @posts.each do |post| %>
+          <%= link_to post_path(post.id) do %>
+            <div class="mb-5">
+              <div class="p-3">
+                <% post.images.each do |image| %>
+                  <%= image_tag image.variant(resize_to_limit: [200, 200]) %>
+                <% end %>
+              </div>
+              <div class="p-3"><%= post.body %></div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 

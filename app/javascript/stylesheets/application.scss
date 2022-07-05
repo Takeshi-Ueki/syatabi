@@ -2,14 +2,14 @@
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
 body{
-  background-color: #DDD;
+  background-color: #FFF;
   font-family:'メイリオ', 'Yu Gothic', '游ゴシック', YuGothic, 'Meiryo', sans-serif;
   color: #555;
 }
 
-main{
-  margin-top: 100px;
-}
+// main{
+//   padding-top: 100px;
+// }
 
 ul{
   padding-inline-start: 0 !important;
@@ -19,13 +19,21 @@ li{
   list-style: none;
 }
 
+.header{
+  height: 80px;
+  align-items: center;
+  // border-bottom: solid 2px #FF773E;
+  border-bottom: solid 2px #FFAD90;
+}
+
 .logo{
-  z-index: 1;
-  position: absolute;
-  top: 50px;
-  left: 50px;
   color: #555;
-  background-color: #DDD;
+  margin-bottom: 50px;
+}
+
+.main-top{
+  padding-top: 50px;
+  padding-bottom: 100px;
 }
 
 .btn{
@@ -48,35 +56,23 @@ li{
   left: -200px;
 }
 
-
 .sidebar{
-  background: linear-gradient(to bottom, #222, #555);
+  background: linear-gradient(to bottom, #FFC, #ff8856);
   height: 100vh;
   li:nth-child(1){
     margin-top: 200px;
   }
   .btn{
     width: 200px;
-    background-color: #DDD;
+    background-color: #FFF;
     color: #555;
     font-size: 1.25rem;
+    border: solid 2px #FF773E;
     border-radius: 30px;
-    box-shadow: 2px 2px 4px #222;
+    box-shadow: 2px 2px 4px #555;
   }
   .btn:hover{
     background-color: #BBB;
-  }
-}
-
-#logout_sidebar{
-  background: linear-gradient(to bottom, #EEE, #AAA);
-  // background-color: #FFF;
-  .btn{
-    background-color: #555;
-    color: #DDD;
-  }
-  .btn:hover{
-    background-color: #777;
   }
 }
 
@@ -91,8 +87,18 @@ li{
   border-radius: 50%;
 }
 
+// public/post
+.post-introduction{
+  background: #FFF;
+  font-size: 1.25rem;
+  border: solid 1px #555;
+  border-radius: 5px;
+}
 
-
+.post-btn{
+  position: absolute;
+  right: -50px;
+}
 
 @media screen and (max-width: 992px){
   main {
@@ -107,7 +113,7 @@ li{
   .open {
     position: absolute;
     z-index: 2;
-    right: 30px;
+    left: 30px;
     top: 20px;
     font-size: 2rem;
     padding: 0 5px;
@@ -117,7 +123,7 @@ li{
   .sidebar{
     position: absolute;
     z-index: 1;
-    right: -250px;
+    left: -250px;
     min-height: 100vh;
     width: 250px;
     background-color: #333;
@@ -125,13 +131,19 @@ li{
   }
 
   input[type="checkbox"]:checked ~ .sidebar {
-    right: 0px;
+    left: 0px;
   }
   input[type="checkbox"]:checked ~ .back {
     position: absolute;
     width: 100%;
     height: 100%;
     background: rgba(3,3,3,0.3);
+    z-index: 1;
+  }
+
+  // public/post
+  .post-btn{
+    position: static;
   }
 }
 

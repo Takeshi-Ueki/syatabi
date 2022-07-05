@@ -13,18 +13,19 @@
 
   <body>
     <div class="container-fluid">
-      <div class="logo">写旅</div>
-
       <div class="row">
 
         <input id="menu" class="menu-btn" type="checkbox" />
         <label for="menu" class="open"><i class="fas fa-bars"></i></label>
         <label for="menu" class="back"></label>
         <% if user_signed_in? %>
-          <aside id="" class="sidebar login_sidebar col-lg-3 text-center">
+          <aside class="sidebar login_sidebar col-lg-3 text-center">
             <label for="menu" class="close">×</label>
             <nav>
               <ul>
+                <li>
+                  <%= link_to "HOME", posts_path, class: "btn mb-4" %>
+                </li>
                 <li>
                   <%= link_to "マイページ", user_path(current_user.id), class: "btn mb-4" %>
                 </li>
@@ -56,9 +57,12 @@
             </li>
           </aside>
         <% end %>
-        <main class="col-lg-9">
+        <div class="col-lg-9">
+          <div class="row header">
+            <div class ="mx-auto logo mt-4">写旅</div>
+          </div>
           <%= yield %>
-        </main>
+        </div>
         <% if !user_signed_in? && !admin_signed_in? %>
           <aside id="logout_sidebar" class="sidebar col-lg-3 ml-auto text-center">
             <li>

@@ -1,2 +1,29 @@
-<h1>Public::Posts#edit</h1>
-<p>Find me in app/views/public/posts/edit.html.erb</p>
+<div class="row">
+  <div class="col-lg-5 ml-lg-5">
+    <%= form_with model: @post do |f| %>
+      <div class="custom-file">
+        <%= f.label :images, "景色の画像(３枚まで投稿できます)", class: "custom-file-label" %>
+        <%= f.file_field :images, multiple: true, class: "custom-file-input" %>
+      </div>
+
+      <div>
+        <% @post.images.each do |image| %>
+          <%= f.check_box :image_ids, { multiple: true }, image.id, false %>
+          <%= image_tag image.variant(resize_to_limit: [100, 100]) %>
+        <% end %>
+      </div>
+
+      <div class="form-group mt-5">
+        <%= f.label :body, "内容(255文字まで)" %>
+        <%= f.text_area :body, rows: "10", placeholder: "どこに行きましたか？", class: "form-control" %>
+      </div>
+
+      <div class="text-center my-5">
+        <%= f.submit "更新する", class: "btn btn-primary post-btn" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-lg-6">
+    <div id="map">Mapがきます</div>
+  </div>
+</div>
