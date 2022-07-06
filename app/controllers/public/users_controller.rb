@@ -14,8 +14,6 @@ class Public::UsersController < ApplicationController
       redirect_to user_path(@user.id)
     else
       render :edit
-      # @errors = @user.errors.full_messages
-      # redirect_to edit_user_path
     end
   end
 
@@ -23,6 +21,12 @@ class Public::UsersController < ApplicationController
   end
 
   def withdraw
+  end
+
+  def favorites
+    @user = User.find(params[:id])
+    favorites = Favorite.where(user_id: @user.id).pluck(:post_id)
+    @favorite_posts = Post.find(favorites)
   end
 
   private

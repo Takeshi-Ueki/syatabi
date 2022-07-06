@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'relationships/followings'
+    get 'relationships/followers'
+  end
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: "public/sessions"
@@ -12,14 +16,20 @@ Rails.application.routes.draw do
   scope module: :public do
     root "homes#top"
 
+    get 'users/:id/favorites' => 'users#favorites', as: "user_favorites"
     get 'users/:id/check' => 'users#check', as: "user_check"
     patch 'users/:id/withdraw' => 'users#withdraw', as: "user_withdraw"
-    resources :users, only: [:show, :edit, :update]
+    resources :users, only: [:show, :edit, :update] do
+      resource :relationships, only: [:create, :destroy]
+      get 'followings' => 'relationships#followings', as: "followings"
+      get 'followers' => 'relationships#followers', as: "followers"
+    end
 
     resources :ranks, only: [:new, :create, :destroy]
     resources :lists, only: [:index, :create, :destroy]
 
     get 'posts/search_tag'
+    get 'posts/:id/favorites' => 'posts#favorites', as: "post_favorites"
     resources :posts do
       resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]

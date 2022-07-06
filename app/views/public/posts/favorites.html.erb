@@ -1,0 +1,19 @@
+<div class="row main-top">
+  <% @favorite_users.each do |user| %>
+    <div class="col-12 col-md-10 col-lg-10 mx-auto favorite-list">
+      <%= link_to user_path(user.id) do %>
+        <div class="row p-3">
+          <div class="pl-2">
+            <%= image_tag user.get_profile_image(100, 100), class: "profile-img" %>
+          </div>
+          <div class="col-3 py-4">
+            <%= user.name %>
+          </div>
+          <div class="col-6">
+            <%= user.profile %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

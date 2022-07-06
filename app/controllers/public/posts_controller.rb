@@ -38,6 +38,12 @@ class Public::PostsController < ApplicationController
     end
   end
 
+  def favorites
+    @post = Post.find(params[:id])
+    favorites = Favorite.where(post_id: @post.id).pluck(:user_id)
+    @favorite_users = User.find(favorites)
+  end
+
   def destroy
   end
 

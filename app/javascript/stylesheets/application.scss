@@ -19,6 +19,10 @@ li{
   list-style: none;
 }
 
+a{
+  color: #555;
+}
+
 .header{
   height: 80px;
   align-items: center;
@@ -109,6 +113,18 @@ li{
   .comment-delete-btn{
     float: right;
   }
+}
+
+.favorite-btn{
+  font-size: 2rem;
+  color: #FFAD90;
+}
+
+.favorite-list{
+  border-bottom: 1px solid #FFAD90;
+}
+.favorite-list:hover{
+  background-color: #FFDBC9;
 }
 @media screen and (max-width: 992px){
   main {
