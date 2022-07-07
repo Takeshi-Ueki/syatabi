@@ -1,2 +1,38 @@
-<h1>Admin::Users#edit</h1>
-<p>Find me in app/views/admin/users/edit.html.erb</p>
+<div class="row main-top">
+  <div class="col-12 col-lg-8 mx-lg-auto">
+    <%=form_with model: @user, url: admin_user_path(@user.id) do |f| %>
+      <div class="row py-4">
+        <div class="col-12 col-md-6 col-xl-5 text-center">
+          <div>
+            <%= image_tag @user.get_profile_image(150, 150), class: "profile-img" %>
+          </div>
+          <div class="py-3"><%= @user.name %></div>
+        </div>
+        <div class="col-12 col-md-6 col-xl-7">
+          <% if @user.profile.blank? %>
+            プロフィールを設定していません
+          <% else %>
+            <%= @user.profile %>
+          <% end %>
+        </div >
+      </div>
+
+      <div class="row">
+        <div class="col-2 offset-3">
+          <%= f.radio_button :is_active, true %>
+          <%= f.label :is_active_true, "有効" %>
+        </div>
+        <div class="col-2 offset-2">
+          <%= f.radio_button :is_active, false %>
+          <%= f.label :is_active_false, "無効" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col text-center py-4">
+          <%= f.submit "変更する", class: "btn btn-success btn" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

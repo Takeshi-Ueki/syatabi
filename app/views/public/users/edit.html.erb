@@ -10,7 +10,6 @@
   <div class="col-10 offset-1">
     <%=form_with model: @user do |f| %>
 
-
       <div class="row">
         <div class="col-12 col-lg-2 offset-lg-2 text-center">
           <%= image_tag @user.get_profile_image(150, 150), class: "profile-img" %>
@@ -28,7 +27,6 @@
         </div>
       </div>
 
-
       <div class="row my-5">
         <div class="form-group col-12 col-md-10 mx-auto">
           <%= f.label :profile, "プロフィール(255文字まで)" %>
@@ -36,13 +34,18 @@
         </div>
       </div>
 
-
-      <div class="row mb-5">
+      <div class="row">
         <div class="mx-auto">
           <%= f.submit "保存", class: "btn btn-success btn-lg" %>
         </div>
       </div>
     <% end %>
+
+    <div class="row">
+      <div class="col text-right mr-5">
+        <%= link_to "退会する", user_check_path, class: "btn btn-danger btn-sm"%>
+      </div>
+    </div>
 
     <div class="row">
       ランキングがきます

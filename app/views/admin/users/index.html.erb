@@ -1,2 +1,26 @@
-<h1>Admin::Users#index</h1>
-<p>Find me in app/views/admin/users/index.html.erb</p>
+<div class="row main-top">
+  <% @users.each do |user| %>
+    <div class="col-12 col-md-10 col-lg-10 mx-auto user-list">
+      <%= link_to admin_user_path(user.id) do %>
+        <div class="row p-3 align-items-center">
+          <div class="pl-2">
+            <%= image_tag user.get_profile_image(100, 100), class: "profile-img" %>
+          </div>
+          <div class="col-3">
+            <%= user.name %>
+          </div>
+          <div class="col-6">
+            <%= user.profile %>
+          </div>
+          <div class="col-1">
+            <% if user.is_active %>
+              <span class="user-true align-middle">有効</span>
+            <% else %>
+              <span class="user-false align-middle">無効</span>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

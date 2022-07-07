@@ -1,2 +1,14 @@
-<h1>Public::Users#check</h1>
-<p>Find me in app/views/public/users/check.html.erb</p>
+<div class="row user-check-top">
+  <div class="col text-center">
+    <h1>本当に退会しますか？</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4 offset-2 text-center">
+    <%= link_to "退会しない", user_path(@user.id), class: "btn btn-primary btn-lg" %>
+  </div>
+  <div class="col-4 text-center">
+    <%= link_to "退会する", user_withdraw_path(@user.id), method: :patch, data: { confirm: "本当に退会してよろしいですか？"}, class: "btn btn-danger btn-lg" %>
+  </div>
+</div>

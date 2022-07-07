@@ -7,10 +7,6 @@ body{
   color: #555;
 }
 
-// main{
-//   padding-top: 100px;
-// }
-
 ul{
   padding-inline-start: 0 !important;
 }
@@ -91,6 +87,11 @@ a{
   border-radius: 50%;
 }
 
+.user-check-top{
+  padding-top: 150px;
+  padding-bottom: 100px;
+}
+
 // public/post
 .post-introduction{
   background: #FFF;
@@ -120,12 +121,29 @@ a{
   color: #FFAD90;
 }
 
-.favorite-list{
+.user-list, .post-list{
   border-bottom: 1px solid #FFAD90;
 }
-.favorite-list:hover{
+.user-list:hover, .post-list:hover{
   background-color: #FFDBC9;
 }
+
+// admin
+.user-status{
+  height: 100px;
+}
+
+.user-status{
+  font-size: 1.25rem;
+}
+
+.user-false{
+  color: red;
+}
+.user-true{
+  color: #93FFAB;
+}
+
 @media screen and (max-width: 992px){
   main {
     width: 100%;
