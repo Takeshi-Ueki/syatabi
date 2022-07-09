@@ -1,2 +1,9 @@
-<h1>Public::Posts#search_tag</h1>
-<p>Find me in app/views/public/posts/search_tag.html.erb</p>
+<div class="row pt-5">
+  <div class="col-12 col-md-10 mx-auto">
+    <% @tag_list.each do |tag| %>
+      <%= link_to "##{tag.name}", search_tag_path(tag_id: tag.id), class: "mr-2" %>
+    <% end %>
+  </div>
+</div>
+
+<%= render 'public/users/post_list', posts: @posts %>

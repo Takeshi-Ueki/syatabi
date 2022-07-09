@@ -20,7 +20,6 @@
         <label for="menu" class="back"></label>
         <% if user_signed_in? %>
           <aside class="sidebar login_sidebar col-lg-3 text-center">
-            <label for="menu" class="close">×</label>
             <nav>
               <ul>
                 <li>
@@ -39,9 +38,16 @@
                   <%= link_to "新規投稿", new_post_path, class: "btn mb-4" %>
                 </li>
                 <li>
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn" %>
+                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn mb-4" %>
                 </li>
+                <li></li>
               </ul>
+              <%= form_with url: search_path, method: :get do |f| %>
+                <div class="col-10 mx-auto">
+                  <%= f.search_field :word, class: "form-control search-input mb-2" %>
+                  <%= button_tag sanitize('<i class="fa fa-search"></i>'), type: "submit", class: "search-btn btn-outline-success align-middle" %>
+                </div>
+              <% end %>
             </nav>
           </aside>
         <% elsif admin_signed_in? %>
@@ -58,9 +64,9 @@
           </aside>
         <% end %>
         <div class="col-lg-9">
-          <div class="row header">
+          <header class="row header">
             <div class ="mx-auto logo mt-4">写旅</div>
-          </div>
+          </header>
           <%= yield %>
         </div>
         <% if !user_signed_in? && !admin_signed_in? %>

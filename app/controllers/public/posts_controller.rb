@@ -5,8 +5,13 @@ class Public::PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
-    @post.save
-    redirect_to posts_path
+    tag_list = params[:post][:tag_name].split(/,| /)
+    if @post.save
+      @post.save_tag(tag_list)
+      redirect_to posts_path
+    else
+      render :new
+    end
   end
 
   def index
@@ -15,16 +20,20 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @user = @post.user
+    @post_tags = @post.tags
     @post_comment = PostComment.new
   end
 
   def edit
     @post = Post.find(params[:id])
+    @tag_list = @post.tags.pluck(:name).join(',')
   end
 
   def update
     @post = Post.find(params[:id])
     image_update = params[:post][:image_ids]
+    tag_list = params[:post][:tag_name].split(/,| /)
     if image_update.present?
       image_update.each do |image_id|
         image= @post.images.find(image_id)
@@ -32,10 +41,16 @@ class Public::PostsController < ApplicationController
       end
     end
     if @post.update(post_params)
+      @post.save_tag(tag_list)
       redirect_to post_path(@post.id)
     else
       render :edit
     end
+  end
+
+  def destroy
+    Post.find(params[:id]).destroy
+    redirect_to user_path(current_user.id)
   end
 
   def favorites
@@ -44,10 +59,10 @@ class Public::PostsController < ApplicationController
     @favorite_users = User.find(favorites)
   end
 
-  def destroy
-  end
-
   def search_tag
+    @tag_list = Tag.all
+    @tag = Tag.find(params[:tag_id])
+    @posts = @tag.posts
   end
 
   private

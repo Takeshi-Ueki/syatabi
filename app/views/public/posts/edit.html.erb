@@ -18,6 +18,11 @@
         <%= f.text_area :body, rows: "10", placeholder: "どこに行きましたか？", class: "form-control" %>
       </div>
 
+      <div class="form-group mt-5">
+        <%= f.label :tag_name, "スペースか,(カンマ)で複数のタグを登録できます" %>
+        <%= f.text_field :tag_name, value: @tag_list, class: "form-control" %>
+      </div>
+
       <div class="text-center my-5">
         <%= f.submit "更新する", class: "btn btn-primary post-btn" %>
       </div>

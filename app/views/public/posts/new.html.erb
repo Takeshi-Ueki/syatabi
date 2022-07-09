@@ -19,6 +19,11 @@
         <%= f.text_area :body, rows: "10", placeholder: "どこに行きましたか？", class: "form-control" %>
       </div>
 
+      <div class="form-group mt-5">
+        <div>スペースか,(カンマ)で複数のタグを付ける事ができます</div>
+        <%= f.text_field :tag_name, placeholder: "例: 夜景 スカイツリー 東京都", class: "form-control" %>
+      </div>
+
       <div class="text-center my-5">
         <%= f.submit "投稿する", class: "btn btn-primary post-btn" %>
       </div>

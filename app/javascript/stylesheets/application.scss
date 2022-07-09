@@ -15,10 +15,6 @@ li{
   list-style: none;
 }
 
-a{
-  color: #555;
-}
-
 .header{
   height: 80px;
   align-items: center;
@@ -46,21 +42,25 @@ a{
 }
 
 // サイドバー
-.open, .close{
+.open{
   display: none;
 }
 
-.menu-btn{
-  position: absolute;
-  top: -200px;
-  left: -200px;
+input[type="checkbox"] {
+display: none;
 }
 
 .sidebar{
-  background: linear-gradient(to bottom, #FFC, #ff8856);
-  height: 100vh;
+  background-color: #FFAD90;
+  padding-right: 0;
+  padding-left: 0;
+  min-height: 100vh;
+  nav{
+    position: sticky;
+    top: 0;
+  }
   li:nth-child(1){
-    margin-top: 200px;
+    padding-top: 150px;
   }
   .btn{
     width: 200px;
@@ -74,6 +74,20 @@ a{
   .btn:hover{
     background-color: #BBB;
   }
+  .form-control{
+    border-radius: 20px;
+  }
+  .search-btn{
+    background-color: #FFF;
+    border-radius: 20px;
+    border: solid 1.5px #90ee90;
+    color: #90ee90;
+    font-size: 1.25rem;
+  }
+  input{
+    display: inline-block;
+    width: auto;
+  }
 }
 
 // ログインフォーム
@@ -86,11 +100,15 @@ a{
 .profile-img{
   border-radius: 50%;
 }
+.no-border:hover{
+  text-decoration: none;
+}
 
 .user-check-top{
   padding-top: 150px;
-  padding-bottom: 100px;
+  padding-bottom: 100p20;
 }
+
 
 // public/post
 .post-introduction{
@@ -121,12 +139,18 @@ a{
   color: #FFAD90;
 }
 
-.user-list, .post-list{
+.user-list,.post-list{
   border-bottom: 1px solid #FFAD90;
+  a{
+  color: #555;
+  }
 }
-.user-list:hover, .post-list:hover{
+.user-list:hover,.post-list:hover{
   background-color: #FFDBC9;
 }
+// .post-list:hover{
+//   background-color: #FFDBC9;
+// }
 
 // admin
 .user-status{
@@ -150,13 +174,12 @@ a{
   }
 
   // サイドバー
-  .open, .close {
+  .open{
     display: block;
   }
-
   .open {
-    position: absolute;
-    z-index: 2;
+    position: fixed;
+    z-index: 100;
     left: 30px;
     top: 20px;
     font-size: 2rem;
@@ -165,24 +188,32 @@ a{
   }
 
   .sidebar{
-    position: absolute;
-    z-index: 1;
+    position: fixed;
+    z-index: 300;
     left: -250px;
+    height: 100%;
     min-height: 100vh;
     width: 250px;
-    background-color: #333;
+    background-color: #FFAD90;
     transition: all 0.2s;
+    nav{
+      position: fixed;
+      top: 0;
+    }
+      li:nth-child(1){
+      padding-top: 100px;
+    }
   }
 
   input[type="checkbox"]:checked ~ .sidebar {
     left: 0px;
   }
   input[type="checkbox"]:checked ~ .back {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
-    background: rgba(3,3,3,0.3);
-    z-index: 1;
+    background: rgba(3,3,3,0.5);
+    z-index: 200;
   }
 
   // public/post

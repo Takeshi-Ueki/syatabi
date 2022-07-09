@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :public do
-    get 'relationships/followings'
-    get 'relationships/followers'
-  end
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: "public/sessions"
@@ -28,7 +24,8 @@ Rails.application.routes.draw do
     resources :ranks, only: [:new, :create, :destroy]
     resources :lists, only: [:index, :create, :destroy]
 
-    get 'posts/search_tag'
+    get 'searches/search', as: "search"
+    get 'posts/search_tag', as: "search_tag"
     get 'posts/:id/favorites' => 'posts#favorites', as: "post_favorites"
     resources :posts do
       resources :post_comments, only: [:create, :destroy]
