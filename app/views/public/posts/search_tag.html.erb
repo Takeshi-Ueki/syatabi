@@ -4,6 +4,12 @@
       <%= link_to "##{tag.name}", search_tag_path(tag_id: tag.id), class: "mr-2" %>
     <% end %>
   </div>
+
+  <div class="col-12 col-md-10 mx-auto text-center mt-5">
+    <%= link_to "新着順", search_tag_path(sort: 'created_at DESC', tag_id: @tag.id) %>
+    | <%= link_to "いいね順", search_tag_path(sort: 'post.favorites DESC', tag_id: @tag.id) %>
+  </div>
 </div>
 
-<%= render 'public/users/post_list', posts: @posts %>
+
+<%= render 'public/users/post_list', {posts: @posts} %>

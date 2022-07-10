@@ -45,6 +45,9 @@
               <div class="p-3">
                 <%= post.body %>
               </div>
+              <div class="text-right mr-3">
+                <%= l post.created_at %>
+              </div>
             </div>
           <% end %>
         </div>
@@ -52,12 +55,33 @@
     </div>
   </div>
 
-  <div class="col-lg-5">
+  <div class="col-lg-5 px-5">
     <div>
       ランキング
     </div>
     <div>
       <%= link_to "いいねした投稿", user_favorites_path(@user.id) %>
+    </div>
+     <div class="row">
+      <% @favorite_posts.each do |post| %>
+        <div class="col-12 post-list">
+          <%= link_to post_path(post.id) do %>
+            <div class="mb-5">
+              <div class="p-3 text-center">
+                <% post.images.each do |image| %>
+                  <%= image_tag image.variant(resize_to_limit: [200, 200]), class: "m-1"%>
+                <% end %>
+              </div>
+              <div class="p-3">
+                <%= post.body %>
+              </div>
+              <div class="text-right mr-3">
+                <%= l post.created_at %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

@@ -3,33 +3,25 @@
     <%= link_to "投稿", search_path(word: @word) %>
   </div>
   <div class="col-12 col-sm-2 mt-2">
-    <%= link_to "ユーザー名", search_path(word: @word, range: "User") %>
+    <%= link_to "ユーザー名", search_path(word: @word, range: "ユーザー名") %>
   </div>
   <div class="col-12 col-sm-2 mt-2">
-    <%= link_to "プロフィール", search_path(word: @word, range: "profile") %>
+    <%= link_to "プロフィール", search_path(word: @word, range: "プロフィール") %>
   </div>
 
 
 
-  <% if @range == "User" && @users.empty? %>
+  <% if @search_result.empty? %>
     <div class="col-12 col-md-10 col-lg-10 mx-auto mt-5 text-center">
-      "<%= @word %>" が名前に含まれているユーザーはいません
+      該当する検索結果はありません ( <%= @range %> : "<%= @word %>" )
     </div>
-  <% elsif @range == "profile" && @users.empty? %>
-    <div class="col-12 col-md-10 col-lg-10 mx-auto mt-5 text-center">
-      "<%= @word %>" がプロフィールに含まれているユーザーはいません
-    </div>
-  <% elsif @range == "User" || @range == "profile" %>
+  <% elsif @range == "ユーザー名" || @range == "プロフィール" %>
     <div class="col-12">
-      <%= render 'public/posts/user_list', users: @users %>
-    </div>
-  <% elsif @posts.empty? %>
-    <div class="col-12 col-md-10 col-lg-10 mx-auto mt-5 text-center">
-      "<%= @word %>" が含まれている投稿はありません
+      <%= render 'public/posts/user_list', users: @search_result %>
     </div>
   <% else %>
     <div class="col-12">
-      <%= render 'public/users/post_list', posts: @posts %>
+      <%= render 'public/users/post_list', posts: @search_result %>
     </div>
   <% end %>
 </div>

@@ -7,10 +7,26 @@ class Post < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :lists, dependent: :destroy
+  has_many :reposts, dependent: :destroy
 
   has_many :tags, through: :post_tags
 
   validates :body, presence: true, length: { maximum: 255 }
+  validate :image_precense, :image_size
+
+  def image_precense
+    if !images.attached? # ファイルがアタッチされていない場合
+      errors.add(:images, '画像ファイルが選択されていません')
+    end
+  end
+
+  def image_size
+    images.each do |image|
+      if image.blob.byte_size > 5.megabytes
+        errors.add(:images, "画像は一つのファイルを5MB以内にしてください")
+      end
+    end
+  end
 
   def get_image(width, height)
     image.variant(resize_to_limit: [width, height]).processed

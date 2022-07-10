@@ -1,4 +1,6 @@
-<div class="row main-top">
+<%= javascript_pack_tag 'post/new' %>
+
+<div class="row post-main-top">
   <div class="col-lg-6 mx-auto mb-5 p-3 text-center post-introduction">
     <p>地図から場所を登録することができます</p>
     <p>登録したい場所をクリックするとピンを立てられます</p>
@@ -6,30 +8,17 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-lg-5 ml-lg-5">
-    <%= form_with model: @post do |f| %>
-      <div class="custom-file">
-        <%= f.label :images, "景色の画像(３枚まで投稿できます)", class: "custom-file-label" %>
-        <%= f.file_field :images, multiple: true, class: "custom-file-input" %>
-      </div>
+<%= form_with model: @post do |f| %>
+  <div class="row">
 
-      <div class="form-group mt-5">
-        <%= f.label :body, "内容(255文字まで)" %>
-        <%= f.text_area :body, rows: "10", placeholder: "どこに行きましたか？", class: "form-control" %>
-      </div>
+    <%= render 'form', f: f %>
 
-      <div class="form-group mt-5">
-        <div>スペースか,(カンマ)で複数のタグを付ける事ができます</div>
-        <%= f.text_field :tag_name, placeholder: "例: 夜景 スカイツリー 東京都", class: "form-control" %>
-      </div>
+    <div class="col-10 mx-auto text-center my-5">
+      <%= f.hidden_field :lat %>
+      <%= f.hidden_field :long %>
+      <%= f.submit "投稿する", class: "btn btn-primary post-btn" %>
+    </div>
+    
+<% end %>
 
-      <div class="text-center my-5">
-        <%= f.submit "投稿する", class: "btn btn-primary post-btn" %>
-      </div>
-    <% end %>
-  </div>
-  <div class="col-lg-6">
-    <div id="map">Mapがきます</div>
-  </div>
-</div>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["MAP_API"] %>&callback=initMap"></script>

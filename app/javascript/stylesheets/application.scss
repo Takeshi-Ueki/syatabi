@@ -7,12 +7,67 @@ body{
   color: #555;
 }
 
+.box {
+  position   : relative;
+  overflow   : hidden;
+  height     : 80vh;
+}
+
+/* --- 背景の指定 ------------------------------------------- */
+.box .bgImg {
+  position   : absolute;
+  top        : 0;
+  left       : 0;
+  bottom     : 0;
+  right      : 0;
+  opacity    : 0;
+  animation  : bgAnime 28s infinite;   /* 4画像 × 各5s = 20s */
+  padding: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+/* --- 段差で背景画像のアニメーションを実行 ----------------- */
+.box .src1 {
+  background-image : url(/images/top1.jpg);   /* 背景の画像を指定 */
+}
+.box .src2 {
+  background-image : url(/images/top2.jpg);   /* 背景の画像を指定 */
+  animation-delay  : 7s;
+}
+.box .src3 {
+  background-image : url(/images/top3.jpg);   /* 背景の画像を指定 */
+  animation-delay  : 14s;
+}
+.box .src4 {
+  background-image : url(/images/top4.jpg);   /* 背景の画像を指定 */
+  animation-delay  : 21s;
+}
+
+@keyframes bgAnime {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  25% { opacity: 1; }
+  38% { opacity: 0; }
+100% { opacity: 0; }
+}
+
 ul{
   padding-inline-start: 0 !important;
 }
 
 li{
   list-style: none;
+}
+
+#map{
+ width: 100%;
+ height: 90%;
+}
+
+.show-map{
+  width: 600px;
+  height: 400px;
 }
 
 .header{
@@ -32,6 +87,10 @@ li{
   padding-bottom: 100px;
 }
 
+.main-bottom{
+  padding-bottom: 200px;
+}
+
 .btn{
   border-radius: 30px;
   padding: 10px 32px;
@@ -46,7 +105,7 @@ li{
   display: none;
 }
 
-input[type="checkbox"] {
+.menu-btn {
 display: none;
 }
 
@@ -90,6 +149,12 @@ display: none;
   }
 }
 
+.logout-sidebar{
+  li:nth-child(1){
+    padding-top: 200px;
+  }
+}
+
 // ログインフォーム
 .login-form{
   border: solid 1px #555;
@@ -106,7 +171,8 @@ display: none;
 
 .user-check-top{
   padding-top: 150px;
-  padding-bottom: 100p20;
+  padding-bottom: 100px;
+  padding-bottom: 100px;
 }
 
 
@@ -118,11 +184,10 @@ display: none;
   border-radius: 5px;
 }
 
-.post-btn{
-  position: absolute;
-  right: -50px;
+.post-main-top{
+  padding-top: 50px;
+  padding-bottom: 0px;
 }
-
 .comment-wrapper{
   border-top: 1px solid #555;
   .comment-btn{
@@ -132,6 +197,11 @@ display: none;
   .comment-delete-btn{
     float: right;
   }
+}
+
+.map-wrapper .btn{
+  border-radius: 3px;
+  padding: 6px 20px;
 }
 
 .favorite-btn{
@@ -148,9 +218,12 @@ display: none;
 .user-list:hover,.post-list:hover{
   background-color: #FFDBC9;
 }
-// .post-list:hover{
-//   background-color: #FFDBC9;
-// }
+
+.post-tag{
+  a{
+    color: #007bff;
+  }
+}
 
 // admin
 .user-status{
@@ -165,7 +238,7 @@ display: none;
   color: red;
 }
 .user-true{
-  color: #93FFAB;
+  color: #5BFF7F;
 }
 
 @media screen and (max-width: 992px){
@@ -200,8 +273,14 @@ display: none;
       position: fixed;
       top: 0;
     }
-      li:nth-child(1){
+    li:nth-child(1){
       padding-top: 100px;
+    }
+  }
+
+  .logout-sidebar{
+    li:nth-child(1){
+      padding-top: 200px;
     }
   }
 
@@ -217,9 +296,9 @@ display: none;
   }
 
   // public/post
-  .post-btn{
-    position: static;
-  }
+  // .post-btn{
+  //   position: static;
+  // }
 }
 
 @media screen and (max-width: 575px){
@@ -228,5 +307,9 @@ display: none;
   }
   .post-show-img{
     width: 350px;
+  }
+  .show-map{
+    width: 100vw;
+    height: 400px;
   }
 }

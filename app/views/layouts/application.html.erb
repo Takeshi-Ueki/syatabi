@@ -7,6 +7,7 @@
     <%= csp_meta_tag %>
 
     <link href="https://fonts.googleapis.com/earlyaccess/kokoro.css" rel="stylesheet">
+    <%= include_gon %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -19,7 +20,7 @@
         <label for="menu" class="open"><i class="fas fa-bars"></i></label>
         <label for="menu" class="back"></label>
         <% if user_signed_in? %>
-          <aside class="sidebar login_sidebar col-lg-3 text-center">
+          <aside class="sidebar col-lg-3 text-center">
             <nav>
               <ul>
                 <li>
@@ -51,12 +52,12 @@
             </nav>
           </aside>
         <% elsif admin_signed_in? %>
-          <aside id="" class="sidebar login_sidebar col-lg-3 text-center">
+          <aside class="sidebar col-lg-3 text-center">
             <li>
-              <%= link_to "投稿一覧",admin_posts_path, class: "btn mb-4" %>
+              <%= link_to "投稿一覧",admin_posts_path, class: "btn mb-5" %>
             </li>
             <li>
-              <%= link_to "ユーザー一覧",admin_users_path, class: "btn mb-4" %>
+              <%= link_to "ユーザー一覧",admin_users_path, class: "btn mb-5" %>
             </li>
             <li>
               <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn" %>
@@ -70,7 +71,7 @@
           <%= yield %>
         </div>
         <% if !user_signed_in? && !admin_signed_in? %>
-          <aside id="logout_sidebar" class="sidebar col-lg-3 ml-auto text-center">
+          <aside class="sidebar logout-sidebar col-lg-3 ml-auto text-center">
             <li>
               <%= link_to "新規登録", new_user_registration_path, class: "btn mb-5" %>
             </li>
@@ -81,9 +82,9 @@
         <% end %>
       </div>
     </div>
-  <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
-  <script>
-    bsCustomFileInput.init();
-  </script>
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+    <script>
+      bsCustomFileInput.init();
+    </script>
   </body>
 </html>
