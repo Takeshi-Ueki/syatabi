@@ -1,2 +1,38 @@
-<h1>Admin::Posts#index</h1>
-<p>Find me in app/views/admin/posts/index.html.erb</p>
+<div class="row main-top">
+  <% @posts.each do |post| %>
+    <div class="col-12 col-md-8 col mx-auto pb-5 post-list">
+      <%= link_to admin_post_path(post.id) do %>
+        <div class="row pt-3 align-items-center">
+          <div class="col-12 text-right col-sm-2">
+            <%= image_tag post.user.get_profile_image(100, 100), class: "profile-img" %>
+          </div>
+          <div class="col-12 col-sm-2">
+            <%= post.favorites.count %>件のいいね
+          </div>
+          <div class="col-12 px-3 col-sm-5">
+            <%= post.body %>
+          </div>
+          <div class="col-3">
+            <%= l post.created_at %>
+          </div>
+        </div>
+
+        <div class="row post-tag mt-3">
+          <div class="col-8 mx-auto">
+            <% post.tags.each do |tag| %>
+              <span class="mr-2">#<%= tag.name %></span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 text-center p-3">
+            <% post.images.each do |image| %>
+              <%= image_tag image.variant(resize_to_limit: [200, 200]), class: "post-show-img" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

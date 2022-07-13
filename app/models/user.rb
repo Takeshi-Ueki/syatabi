@@ -7,9 +7,12 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :ranks, dependent: :destroy
   has_many :post_comments, dependent: :destroy
+  has_many :diaries, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :lists, dependent: :destroy
   has_many :reposts, dependent: :destroy
+  has_many :repost_posts, through: :reposts, source: :post
+  has_many :list_posts, through: :lists, source: :post
 
   # フォローしたユーザー、フォローされたユーザー
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
@@ -18,6 +21,12 @@ class User < ApplicationRecord
   # 一覧画面で使う
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_relationships, source: :follower
+
+  has_one_attached :profile_image
+
+
+  validates :name, presence: true, length: { minimum: 2, maximum: 50 }
+  validates :profile, length: { maximum: 255 }
 
   # フォロー機能
   def follow(user_id)
@@ -32,11 +41,46 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
-  has_one_attached :profile_image
+  # 自分の投稿とリポストを取得する user/show画面で使用する
+  def posts_with_reposts
+    my_posts = []
+    posts.each do |post|
+      post.attached_at = post.created_at
+      my_posts << post
+    end
+    my_reposts = []
+    reposts_hash = Hash[*self.reposts.pluck(:post_id, :created_at).flatten]
+    repost_posts.each do |post|
+      post.attached_at = reposts_hash[post.id]
+      my_reposts << post
+    end
+    (my_posts + my_reposts).sort do |a, b|
+      b.attached_at <=> a.attached_at
+    end
+  end
 
-  validates :name, presence: true, length: { minimum: 2, maximum: 50 }
-  validates :profile, length: { maximum: 255 }
+  # 自分のフォローしている人の投稿とリポストと自分の投稿とリポストを取得する
+  def my_posts_with_follower_posts
+    my_posts = self.posts_with_reposts
 
+    following_posts = []
+    following_reposts = []
+    followings.each do |following|
+      following.posts.each do |post|
+        post.attached_at = post.created_at
+        following_posts << post
+      end
+      following_reposts_hash = Hash[*following.reposts.pluck(:post_id, :created_at).flatten]
+      following.repost_posts.each do |post|
+        post.attached_at = following_reposts_hash[post.id]
+        following_posts << post
+      end
+    end
+
+    (my_posts + following_posts + following_reposts).sort do |a, b|
+      b.attached_at <=> a.attached_at
+    end
+  end
 
   def get_profile_image(width, height)
     if !profile_image.attached?

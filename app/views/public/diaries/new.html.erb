@@ -1,2 +1,12 @@
-<h1>Public::Diaries#new</h1>
-<p>Find me in app/views/public/diaries/new.html.erb</p>
+<div class="row main-top">
+  <div class="col-10 mx-auto">
+    <%= form_with model: [@post, @diary] do |f| %>
+
+    <%= render 'form', f: f %>
+
+      <div class="text-center">
+        <%= f.submit "投稿する", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

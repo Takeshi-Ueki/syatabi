@@ -55,7 +55,9 @@ ActiveRecord::Schema.define(version: 2022_07_03_055034) do
   create_table "diaries", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id", null: false
+    t.string "title", null: false
     t.text "body", null: false
+    t.boolean "is_public", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_diaries_on_post_id"
@@ -74,6 +76,7 @@ ActiveRecord::Schema.define(version: 2022_07_03_055034) do
   create_table "lists", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id", null: false
+    t.string "memo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_lists_on_post_id"

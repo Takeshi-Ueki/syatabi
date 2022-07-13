@@ -1,2 +1,29 @@
-<h1>Public::Diaries#show</h1>
-<p>Find me in app/views/public/diaries/show.html.erb</p>
+<div class="row main-top">
+  <% if @diary.user == current_user || @diary.is_public  %>
+    <div class="col-8 mx-auto">
+      <div class="row my-5">
+        <div class="col p-3 diary-box">
+          <h2 class="p-1"><%= @diary.title %></h2>
+          <div class="p-3">
+            <%= @diary.body %>
+          </div>
+        </div>
+      </div>
+
+    <% if @diary.user == current_user %>
+      <div class="row">
+        <div class="col-3 offset-3 text-center">
+          <%= link_to "編集する", edit_post_diary_path(@post.id, @diary.id), class: "btn btn-success" %>
+        </div>
+        <div class="col-3 text-center">
+          <%= link_to "削除する", post_diary_path(@post.id, @diary.id), method: :delete, class: "btn btn-danger" %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  <% else %>
+    <div class="col-8 mx-auto text-center">
+      <h2>このDiaryは、非公開設定です</h2>
+    </div>
+  <% end %>
+</div>

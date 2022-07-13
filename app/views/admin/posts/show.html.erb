@@ -1,2 +1,86 @@
-<h1>Admin::Posts#show</h1>
-<p>Find me in app/views/admin/posts/show.html.erb</p>
+<%= javascript_pack_tag 'post/show' %>
+
+<div class="row main-top">
+  <div class="col-12 col-xl-8 ml-xl-4">
+    <div class="row align-items-center">
+      <div class="col-sm-2 offset-sm-1">
+        <%= link_to admin_user_path(@user.id) do %>
+          <%= image_tag @user.get_profile_image(100, 100), class: "profile-img" %>
+        <% end %>
+      </div>
+
+      <div class="col-5 col-sm-3">
+        <%= link_to "#{@post.favorites.count}件のいいね",post_favorites_path(@post.id), class: "mt-3" %>
+      </div>
+
+      <% if !@post.is_active %>
+        <div class="col-sm-5">
+          <span>この投稿は<strong class="post-false">無効</strong>に設定されています</span>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-6 mx-auto text-center">
+        <%= link_to "投稿を編集", edit_admin_post_path(@post.id), class: "btn btn-success" %>
+      </div>
+    </div>
+
+
+    <div class="row mt-5 px-5 py-2">
+      <%= @post.body %>
+    </div>
+
+    <div class="row px-5">
+      <% @post_tags.each do |tag| %>
+        <%= link_to "##{tag.name}", search_tag_path(tag_id: tag.id), class: "pr-2"%>
+      <% end %>
+    </div>
+
+    <div class="row">
+      <div class="col-10 mx-auto text-right">
+        <%= l @post.created_at %>
+      </div>
+    </div>
+
+    <div class="row mt-3 mb-3">
+      <% @post.images.each do |image| %>
+        <div class="col-12 text-center py-3">
+          <%= image_tag image.variant(resize_to_limit: [200, 200]), class: "post-show-img" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row">
+      <div class="col-10 mx-auto show-map">
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-xl-3 ml-xl-4">
+
+    <% @post_comments.each do |post_comment| %>
+      <div class="row my-4 comment-wrapper">
+        <div class="col-12 my-3">
+          <%= link_to(user_path(post_comment.user.id), class: "no-border") do %>
+            <%= image_tag post_comment.user.get_profile_image(75, 75), class: "profile-img" %>
+          <% end %>
+          <span class="ml-2"><%= post_comment.user.name %></span>
+          <% if post_comment.user == current_user %>
+            <span class="comment-delete-btn mt-3">
+              <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "btn btn-danger comment-btn" %>
+            </span>
+          <% end %>
+        </div>
+        <div class="col-12 mb-2">
+          <%= post_comment.comment %>
+        </div>
+        <div class="col-12 text-right">
+          <%= l post_comment.created_at %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["MAP_API"] %>&callback=initMap"></script>

@@ -1,0 +1,39 @@
+<div class="row main-top">
+  <div class="col-11 mx-auto">
+    <% if @posts.present? %>
+      <% @posts.each do |post| %>
+        <div class="row align-items-center">
+          <div class="col-10 mx-auto">
+            <% list = post.has_list(current_user) %>
+            <%= link_to post_path(post.id) do %>
+              <%= post.body %>
+              <%= l post.created_at %>
+            <% end %>
+          </div>
+          <div class="col-4 offset-1">
+            <%= form_with model: list, url: post_list_path(post.id, list.id) do |f| %>
+              <%= f.text_field :memo, placeholder: "メモ(50文字まで)" %>
+              <% if list.memo.blank? %>
+                <%= f.submit "作成", class: "btn btn-sm btn-primary list-btn" %>
+              <% else %>
+                <%= f.submit "更新", class: "btn btn-sm btn-success list-btn"  %>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="col-3">
+            保存日<%= l list.created_at %>
+          </div>
+          <div class="col-3">
+            <%= link_to "リストから削除", post_list_path(post.id, list.id), method: :delete, class: "btn btn-sm btn-danger list-btn" %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="row">
+        <div class="col  text-center">
+          <h4>行きたいところリストはありません</h2>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

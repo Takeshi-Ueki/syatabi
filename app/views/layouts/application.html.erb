@@ -33,7 +33,7 @@
                   <%= link_to "ランキング", '#', class: "btn mb-4" %>
                 </li>
                 <li>
-                  <%= link_to "リスト", lists_path, class: "btn mb-4" %>
+                  <%= link_to "リスト", user_lists_path(current_user), class: "btn mb-4" %>
                 </li>
                 <li>
                   <%= link_to "新規投稿", new_post_path, class: "btn mb-4" %>
@@ -53,15 +53,19 @@
           </aside>
         <% elsif admin_signed_in? %>
           <aside class="sidebar col-lg-3 text-center">
-            <li>
-              <%= link_to "投稿一覧",admin_posts_path, class: "btn mb-5" %>
-            </li>
-            <li>
-              <%= link_to "ユーザー一覧",admin_users_path, class: "btn mb-5" %>
-            </li>
-            <li>
-              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn" %>
-            </li>
+            <nav>
+              <ul>
+                <li>
+                  <%= link_to "投稿一覧",admin_posts_path, class: "btn mb-5" %>
+                </li>
+                <li>
+                  <%= link_to "ユーザー一覧",admin_users_path, class: "btn mb-5" %>
+                </li>
+                <li>
+                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn" %>
+                </li>
+              </ul>
+            </nav>
           </aside>
         <% end %>
         <div class="col-lg-9">

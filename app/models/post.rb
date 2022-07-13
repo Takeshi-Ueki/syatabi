@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
   has_many_attached :images
 
+  attribute :attached_at, :datetime
+
   belongs_to :user
   has_one :diary, dependent: :destroy
   has_many :post_tags, dependent: :destroy
@@ -13,6 +15,9 @@ class Post < ApplicationRecord
 
   validates :body, presence: true, length: { maximum: 255 }
   validate :image_precense, :image_size
+
+  scope :tag_posts, -> (tag_id) {where(id: PostTag.where(tag_id: tag_id).pluck(:post_id))}
+  scope :no_favorite_posts, -> {where.not(id: Favorite.pluck(:post_id).uniq).order(created_at: :desc)}
 
   def image_precense
     if !images.attached? # ファイルがアタッチされていない場合
@@ -35,6 +40,18 @@ class Post < ApplicationRecord
   # 投稿をいいねしているか判断
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
+  end
+
+  def reposted_by?(user)
+    reposts.exists?(user_id: user.id)
+  end
+
+  def listed_by?(user)
+    lists.exists?(user_id: user.id)
+  end
+  
+  def has_list(user)
+    list = self.lists.find_by(user_id: user.id)
   end
 
   def save_tag(sent_tags)

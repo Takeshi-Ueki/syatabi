@@ -1,6 +1,6 @@
 require "test_helper"
 
-class Public::RepostControllerTest < ActionDispatch::IntegrationTest
+class Public::RepostsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
