@@ -10,12 +10,12 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :lists, dependent: :destroy
   has_many :reposts, dependent: :destroy
-  has_many :ranks, dependent: :destroy
+  has_one :rank, dependent: :destroy
 
   has_many :tags, through: :post_tags
 
   validates :body, presence: true, length: { maximum: 255 }
-  validate :image_precense, :image_size
+  validate :image_precense, :image_size, :image_length
 
   scope :tag_posts, -> (tag_id) {where(id: PostTag.where(tag_id: tag_id).pluck(:post_id))}
   scope :no_favorite_posts, -> {where.not(id: Favorite.pluck(:post_id).uniq).order(created_at: :desc)}
@@ -31,6 +31,12 @@ class Post < ApplicationRecord
       if image.blob.byte_size > 5.megabytes
         errors.add(:images, "画像は一つのファイルを5MB以内にしてください")
       end
+    end
+  end
+
+  def image_length
+    if images.length > 3
+      errors.add(:images, "画像は3枚以内にしてください")
     end
   end
 
