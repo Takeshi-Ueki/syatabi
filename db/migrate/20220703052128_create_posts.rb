@@ -1,6 +1,6 @@
 class CreatePosts < ActiveRecord::Migration[6.1]
   def change
-    create_table :posts do |t|
+    create_table :posts, id: :integer do |t|
       t.references :user, type: :bigint, null: false, foreign_key: true
       t.string :body, null: false
       t.decimal :lat
