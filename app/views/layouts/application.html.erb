@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <link href="https://fonts.googleapis.com/earlyaccess/kokoro.css" rel="stylesheet">
     <%= include_gon %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -75,13 +73,17 @@
           <%= yield %>
         </div>
         <% if !user_signed_in? && !admin_signed_in? %>
-          <aside class="sidebar logout-sidebar col-lg-3 ml-auto text-center">
-            <li>
-              <%= link_to "新規登録", new_user_registration_path, class: "btn mb-5" %>
-            </li>
-            <li>
-              <%= link_to "ログイン", new_user_session_path, class: "btn" %>
-            </li>
+          <aside class="sidebar logout-sidebar col-lg-3 text-center">
+            <nav>
+              <ul>
+                <li>
+                  <%= link_to "新規登録", new_user_registration_path, class: "btn mb-5" %>
+                </li>
+                <li>
+                  <%= link_to "ログイン", new_user_session_path, class: "btn" %>
+                </li>
+              </ul>
+            </nav>
           </aside>
         <% end %>
       </div>

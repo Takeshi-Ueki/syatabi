@@ -3,4 +3,8 @@ class Rank < ApplicationRecord
 
   belongs_to :user
   belongs_to :post
+
+  def rank_replace(post_rank)
+
+  end
 end

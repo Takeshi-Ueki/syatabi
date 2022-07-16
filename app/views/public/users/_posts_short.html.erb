@@ -1,0 +1,17 @@
+<div class="col-12 post-list">
+  <%= link_to post_path(post.id) do %>
+    <div class="mb-5">
+      <div class="p-3 text-center">
+        <% post.images.each do |image| %>
+          <%= image_tag image.variant(resize_to_limit: size), class: "m-1"%>
+        <% end %>
+      </div>
+      <div class="p-3">
+        <%= post.body %>
+      </div>
+      <div class="text-right mr-3">
+        <%= l post.created_at %>
+      </div>
+    </div>
+  <% end %>
+</div>

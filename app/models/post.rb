@@ -10,6 +10,7 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :lists, dependent: :destroy
   has_many :reposts, dependent: :destroy
+  has_many :ranks, dependent: :destroy
 
   has_many :tags, through: :post_tags
 
@@ -49,7 +50,7 @@ class Post < ApplicationRecord
   def listed_by?(user)
     lists.exists?(user_id: user.id)
   end
-  
+
   def has_list(user)
     list = self.lists.find_by(user_id: user.id)
   end

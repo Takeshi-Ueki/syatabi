@@ -1,55 +1,11 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
+// 共通
 body{
   background-color: #FFF;
   font-family:'メイリオ', 'Yu Gothic', '游ゴシック', YuGothic, 'Meiryo', sans-serif;
-  color: #555;
-}
-
-.box {
-  position   : relative;
-  overflow   : hidden;
-  height     : 80vh;
-}
-
-/* --- 背景の指定 ------------------------------------------- */
-.box .bgImg {
-  position   : absolute;
-  top        : 0;
-  left       : 0;
-  bottom     : 0;
-  right      : 0;
-  opacity    : 0;
-  animation  : bgAnime 28s infinite;   /* 4画像 × 各5s = 20s */
-  padding: 0;
-  background-size: cover;
-  background-position: center;
-}
-
-/* --- 段差で背景画像のアニメーションを実行 ----------------- */
-.box .src1 {
-  background-image : url(/images/top1.jpg);   /* 背景の画像を指定 */
-}
-.box .src2 {
-  background-image : url(/images/top2.jpg);   /* 背景の画像を指定 */
-  animation-delay  : 7s;
-}
-.box .src3 {
-  background-image : url(/images/top3.jpg);   /* 背景の画像を指定 */
-  animation-delay  : 14s;
-}
-.box .src4 {
-  background-image : url(/images/top4.jpg);   /* 背景の画像を指定 */
-  animation-delay  : 21s;
-}
-
-@keyframes bgAnime {
-  0% { opacity: 0; }
-  10% { opacity: 1; }
-  25% { opacity: 1; }
-  38% { opacity: 0; }
-100% { opacity: 0; }
+  color: #000;
 }
 
 ul{
@@ -65,11 +21,6 @@ li{
  height: 90%;
 }
 
-.show-map{
-  width: 600px;
-  height: 400px;
-}
-
 .header{
   height: 80px;
   align-items: center;
@@ -80,7 +31,6 @@ li{
   color: #555;
   margin-bottom: 50px;
 }
-
 .main-top{
   padding-top: 50px;
   padding-bottom: 100px;
@@ -97,6 +47,77 @@ li{
 
 .form-label{
   font-size: 0.75rem;
+}
+
+.border-box{
+  border: solid 1px #FFAD90;
+  border-radius: 5px;
+}
+
+
+// top画面
+.box {
+  position: relative;
+  overflow: hidden;
+  height: 95vh;
+}
+
+/*  背景の指定  */
+.box .bgImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  animation: bgAnime 28s infinite;   /* 4画像 × 各5s = 20s */
+  padding: 0;
+  background-size: cover;
+  background-position: bottom;
+}
+/* 背景画像のアニメーションを実行 */
+.box .src1 {
+  background-image : url(/images/bg1.jpg);   /* 背景の画像を指定 */
+}
+.box .src2 {
+  background-image : url(/images/bg2.jpg);   /* 背景の画像を指定 */
+  animation-delay  : 7s;
+}
+.box .src3 {
+  background-image : url(/images/bg3.jpg);   /* 背景の画像を指定 */
+  animation-delay  : 14s;
+}
+.box .src4 {
+  background-image : url(/images/bg4.jpg);   /* 背景の画像を指定 */
+  animation-delay  : 21s;
+}
+
+@keyframes bgAnime {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  25% { opacity: 1; }
+  38% { opacity: 0; }
+100% { opacity: 0; }
+}
+
+.top-message{
+  padding: 10px;
+}
+.top-btn{
+  display: none;
+  .btn{
+    background-color: #FFAD90;
+    border: solid 1px #FF773E;
+    color: #FFF;
+  }
+}
+
+.top{
+  padding-top: 150px;
+}
+
+.top-massege{
+  font-weight: bold;
 }
 
 // サイドバー
@@ -156,8 +177,6 @@ display: none;
 
 // ログインフォーム
 .login-form{
-  border: solid 1px #FFAD90;
-  border-radius: 5px;
   .btn{
     background-color: #FFAD90;
     border: solid 1px #FF773E;
@@ -178,6 +197,10 @@ display: none;
   padding-bottom: 100px;
 }
 
+.show-favorite-box{
+
+}
+
 
 // public/post
 .post-introduction{
@@ -191,6 +214,12 @@ display: none;
   padding-top: 50px;
   padding-bottom: 0px;
 }
+
+.show-map{
+  width: 600px;
+  height: 400px;
+}
+
 .comment-wrapper{
   border-top: 1px solid #555;
   .comment-btn{
@@ -259,6 +288,14 @@ display: none;
   }
 }
 
+// public/rank
+.rank-form-img{
+  min-height: 232px;
+}
+.rank-form{
+  width: 200px;
+  font-size: 0.85rem;
+}
 
 // admin
 .user-status{
@@ -282,6 +319,9 @@ display: none;
     width: 100%;
   }
 
+  .top-btn{
+    display: block;
+  }
   // サイドバー
   .open{
     display: block;
@@ -337,7 +377,16 @@ display: none;
   // }
 }
 
-@media screen and (max-width: 575px){
+@media screen and (max-width: 540px){
+  .box {
+    height: 60vh;
+  }
+  .top-message-box{
+    background-color: rgba(3,3,3,0.3);
+  }
+  .top-message{
+    color: #FFF;
+  }
   .login-form{
     border: none;
   }

@@ -17,12 +17,12 @@ Rails.application.routes.draw do
     get 'users/:id/check' => 'users#check', as: "user_check"
     patch 'users/:id/withdraw' => 'users#withdraw', as: "user_withdraw"
     resources :users, only: [:show, :edit, :update] do
+      resource :ranks, only: [:new]
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: "followings"
       get 'followers' => 'relationships#followers', as: "followers"
     end
 
-    resources :ranks, only: [:new, :create, :destroy]
 
     get 'searches/search', as: "search"
     get 'posts/search_tag', as: "search_tag"
@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
       resources :lists, only: [:create, :update, :destroy]
+      resources :ranks, only: [:create, :destroy]
       resource :reposts, only: [:create, :destroy]
       resources :diaries, only: [:new, :create, :show, :edit, :update, :destroy]
     end

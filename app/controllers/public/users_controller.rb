@@ -4,6 +4,7 @@ class Public::UsersController < ApplicationController
     @posts = @user.posts_with_reposts
     favorites = Favorite.where(user_id: @user.id).order(created_at: :desc).first(5).pluck(:post_id)
     @favorite_posts = Post.find(favorites)
+    @ranks = @user.ranks
   end
 
   def edit
@@ -32,13 +33,13 @@ class Public::UsersController < ApplicationController
 
   def favorites
     @user = User.find(params[:id])
-    favorites = Favorite.where(user_id: @user.id).order(created_at: :desc).pluck(:post_id)
+    favorites = @user.favorites.order(created_at: :desc).pluck(:post_id)
     @favorite_posts = Post.find(favorites)
   end
 
   def lists
     @user = User.find(params[:id])
-    lists = List.where(user_id: @user.id).order(created_at: :desc).pluck(:post_id)
+    lists = @user.lists.order(created_at: :desc).pluck(:post_id)
     @posts = Post.find(lists)
   end
 
