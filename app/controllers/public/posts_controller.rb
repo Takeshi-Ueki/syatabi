@@ -6,6 +6,7 @@ class Public::PostsController < ApplicationController
   end
 
   def create
+    Rails.logger.debug post_params
     @post = current_user.posts.new(post_params)
     tag_list = params[:post][:tag_name].split(/,| /)
     if @post.save
