@@ -1,5 +1,5 @@
 class Public::RanksController < ApplicationController
-  def new
+  def index
     @posts = current_user.posts
     @rank = Rank.new
   end
@@ -16,8 +16,6 @@ class Public::RanksController < ApplicationController
         @rank.save
       end
     end
-    # current_rank = @ranks.find_by(user_id: current_user.id)
-    # @rank.rank_replace(@rank) if current_rank.present?
     redirect_to user_path(current_user)
   end
 

@@ -139,7 +139,6 @@ GEM
     minitest (5.16.1)
     msgpack (1.5.2)
     multi_json (1.15.0)
-    mysql2 (0.5.4)
     nio4r (2.5.8)
     nokogiri (1.13.6)
       mini_portile2 (~> 2.8.0)
@@ -270,7 +269,6 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   kaminari (~> 1.2.1)
   listen (~> 3.3)
-  mysql2
   pry-byebug
   puma (~> 3.11)
   rack-mini-profiler (~> 2.0)

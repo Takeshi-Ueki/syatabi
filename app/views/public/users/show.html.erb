@@ -89,7 +89,7 @@
       </div>
       <% if @user == current_user %>
         <div class="col-12 text-center">
-          <%= link_to "ランキングを設定する", new_ranks_path %>
+          <%= link_to "ランキングを設定する", user_ranks_path(@user.id) %>
         </div>
       <% end %>
       <div class="col-12">

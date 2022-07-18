@@ -16,8 +16,8 @@ Rails.application.routes.draw do
     get 'users/:id/lists' => 'users#lists', as: "user_lists"
     get 'users/:id/check' => 'users#check', as: "user_check"
     patch 'users/:id/withdraw' => 'users#withdraw', as: "user_withdraw"
-    resource :ranks, only: [:new, :edit]
     resources :users, only: [:show, :edit, :update] do
+      resources :ranks, only: [:index]
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: "followings"
       get 'followers' => 'relationships#followers', as: "followers"

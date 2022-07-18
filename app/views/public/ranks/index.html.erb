@@ -1,4 +1,4 @@
-<%= form_with model: @ranks, url: post_ranks_path(@posts.take.id) do |f| %>
+<%= form_with model: @rank, url: post_ranks_path(@posts.take.id) do |f| %>
   <div class="row main-top">
     <% @posts.each_with_index do |post, i| %>
       <div class="col-11 col-md-5 mx-auto ml-md-5 my-5 text-center border-box form-group">
@@ -11,7 +11,7 @@
         <div>
           投稿日: <%= l post.created_at %>
         </div>
-        <%= f.select :rank, Rank.ranks.keys.map {|rank| [Rank.ranks_i18n[rank], "#{post.id}-#{rank}"]}, { include_blank: "順位を選択してください" }, name: "rank[#{i}][post_id_rank_pair]", class: "form-control mx-auto rank-form my-3" %>
+        <%= f.select :rank, Rank.ranks.keys.map {|rank| [Rank.ranks_i18n[rank], "#{post.id}-#{rank}"]}, { include_blank: "順位を選択してください" }, name: "rank[#{i}][post_id_rank_pair]", id: "#{post.id}-rank", class: "form-control mx-auto rank-form my-3" %>
       </div>
     <% end %>
     <div class="col-12 text-center">
@@ -19,3 +19,5 @@
     </div>
   </div>
 <% end %>
+
+<%= javascript_pack_tag 'rank/rank' %>
