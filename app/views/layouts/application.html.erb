@@ -18,53 +18,9 @@
         <label for="menu" class="open"><i class="fas fa-bars"></i></label>
         <label for="menu" class="back"></label>
         <% if user_signed_in? %>
-          <aside class="sidebar col-lg-3 text-center">
-            <nav>
-              <ul>
-                <li>
-                  <%= link_to "HOME", posts_path, class: "btn mb-4" %>
-                </li>
-                <li>
-                  <%= link_to "マイページ", user_path(current_user.id), class: "btn mb-4" %>
-                </li>
-                <li>
-                  <%= link_to "ランキング", user_ranks_path(current_user), class: "btn mb-4" %>
-                </li>
-                <li>
-                  <%= link_to "リスト", user_lists_path(current_user), class: "btn mb-4" %>
-                </li>
-                <li>
-                  <%= link_to "新規投稿", new_post_path, class: "btn mb-4" %>
-                </li>
-                <li>
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn mb-4" %>
-                </li>
-                <li></li>
-              </ul>
-              <%= form_with url: search_path, method: :get do |f| %>
-                <div class="col-10 mx-auto">
-                  <%= f.search_field :word, class: "form-control search-input mb-2" %>
-                  <%= button_tag sanitize('<i class="fa fa-search"></i>'), type: "submit", class: "search-btn btn-outline-success align-middle" %>
-                </div>
-              <% end %>
-            </nav>
-          </aside>
+          <%= render 'layouts/user_sidebar' %>
         <% elsif admin_signed_in? %>
-          <aside class="sidebar col-lg-3 text-center">
-            <nav>
-              <ul>
-                <li>
-                  <%= link_to "投稿一覧",admin_posts_path, class: "btn mb-5" %>
-                </li>
-                <li>
-                  <%= link_to "ユーザー一覧",admin_users_path, class: "btn mb-5" %>
-                </li>
-                <li>
-                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn" %>
-                </li>
-              </ul>
-            </nav>
-          </aside>
+          <%= render 'layouts/admin_sidebar' %>
         <% end %>
         <div class="col-lg-9">
           <header class="row header">
@@ -73,18 +29,7 @@
           <%= yield %>
         </div>
         <% if !user_signed_in? && !admin_signed_in? %>
-          <aside class="sidebar logout-sidebar col-lg-3 text-center">
-            <nav>
-              <ul>
-                <li>
-                  <%= link_to "新規登録", new_user_registration_path, class: "btn mb-5" %>
-                </li>
-                <li>
-                  <%= link_to "ログイン", new_user_session_path, class: "btn" %>
-                </li>
-              </ul>
-            </nav>
-          </aside>
+          <%= render 'layouts/logout_sidebar' %>
         <% end %>
       </div>
     </div>

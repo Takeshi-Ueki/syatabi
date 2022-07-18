@@ -1,0 +1,15 @@
+<aside class="sidebar col-lg-3 text-center">
+  <nav>
+    <ul>
+      <li>
+        <%= link_to "投稿一覧",admin_posts_path, class: "btn mb-5" %>
+      </li>
+      <li>
+        <%= link_to "ユーザー一覧",admin_users_path, class: "btn mb-5" %>
+      </li>
+      <li>
+        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn" %>
+      </li>
+    </ul>
+  </nav>
+</aside>

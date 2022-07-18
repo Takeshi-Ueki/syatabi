@@ -54,6 +54,19 @@ li{
   border-radius: 5px;
 }
 
+.pagination{
+  justify-content: center;
+  .active{
+    .page-link{
+      background-color: #FFAD90;
+      border-color: #FF773E;
+    }
+  }
+  .page-item a{
+    color: #FF773E;
+  }
+}
+
 
 // top画面
 .box {
