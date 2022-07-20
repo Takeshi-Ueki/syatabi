@@ -13,6 +13,30 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+      models:
+        user:
+          attributes:
+            email:
+              taken: "は既に使用されています。"
+              blank: "が入力されていません。"
+              too_short: "は%{count}文字以上に設定して下さい。"
+              too_long: "は%{count}文字以下に設定して下さい。"
+              invalid: "は有効でありません。"
+            name:
+              blank: "を入力してください"
+              too_short: "は%{count}文字以上に設定して下さい。"
+              too_long: "は%{count}文字以下に設定して下さい。"
+              invalid: "は有効でありません"
+            profile:
+              too_long: "は%{count}文字以下に設定して下さい。"
+    attributes:
+      user:
+        name: 名前
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "確認用パスワード"
+        profile: "プロフィール"
+
   date:
     abbr_day_names:
     - 日

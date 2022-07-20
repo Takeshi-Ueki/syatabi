@@ -44,6 +44,27 @@ li{
   border-radius: 30px;
   padding: 10px 32px;
 }
+.btn-success{
+  background-color: #7ACC7D;
+  border-color: #7ACC7D;
+}
+.btn-success:hover{
+  background-color: #28a745;
+}
+.btn-danger{
+  background-color: #CC5652;
+  border-color: #CC5652;
+}
+.btn-danger:hover{
+  background-color: red;
+}
+.btn-primary{
+  background-color: #3298dc;
+  border-color: #3298dc;
+}
+.btn-primary:hover{
+  background-color: #007bff;
+}
 
 .form-label{
   font-size: 0.75rem;
@@ -67,6 +88,13 @@ li{
   }
 }
 
+.notice{
+  background-color: #CCFFFF;
+}
+
+.error-massege{
+  background-color: #FA9996;
+}
 
 // top画面
 .box {

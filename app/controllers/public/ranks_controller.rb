@@ -16,7 +16,7 @@ class Public::RanksController < ApplicationController
         @rank.save
       end
     end
-    redirect_to user_path(current_user)
+    redirect_to user_path(current_user), notice: 'ランキングを設定しました'
   end
 
   def edit

@@ -1,9 +1,9 @@
 <%if @user.errors.any? %>
-  <ul class="error-massege col-12">
+  <div class="error-massege row p-2">
     <% @user.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+      <div class="col-12 p-1"><%= message %></div>
     <% end %>
-  </ul>
+  </div>
 <% end %>
 
 <div class="row main-top">

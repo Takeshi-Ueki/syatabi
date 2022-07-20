@@ -18,3 +18,7 @@ import '@fortawesome/fontawesome-free/js/all'
 Rails.start()
 // Turbolinks.start()
 ActiveStorage.start()
+
+$(function(){
+  $('.notice').fadeOut(6000);
+});
