@@ -1,12 +1,14 @@
 class Public::RelationshipsController < ApplicationController
   def create
-    current_user.follow(params[:user_id])
-    redirect_to request.referer
+    @user = User.find(params[:user_id])
+    current_user.follow(@user.id)
+    render 'replace_follow'
   end
 
   def destroy
-    current_user.unfollow(params[:user_id])
-    redirect_to request.referer
+    @user = User.find(params[:user_id])
+    current_user.unfollow(@user.id)
+    render 'replace_follow'
   end
 
   def followings
@@ -16,6 +18,6 @@ class Public::RelationshipsController < ApplicationController
 
   def followers
     user = User.find(params[:user_id])
-    @followers = user.followers2.with_attached_profile_image.order(created_at: :desc)
+    @followers = user.followers.with_attached_profile_image.order(created_at: :desc)
   end
 end

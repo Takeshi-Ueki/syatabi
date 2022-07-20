@@ -1,0 +1,19 @@
+<% post.post_comments.each do |post_comment| %>
+  <div class="col-12 my-3">
+    <%= link_to(user_path(post_comment.user.id), class: "no-border") do %>
+      <%= image_tag post_comment.user.get_profile_image(75, 75), class: "profile-img" %>
+    <% end %>
+    <span class="ml-2"><%= post_comment.user.name %></span>
+  </div>
+  <div class="col-12 mb-2">
+    <%= post_comment.comment %>
+  </div>
+  <div class="col-12 text-right">
+    <%= l post_comment.created_at %>
+  </div>
+  <div class="col-12 text-center my-2">
+    <% if post_comment.user == current_user %>
+      <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, remote: true, class: "btn btn-danger btn-sm" %>
+    <% end %>
+  </div>
+<% end %>

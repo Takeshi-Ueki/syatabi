@@ -8,10 +8,10 @@ class Public::PostsController < ApplicationController
   def create
     Rails.logger.debug post_params
     @post = current_user.posts.new(post_params)
-    tag_list = params[:post][:tag_name].split(/,| /)
+    tag_list = params[:post][:tag_name].split(/,| |　/)
     if @post.save
       @post.save_tag(tag_list)
-      redirect_to posts_path
+      redirect_to posts_path, notice: '新規投稿が完了しました'
     else
       render :new
     end
@@ -40,7 +40,7 @@ class Public::PostsController < ApplicationController
 
   def update
     image_update = params[:post][:image_ids]
-    tag_list = params[:post][:tag_name].split(/,| /)
+    tag_list = params[:post][:tag_name].split(/,| |　/)
     if image_update.present?
       image_update.each do |image_id|
         image= @post.images.find(image_id)
@@ -49,7 +49,7 @@ class Public::PostsController < ApplicationController
     end
     if @post.update(post_params)
       @post.save_tag(tag_list)
-      redirect_to post_path(@post.id)
+      redirect_to post_path(@post.id), notice: '投稿の編集を保存しました'
     else
       render :edit
     end
@@ -57,11 +57,11 @@ class Public::PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to user_path(current_user.id)
+    redirect_to user_path(current_user.id), notice: '投稿の削除が完了しました'
   end
 
   def favorites
-    favorites = Favorite.where(post_id: @post.id).order(created_at: :desc).pluck(:user_id)
+    favorites = @post.favorites.order(created_at: :desc).pluck(:user_id)
     @favorite_users = User.find(favorites)
   end
 

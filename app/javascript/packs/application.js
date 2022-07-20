@@ -20,5 +20,5 @@ Rails.start()
 ActiveStorage.start()
 
 $(function(){
-  $('.notice').fadeOut(6000);
+  $('.notice').fadeOut(4000);
 });

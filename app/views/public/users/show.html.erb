@@ -1,76 +1,32 @@
 <%= render 'shared/notice' %>
 
 <div class="row main-top">
-  <div class="col-lg-6 offset-lg-1">
-    <div class="row py-4">
-      <div class="col-12 col-md-6 col-xl-5 text-center">
-        <div><%= image_tag @user.get_profile_image(150, 150), class: "profile-img" %></div>
-        <div class="py-3"><%= @user.name %></div>
-      </div>
-      <div class="col-12 col-md-6 col-xl-7">
-        <% if @user.profile.blank? %>
-          プロフィールを設定していません
-        <% else %>
-          <%= @user.profile %>
-        <% end %>
-      </div>
-    </div>
+  <div class="col-lg-6 offset-lg-1 mb-5">
+    <%= render 'info', user: @user %>
     <div class="row text-center">
-      <%= render 'follow_list' %>
+      <div class="follow-lists-<%= @user.id %> col-8">
+        <%= render 'public/relationships/follow_list', user: @user %>
+      </div>
       <div class="col-4">
         <%= link_to "行きたいところリスト", user_lists_path(@user) %>
       </div>
     </div>
     <div class="row">
-      <div class="col-12 mb-5 py-5 text-center">
-        <% if @user == current_user %>
-          <%= link_to "編集する", edit_user_path, class: "btn btn-success btn-lg" %>
-        <% end %>
-        <%= render 'follow_btn' %>
+      <div class="follow-buttons-<%= @user.id %> col-12 mb-5 py-5 text-center">
+        <%= link_to "編集する", edit_user_path, class: "btn btn-success btn-lg" if @user == current_user %>
+        <%= render 'public/relationships/follow_btn', user: @user %>
       </div>
     </div>
     <div class="row">
       <% @posts.each do |post| %>
-      <% if post.user == current_user && post.is_active == false %>
-          <div class="col-12 post-list">
-            <%= link_to post_path(post.id) do %>
-              <div class="my-5">
-                <div class="p-3 text-center limit-post">
-                  この投稿は管理者より制限されています
-                </div>
-                <div class="text-right mr-3">
-                  <%= l post.created_at %>
-                </div>
-              </div>
-            <% end %>
-          </div>
+        <% if post.user == current_user && post.is_active == false %>
+          <%= render 'limit_post', post: post %>
         <% elsif post.user == @user && post.is_active == true %>
-
           <%= render 'posts_short', {post: post, size: [200, 200]} %>
-
         <% elsif post.is_active == false %>
           <!-- なにも表示しない -->
         <% else %>
-          <div class="col-12 post-list">
-            <%= link_to post_path(post.id) do %>
-              <div class="mb-5">
-                <div class="text-center">
-                  <%= post.user.name %>さんの投稿をリポストしています
-                </div>
-                <div class="p-3 text-center">
-                  <% post.images.each do |image| %>
-                    <%= image_tag image.variant(resize_to_limit: [200, 200]), class: "m-1"%>
-                  <% end %>
-                </div>
-                <div class="p-3">
-                  <%= post.body %>
-                </div>
-                <div class="text-right mr-3">
-                  <%= l post.created_at %>
-                </div>
-              </div>
-            <% end %>
-          </div>
+          <%= render 'repost_post', post: post %>
         <% end %>
       <% end %>
     </div>
@@ -111,5 +67,9 @@
         <%= link_to ">> 一覧を見る", user_favorites_path(@user.id) %>
       </div>
     </div>
+  </div>
+
+  <div class="col-12 mt-5">
+    <%= paginate @posts %>
   </div>
 </div>

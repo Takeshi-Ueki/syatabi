@@ -1,0 +1,17 @@
+<div class="row align-items-center">
+  <div class="col-6 col-sm-5 text-center">
+    <% if post.favorited_by?(current_user) %>
+      <%= link_to post_favorites_path(post.id), method: :delete, remote: true do %>
+        <span class="favorite-true favorite-btn"><i class="fas fa-heart"></i></span>
+      <% end %>
+    <% else %>
+      <%= link_to post_favorites_path(post.id), method: :post, remote: true do %>
+        <span class="favorite-false favorite-btn"><i class="far fa-heart"></i></span>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="col-6 col-sm-7">
+    <%= link_to "#{post.favorites.count}件のいいね",post_favorites_path(post.id) %>
+  </div>
+</div>

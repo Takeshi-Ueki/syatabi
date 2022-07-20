@@ -22,21 +22,21 @@ class Post < ApplicationRecord
 
   def image_precense
     if !images.attached? # ファイルがアタッチされていない場合
-      errors.add(:images, '画像ファイルが選択されていません')
+      errors.add(:images, 'ファイルが選択されていません')
     end
   end
 
   def image_size
     images.each do |image|
       if image.blob.byte_size > 5.megabytes
-        errors.add(:images, "画像は一つのファイルを5MB以内にしてください")
+        errors.add(:images, "は一つのファイルを5MB以内にしてください")
       end
     end
   end
 
   def image_length
     if images.length > 3
-      errors.add(:images, "画像は3枚以内にしてください")
+      errors.add(:images, "は3枚以内にしてください")
     end
   end
 

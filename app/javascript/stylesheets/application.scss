@@ -52,8 +52,8 @@ li{
   background-color: #28a745;
 }
 .btn-danger{
-  background-color: #CC5652;
-  border-color: #CC5652;
+  background-color: #FA9996;
+  border-color: #FA9996;
 }
 .btn-danger:hover{
   background-color: red;
@@ -89,6 +89,8 @@ li{
 }
 
 .notice{
+  position: absolute;
+  width: 100%;
   background-color: #CCFFFF;
 }
 
@@ -262,14 +264,7 @@ display: none;
 }
 
 .comment-wrapper{
-  border-top: 1px solid #555;
-  .comment-btn{
-    padding: 8px 16px;
-  }
-
-  .comment-delete-btn{
-    float: right;
-  }
+  border-top: 1px solid #FFAD90;
 }
 
 .map-wrapper .btn{

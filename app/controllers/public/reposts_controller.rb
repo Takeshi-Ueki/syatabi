@@ -1,21 +1,16 @@
 class Public::RepostsController < ApplicationController
-  before_action :set_post
 
   def create
-    repost = current_user.reposts.new
-    repost.post_id = @post.id
+    @post = Post.find(params[:post_id])
+    repost = current_user.reposts.new(post_id: @post.id)
     repost.save
-    redirect_to request.referer
+    render 'replace_btn'
   end
 
   def destroy
+    @post = Post.find(params[:post_id])
     repost = current_user.reposts.find_by(post_id: @post.id)
     repost.destroy
-    redirect_to request.referer
+    render 'replace_btn'
   end
-
-  private
-    def set_post
-      @post = Post.find(params[:post_id])
-    end
 end

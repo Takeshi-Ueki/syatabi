@@ -1,46 +1,28 @@
 <%= javascript_pack_tag 'post/show' %>
 
+<%= render 'shared/notice' %>
+
 <div class="row main-top">
   <div class="col-12 col-xl-8 ml-xl-4">
     <div class="row align-items-center">
-      <div class="col-sm-2 offset-sm-1">
+      <div class="col-12 col-sm-2 offset-sm-1 text-center">
         <%= link_to user_path(@user.id) do %>
           <%= image_tag @user.get_profile_image(100, 100), class: "profile-img" %>
         <% end %>
       </div>
-      <div class="col-4 col-sm-2 text-center">
-        <% if @post.favorited_by?(current_user) %>
-          <%= link_to post_favorites_path(@post.id), method: :delete do %>
-            <span class="favorite-true favorite-btn"><i class="fas fa-heart"></i></span>
-          <% end %>
-        <% else %>
-          <%= link_to post_favorites_path(@post.id), method: :post do %>
-            <span class="favorite-false favorite-btn"><i class="far fa-heart"></i></span>
-          <% end %>
-        <% end %>
+      <div class="favorite-buttons-<%= @post.id %> col-12 col-sm-4 my-3">
+        <%= render 'public/favorites/favorite', post: @post %>
       </div>
-      <div class="col-5 col-sm-2">
-        <%= link_to "#{@post.favorites.count}件のいいね",post_favorites_path(@post.id), class: "mt-3" %>
-      </div>
-
       <% if @user == current_user %>
-        <div class="col-sm-4 mr-3 text-center text-sm-right">
+        <div class="col-6 col-sm-4 mr-sm-3 text-center text-sm-right">
           <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-success btn-sm" %>
         </div>
-        <div class= "col-11 mr-3 text-right">
+        <div class= "col-6 col-sm-11 mr-sm-3 text-center text-sm-right">
           <%= link_to "削除", post_path(@post.id), method: :delete, class: "btn btn-danger btn btn-sm" %>
         </div>
       <% else %>
-        <div class="col-4 col-sm-2 text-center">
-          <% if @post.reposted_by?(current_user) %>
-            <%= link_to post_reposts_path(@post.id), method: :delete do %>
-              <span class="repost-true repost-btn"><i class="fas fa-retweet"></i></span>
-            <% end %>
-          <% else %>
-            <%= link_to post_reposts_path(@post.id), method: :post do %>
-              <span class="repost-false repost-btn"><i class="fas fa-retweet"></i></span>
-            <% end %>
-          <% end %>
+        <div class="repost-buttons-<%= @post.id %> col-4 col-sm-2 text-center">
+          <%= render 'public/reposts/repost_btn', post: @post %>
         </div>
         <div class="col-sm-3">
           <% if @post.listed_by?(current_user) %>
@@ -94,50 +76,19 @@
         </div>
       <% end %>
     </div>
-  <div class="row">
-    <div class="col-10 mx-auto show-map">
-      <div id="map"></div>
+    <div class="row">
+      <div class="col-10 mx-auto show-map">
+        <div id="map"></div>
+      </div>
     </div>
-  </div>
 
   </div>
   <div class="col-12 col-xl-3 ml-xl-4">
-    <%= form_with model: [@post, @post_comment] do |f| %>
-      <div class="row my-3">
-        <%= image_tag current_user.get_profile_image(75, 75), class: "profile-img ml-3" %>
-      </div>
+    <%= render partial: 'public/post_comments/form', locals: { post: @post, post_comment: @post_comment } %>
 
-      <div class="row mb-3">
-        <div class="form-group col-12">
-          <%= f.text_area :comment, rows: '3', placeholder: "コメントを入力", class: "form-control" %>
-        </div>
-        <div class="col-12 text-right">
-          <%= f.submit "送信する", class: "btn btn-primary comment-btn" %>
-        </div>
-      </div>
-    <% end %>
-
-    <% @post.post_comments.each do |post_comment| %>
-      <div class="row my-4 comment-wrapper">
-        <div class="col-12 my-3">
-          <%= link_to(user_path(post_comment.user.id), class: "no-border") do %>
-            <%= image_tag post_comment.user.get_profile_image(75, 75), class: "profile-img" %>
-          <% end %>
-          <span class="ml-2"><%= post_comment.user.name %></span>
-          <% if post_comment.user == current_user %>
-            <span class="comment-delete-btn mt-3">
-              <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "btn btn-danger comment-btn" %>
-            </span>
-          <% end %>
-        </div>
-        <div class="col-12 mb-2">
-          <%= post_comment.comment %>
-        </div>
-        <div class="col-12 text-right">
-          <%= l post_comment.created_at %>
-        </div>
-      </div>
-    <% end %>
+    <div class="comment-index-<%= @post.id %> row my-4 comment-wrapper">
+      <%= render 'public/post_comments/index', post: @post %>
+    </div>
   </div>
 </div>
 

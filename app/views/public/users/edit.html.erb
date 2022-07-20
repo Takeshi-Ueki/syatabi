@@ -1,10 +1,4 @@
-<%if @user.errors.any? %>
-  <div class="error-massege row p-2">
-    <% @user.errors.full_messages.each do |message| %>
-      <div class="col-12 p-1"><%= message %></div>
-    <% end %>
-  </div>
-<% end %>
+<%= render 'shared/error', model: @user %>
 
 <div class="row main-top">
   <div class="col-10 offset-1">

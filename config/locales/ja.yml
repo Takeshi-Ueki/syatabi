@@ -5,6 +5,13 @@ ja:
         first_place: "1位"
         second_place: "2位"
         third_place: "3位"
+  views:
+      pagination:
+        first: '最初'
+        last: '最後'
+        previous: '前'
+        next: '次'
+        truncate: '...'
 
   activerecord:
     errors:
@@ -17,25 +24,37 @@ ja:
         user:
           attributes:
             email:
-              taken: "は既に使用されています。"
-              blank: "が入力されていません。"
-              too_short: "は%{count}文字以上に設定して下さい。"
-              too_long: "は%{count}文字以下に設定して下さい。"
-              invalid: "は有効でありません。"
+              taken: "は既に使用されています"
+              blank: "が入力されていません"
+              too_short: "は%{count}文字以上に設定して下さい"
+              too_long: "は%{count}文字以下に設定して下さい"
+              invalid: "は有効でありません"
             name:
               blank: "を入力してください"
-              too_short: "は%{count}文字以上に設定して下さい。"
-              too_long: "は%{count}文字以下に設定して下さい。"
+              too_short: "は%{count}文字以上に設定して下さい"
+              too_long: "は%{count}文字以下に設定して下さい"
               invalid: "は有効でありません"
             profile:
-              too_long: "は%{count}文字以下に設定して下さい。"
+              too_long: "は%{count}文字以下に設定して下さい"
+        post:
+          attributes:
+            body:
+              blank: "を入力してください"
+              too_short: "は%{count}文字以上に設定して下さい"
+              too_long: "は%{count}文字以下に設定して下さい"
+              invalid: "は有効でありません"
+
     attributes:
       user:
-        name: 名前
+        name: "名前"
         email: "メールアドレス"
         password: "パスワード"
         password_confirmation: "確認用パスワード"
         profile: "プロフィール"
+      post:
+        body: "投稿の本文"
+        images: "画像"
+
 
   date:
     abbr_day_names:

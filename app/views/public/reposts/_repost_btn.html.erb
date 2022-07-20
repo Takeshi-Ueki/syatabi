@@ -1,0 +1,9 @@
+<% if post.reposted_by?(current_user) %>
+  <%= link_to post_reposts_path(post.id), method: :delete, remote: true do %>
+    <span class="repost-true repost-btn"><i class="fas fa-retweet"></i></span>
+  <% end %>
+<% else %>
+  <%= link_to post_reposts_path(post.id), method: :post, remote: true do %>
+    <span class="repost-false repost-btn"><i class="fas fa-retweet"></i></span>
+  <% end %>
+<% end %>

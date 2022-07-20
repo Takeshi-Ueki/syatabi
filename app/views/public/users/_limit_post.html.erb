@@ -1,0 +1,12 @@
+<div class="col-12 post-list">
+  <%= link_to post_path(post.id) do %>
+    <div class="my-5">
+      <div class="p-3 text-center limit-post">
+        この投稿は管理者より制限されています
+      </div>
+      <div class="text-right mr-3">
+        <%= l post.created_at %>
+      </div>
+    </div>
+  <% end %>
+</div>

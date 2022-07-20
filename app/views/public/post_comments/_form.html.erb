@@ -1,0 +1,14 @@
+<%= form_with model: [@post, @post_comment], local: false do |f| %>
+  <div class="row my-3">
+    <%= image_tag current_user.get_profile_image(75, 75), class: "profile-img ml-3" %>
+  </div>
+
+  <div class="row mb-3">
+    <div class="form-group col-12">
+      <%= f.text_area :comment, rows: '3', placeholder: "コメントを入力", class: "comment-form form-control" %>
+    </div>
+    <div class="col-12 text-right">
+      <%= f.submit "送信する", class: "btn btn-primary comment-btn" %>
+    </div>
+  </div>
+<% end %>

@@ -1,4 +1,5 @@
 <%= javascript_pack_tag 'post/new' %>
+<%= render 'shared/error', model: @post %>
 
 <div class="row post-main-top">
   <div class="col-lg-6 mx-auto mb-5 p-3 text-center post-introduction">
@@ -18,7 +19,7 @@
       <%= f.hidden_field :long %>
       <%= f.submit "投稿する", class: "btn btn-primary post-btn" %>
     </div>
-    
+
 <% end %>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["MAP_API"] %>&callback=initMap"></script>
