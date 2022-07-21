@@ -1,3 +1,16 @@
+<div class="row mt-5">
+  <% @rank_posts.each do |post| %>
+    <div class="col-3 mx-auto">
+      <h4 class="text-center">
+        <%= post.rank.rank_i18n %>
+      </h4>
+      <div class="text-center">
+        <%= image_tag post.images.first.variant(resize_to_limit: [200, 200]), class: "my-3" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
 <%= form_with model: @rank, url: post_ranks_path(@posts.take.id) do |f| %>
   <div class="row main-top">
     <% @posts.each_with_index do |post, i| %>

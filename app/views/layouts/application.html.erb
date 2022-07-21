@@ -23,8 +23,9 @@
           <%= render 'layouts/admin_sidebar' %>
         <% end %>
         <div class="col-lg-9">
-          <header class="row header">
-            <div class ="mx-auto logo mt-4">写旅</div>
+          <header class="row header align-items-center">
+            <%= link_to "写旅", root_path, class: "mx-auto logo" %>
+            <!--<div class ="">写旅</div>-->
           </header>
           <%= yield %>
         </div>

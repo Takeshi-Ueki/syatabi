@@ -2,6 +2,8 @@ class Public::RanksController < ApplicationController
   def index
     @posts = current_user.posts
     @rank = Rank.new
+    ranks = current_user.ranks.order(rank: :asc).pluck(:post_id)
+    @rank_posts = Post.find(ranks)
   end
 
   def create

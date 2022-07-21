@@ -28,7 +28,7 @@ class Public::UsersController < ApplicationController
   def withdraw
     @user.update(is_active: false)
     reset_session
-    redirect_to root_path
+    redirect_to root_path, notice: '退会処理が完了しました'
   end
 
   def favorites

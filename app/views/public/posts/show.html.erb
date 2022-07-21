@@ -41,7 +41,7 @@
       <% end %>
     </div>
 
-    <%= render partial: 'public/diaries/diary_link', locals: { post: @post, user: @user } %>
+    <%= render 'public/diaries/diary_link', { post: @post, user: @user } %>
 
     <div class="row">
       <div class="col-10 mx-auto text-right">
@@ -64,7 +64,7 @@
 
   </div>
   <div class="col-12 col-xl-3 ml-xl-4">
-    <%= render partial: 'public/post_comments/form', locals: { post: @post, post_comment: @post_comment } %>
+    <%= render 'public/post_comments/form', { post: @post, post_comment: @post_comment } %>
 
     <div class="comment-index-<%= @post.id %> row my-4 comment-wrapper">
       <%= render 'public/post_comments/index', post: @post %>
