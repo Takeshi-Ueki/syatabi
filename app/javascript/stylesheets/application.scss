@@ -41,8 +41,15 @@ li{
 }
 
 .btn{
+  background-color: #FFAD90;
   border-radius: 30px;
+  border: solid 1px #FF773E;
+  color: #FFF;
   padding: 10px 32px;
+}
+.btn:hover{
+  background-color: #FF8856;
+  color: #FFF;
 }
 .btn-success{
   background-color: #7ACC7D;
@@ -148,11 +155,6 @@ li{
 }
 .top-btn{
   display: none;
-  .btn{
-    background-color: #FFAD90;
-    border: solid 1px #FF773E;
-    color: #FFF;
-  }
 }
 
 .top{
@@ -196,6 +198,12 @@ display: none;
   .btn:hover{
     background-color: #BBB;
   }
+
+  .guest-login-btn{
+    font-size: 0.85rem;
+    padding: 10px 24px;
+  }
+
   .form-control{
     border-radius: 20px;
   }
@@ -229,6 +237,7 @@ display: none;
 // public/user
 .profile-img{
   border-radius: 50%;
+  border: 0.5px solid #FFAD90;
 }
 .no-border:hover{
   text-decoration: none;
@@ -354,9 +363,15 @@ display: none;
   main {
     width: 100%;
   }
-
+  .box{
+    height: 80vh;
+  }
   .top-btn{
     display: block;
+  }
+  .guest-login-btn{
+    font-size: 0.85rem;
+    padding: 10px 24px;
   }
   // サイドバー
   .open{
@@ -407,11 +422,6 @@ display: none;
     background: rgba(3,3,3,0.5);
     z-index: 200;
   }
-
-  // public/post
-  // .post-btn{
-  //   position: static;
-  // }
 }
 
 @media screen and (max-width: 540px){

@@ -1,30 +1,29 @@
 <div class="col-12 mx-auto col-lg-5 ml-lg-5">
-      <div class="custom-file">
-        <%= f.label :images, "景色の画像(３枚まで投稿できます)", class: "custom-file-label" %>
-        <%= f.file_field :images, multiple: true, class: "custom-file-input" %>
-      </div>
+  <div class="custom-file">
+    <%= f.label :images, "景色の画像(３枚まで投稿できます)", class: "custom-file-label" %>
+    <%= f.file_field :images, multiple: true, class: "custom-file-input" %>
+  </div>
 
-      <div class="form-group mt-5">
-        <%= f.label :body, "内容(255文字まで)" %>
-        <%= f.text_area :body, rows: "10", placeholder: "どこに行きましたか？", class: "form-control" %>
-      </div>
+  <div class="form-group mt-5">
+    <%= f.label :body, "内容(255文字まで)" %>
+    <%= f.text_area :body, rows: "10", placeholder: "どこに行きましたか？", class: "form-control" %>
+  </div>
 
-      <div class="form-group mt-5">
-        <%= f.label :tag_name, "スペースか,(カンマ)で複数のタグを登録できます" %>
-        <%= f.text_field :tag_name, value: @tag_list, class: "form-control" %>
-      </div>
-    </div>
+  <div class="form-group mt-5">
+    <%= f.label :tag_name, "スペースか,(カンマ)で複数のタグを登録できます" %>
+    <%= f.text_field :tag_name, value: @tag_list, class: "form-control" %>
+  </div>
+</div>
 
-    <div class="col-lg-6 map-wrapper">
-      <div class="mb-2 form-inline">
-        <input id="address" class="form-control mb-2" type="textbox" placeholder="ここに住所を入力">
-        <input id="search-btn" type="button" class="btn btn-success btn-sm ml-md-2 mb-2" value="検索">
-      </div>
-      <div class="row">
-        <div class="col-12 show-map">
-        <div class="col-12 show-map">
-          <div id="map"></div>
-        </div>
-      </div>
+<div class="col-lg-6 map-wrapper">
+  <div class="mb-2 form-inline">
+    <input id="address" class="form-control mb-2" type="textbox" placeholder="ここに住所を入力">
+    <input id="search-btn" type="button" class="btn btn-success btn-sm ml-md-2 mb-2" value="検索">
+  </div>
+  <div class="row">
+    <div class="col-12 show-map">
+      <div id="map"></div>
     </div>
   </div>
+</div>
+

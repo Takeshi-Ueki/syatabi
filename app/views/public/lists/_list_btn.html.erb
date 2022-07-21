@@ -1,0 +1,7 @@
+<div class="col-sm-3">
+  <% if post.listed_by?(current_user) %>
+    <%= link_to "リストから削除", post_list_path(post.id), method: :delete %>
+  <% else %>
+    <%= link_to "リストに追加", post_lists_path(post.id), method: :post %>
+  <% end %>
+</div>

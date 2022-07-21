@@ -14,27 +14,18 @@
         <%= render 'public/favorites/favorite', post: @post %>
       </div>
       <% if @user == current_user %>
-        <div class="col-6 col-sm-4 mr-sm-3 text-center text-sm-right">
-          <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-success btn-sm" %>
-        </div>
-        <div class= "col-6 col-sm-11 mr-sm-3 text-center text-sm-right">
-          <%= link_to "削除", post_path(@post.id), method: :delete, class: "btn btn-danger btn btn-sm" %>
-        </div>
+        <%= render 'edit_buttons', post: @post %>
       <% else %>
         <div class="repost-buttons-<%= @post.id %> col-4 col-sm-2 text-center">
           <%= render 'public/reposts/repost_btn', post: @post %>
         </div>
-        <div class="col-sm-3">
-          <% if @post.listed_by?(current_user) %>
-            <%= link_to "リストから削除", post_list_path(@post.id), method: :delete %>
-          <% else %>
-            <%= link_to "リストに追加", post_lists_path(@post.id), method: :post %>
-          <% end %>
-        </div>
+
+        <%= render 'public/lists/list_btn', post: @post %>
+
       <% end %>
     </div>
 
-    <% unless @post.is_active %>
+    <% if @post.is_active == false %>
       <div class="row mt-5">
         <div class="col-12 text-center limit-post">この投稿は管理者によって制限されています</div>
       </div>
@@ -50,18 +41,7 @@
       <% end %>
     </div>
 
-
-    <div class="row">
-      <div class="col-12 text-center">
-        <% if @post.diary.present? %>
-          <%= link_to "Diary #{@post.diary.title}", post_diary_path(@post.id, @diary.id) %>
-        <% elsif @user == current_user %>
-          <%= link_to "Diaryを作成する", new_post_diary_path(@post.id) %>
-        <% else %>
-          この投稿にはDiaryがまだありません
-        <% end %>
-      </div>
-    </div>
+    <%= render partial: 'public/diaries/diary_link', locals: { post: @post, user: @user } %>
 
     <div class="row">
       <div class="col-10 mx-auto text-right">

@@ -13,7 +13,7 @@
     </div>
     <div class="row">
       <div class="follow-buttons-<%= @user.id %> col-12 mb-5 py-5 text-center">
-        <%= link_to "編集する", edit_user_path, class: "btn btn-success btn-lg" if @user == current_user %>
+        <%= link_to "編集する", edit_user_path, class: "btn btn-success btn-lg" if @user == current_user && @user.name != "ゲストユーザー" %>
         <%= render 'public/relationships/follow_btn', user: @user %>
       </div>
     </div>

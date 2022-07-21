@@ -1,0 +1,6 @@
+<div class="col-6 col-sm-4 mr-sm-3 text-center text-sm-right">
+  <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-success btn-sm" %>
+</div>
+<div class= "col-6 col-sm-11 mr-sm-3 text-center text-sm-right">
+  <%= link_to "削除", post_path(@post.id), method: :delete, class: "btn btn-danger btn btn-sm" %>
+</div>
