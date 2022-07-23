@@ -3,6 +3,7 @@
   <head>
     <title>Syatabi</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= favicon_link_tag '/favicon.ico' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= include_gon %>
@@ -24,8 +25,11 @@
         <% end %>
         <div class="col-lg-9">
           <header class="row header align-items-center">
-            <%= link_to "写旅", root_path, class: "mx-auto logo" %>
-            <!--<div class ="">写旅</div>-->
+            <div class="col-6 mx-auto text-center">
+              <%= link_to root_path do %>
+                <%= image_tag 'logo.png', class: "mx-auto logo" %>
+              <% end %>
+            </div>
           </header>
           <%= yield %>
         </div>

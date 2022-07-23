@@ -14,6 +14,10 @@ class User < ApplicationRecord
   has_many :repost_posts, through: :reposts, source: :post
   has_many :list_posts, through: :lists, source: :post
 
+  # 通知を送ったユーザー、通知を送られたユーザー
+  has_many :active_notifications, class_name: "Notification", foreign_key: "visitor_id", dependent: :destroy
+  has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
+
   # フォローしたユーザー、フォローされたユーザー
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
@@ -24,9 +28,16 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
 
-
   validates :name, presence: true, length: { minimum: 2, maximum: 50 }
   validates :profile, length: { maximum: 255 }
+
+  def get_profile_image(width, height)
+    if !profile_image.attached?
+      file_path = Rails.root.join('app/assets/images/no-image-icon.jpg')
+      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+    end
+    profile_image.variant(resize_to_limit: [width, height]).processed
+  end
 
   # フォロー機能
   def follow(user_id)
@@ -82,12 +93,17 @@ class User < ApplicationRecord
     end
   end
 
-  def get_profile_image(width, height)
-    if !profile_image.attached?
-      file_path = Rails.root.join('app/assets/images/no-image-icon.jpg')
-      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+  # フォロー通知
+  def create_notification_follow(current_user)
+    followed = Notification.where([ "visitor_id = ? and visited_id = ? and action = ?", current_user.id, id, "follow" ])
+    if followed.blank?
+      notification = current_user.active_notifications.new(
+        visited_id: id,
+        action: "follow"
+      )
+
+      notification.save
     end
-    profile_image.variant(resize_to_limit: [width, height]).processed
   end
 
   # ゲストログイン

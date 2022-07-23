@@ -16,7 +16,7 @@
       <% if @user == current_user %>
         <%= render 'edit_buttons', post: @post %>
       <% else %>
-        <div class="repost-buttons-<%= @post.id %> col-4 col-sm-2 text-center">
+        <div class="repost-buttons-<%= @post.id %> col-6 col-sm-2 text-center">
           <%= render 'public/reposts/repost_btn', post: @post %>
         </div>
 

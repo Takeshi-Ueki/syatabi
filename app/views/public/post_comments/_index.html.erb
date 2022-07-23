@@ -5,9 +5,15 @@
     <% end %>
     <span class="ml-2"><%= post_comment.user.name %></span>
   </div>
+
   <div class="col-12 mb-2">
-    <%= post_comment.comment %>
+    <% if post_comment.is_active == false %>
+      <span class="status-false">このコメントは管理者によって制限されています</span>
+    <% else %>
+      <%= post_comment.comment %>
+    <% end %>
   </div>
+
   <div class="col-12 text-right">
     <%= l post_comment.created_at %>
   </div>

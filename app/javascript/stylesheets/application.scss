@@ -23,14 +23,14 @@ li{
 
 .header{
   height: 80px;
-  align-items: center;
+  align-itemsx: center;
   border-bottom: solid 2px #FFAD90;
 }
 
 .logo{
   text-decoration: none;
   color: #555;
-  // margin-bottom: 50px;
+  width: 78px;
 }
 .logo:hover{
   text-decoration: none;
@@ -111,6 +111,11 @@ li{
   background-color: #FA9996;
 }
 
+.notifications{
+  border-bottom: 1px solid #FFAD90;
+  font-size: 1.25rem;
+}
+
 // top画面
 .box {
   position: relative;
@@ -137,15 +142,15 @@ li{
 }
 .box .src2 {
   background-image : url('/images/bg2.jpg');   /* 背景の画像を指定 */
-  animation-delay  : 7s;
+  animation-delay : 7s;
 }
 .box .src3 {
   background-image : url('/images/bg3.jpg');   /* 背景の画像を指定 */
-  animation-delay  : 14s;
+  animation-delay : 14s;
 }
 .box .src4 {
   background-image : url('/images/bg4.jpg');   /* 背景の画像を指定 */
-  animation-delay  : 21s;
+  animation-delay : 21s;
 }
 
 @keyframes bgAnime {
@@ -154,6 +159,17 @@ li{
   25% { opacity: 1; }
   38% { opacity: 0; }
 100% { opacity: 0; }
+}
+
+.top-logo{
+  position: absolute;
+  background-image: url(/images/logo.png);
+  background-size: cover;
+  height: 400px;
+  width: 400px;
+  top: 150px;
+  left: 100px;
+  opacity: 0.7;
 }
 
 .top-message{
@@ -357,11 +373,11 @@ display: none;
   font-size: 1.25rem;
 }
 
-.user-false, .post-false{
-  color: red;
-}
-.user-true{
+.status-true{
   color: #5BFF7F;
+}
+.status-false{
+  color: red;
 }
 
 
@@ -371,6 +387,13 @@ display: none;
   }
   .box{
     height: 80vh;
+  }
+  .top-logo{
+    height: 350px;
+    width: 350px;
+    top: 100px;
+    left: 100px;
+    opacity: 0.5;
   }
   .top-btn{
     display: block;
@@ -433,6 +456,9 @@ display: none;
 @media screen and (max-width: 540px){
   .box {
     height: 60vh;
+  }
+  .top-logo{
+    display: none;
   }
   .top-message-box{
     background-color: rgba(3,3,3,0.3);

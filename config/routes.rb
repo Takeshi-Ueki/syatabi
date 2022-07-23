@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'notifications/index'
+  end
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: "public/sessions"
@@ -15,6 +18,8 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root "homes#top"
+
+    resources :notifications, only: [:index]
 
     get 'users/:id/favorites' => 'users#favorites', as: "user_favorites"
     get 'users/:id/lists' => 'users#lists', as: "user_lists"
@@ -43,7 +48,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, only: [:index, :show, :edit, :update]
-    resources :posts, only: [:index, :show, :edit, :update]
+    resources :posts, only: [:index, :show, :edit, :update] do
+      resources :post_comments, only: :update
+    end
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

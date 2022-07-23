@@ -15,6 +15,7 @@ class Admin::PostsController < ApplicationController
 
   def edit
     @user = @post.user
+    @post_comments = @post.post_comments.includes(:user)
   end
 
   def update

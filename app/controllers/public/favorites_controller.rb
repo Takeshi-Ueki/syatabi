@@ -3,6 +3,7 @@ class Public::FavoritesController < ApplicationController
     @post = Post.find(params[:post_id])
     favorite = current_user.favorites.new(post_id: @post.id)
     favorite.save
+    @post.create_notification_favorite(current_user)
     render 'replace_favorite'
   end
 

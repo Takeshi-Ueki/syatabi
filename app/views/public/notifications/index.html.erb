@@ -1,0 +1,33 @@
+<div class="row main-top">
+  <div class="col-12 col-sm-11 col-lg-6 mx-auto">
+    <% @notifications.each do |notification| %>
+      <% post = notification.post %>
+      <div class="notifications my-3 py-2 pl-3">
+        <% if notification.action == "comment" %>
+          <%= notification.visitor.name %>さんが
+          <% if post.user != current_user %>
+            <%= link_to "#{post.user.name}さんの投稿", post_path(post.id) %>
+          <% else %>
+            <%= link_to "あなたの投稿", post_path(post.id) %>
+          <% end %>
+          にコメントしました
+          <div class="ml-3">
+            - <%= notification.post_comment.comment %>
+          </div>
+        <% elsif notification.action == "favorite" %>
+          <%= notification.visitor.name %>さんが
+          <%= link_to "あなたの投稿", post_path(post.id) %>
+          にいいねしました
+        <% elsif notification.action == "repost" %>
+          <%= notification.visitor.name %>さんが
+          <%= link_to "あなたの投稿", post_path(post.id) %>
+          をリポストしました
+        <% elsif notification.action == "follow" %>
+          <%= link_to "#{notification.visitor.name}", user_path(notification.visitor.id) %>さんが
+          あなたをフォローしました
+        <% end %>
+      </div>
+      <%= paginate @notifications %>
+    <% end %>
+  </div>
+</div>

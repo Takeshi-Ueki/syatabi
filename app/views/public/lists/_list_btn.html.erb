@@ -1,4 +1,4 @@
-<div class="col-sm-3">
+<div class="col-6 col-sm-3">
   <% if post.listed_by?(current_user) %>
     <%= link_to "リストから削除", post_list_path(post.id), method: :delete %>
   <% else %>
