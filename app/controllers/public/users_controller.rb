@@ -26,7 +26,7 @@ class Public::UsersController < ApplicationController
   end
 
   def withdraw
-    @user.update(is_active: false)
+    @user.update(is_active: "passive")
     reset_session
     redirect_to root_path, notice: '退会処理が完了しました'
   end

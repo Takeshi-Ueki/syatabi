@@ -13,8 +13,8 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    user.update(user_params)
-    redirect_to admin_user_path(user.id)
+    @user.update(is_active: "block")
+    redirect_to admin_user_path(@user.id)
   end
 
   private

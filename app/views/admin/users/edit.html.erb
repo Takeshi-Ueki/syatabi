@@ -1,6 +1,5 @@
 <div class="row main-top">
   <div class="col-12 col-lg-8 mx-lg-auto">
-    <%=form_with model: @user, url: admin_user_path(@user.id) do |f| %>
       <div class="row py-4">
         <div class="col-12 col-md-6 col-xl-5 text-center">
           <div>
@@ -18,21 +17,9 @@
       </div>
 
       <div class="row">
-        <div class="col-2 offset-3">
-          <%= f.radio_button :is_active, true %>
-          <%= f.label :is_active_true, "有効" %>
-        </div>
-        <div class="col-2 offset-2">
-          <%= f.radio_button :is_active, false %>
-          <%= f.label :is_active_false, "無効" %>
+        <div class="col-12 text-center">
+          <%= link_to "アカウントをブロックする", admin_user_path(@user.id), method: :patch, class: "btn btn-danger" %>
         </div>
       </div>
-
-      <div class="row">
-        <div class="col text-center py-4">
-          <%= f.submit "変更する", class: "btn btn-success btn" %>
-        </div>
-      </div>
-    <% end %>
   </div>
 </div>

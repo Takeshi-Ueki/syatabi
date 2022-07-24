@@ -18,12 +18,14 @@
 
     <div class="row">
       <div class="col-12 text-center user-status">
-        <% if @user.is_active %>
-          <strong class="status-true">有効</strong>
+        <% if @user.is_active == "block" %>
+          <strong class="status-false">ブロックした</strong>
+        <% elsif @user.is_active == "passive" %>
+          <strong class="status-false">無効な</strong>
         <% else %>
-          <strong class="status-false">無効</strong>
+          <strong class="status-true">有効な</strong>
         <% end %>
-        なユーザーです
+        ユーザーです
       </div>
       <div class="col-12 mb-5 py-5 text-center">
           <%= link_to "編集する", edit_admin_user_path, class: "btn btn-success btn-lg" %>

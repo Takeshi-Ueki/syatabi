@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 2022_07_21_072500) do
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index "\"comment_id\"", name: "index_notifications_on_comment_id"
+    t.index ["post_comment_id"], name: "index_notifications_on_post_comment_id"
     t.index ["post_id"], name: "index_notifications_on_post_id"
     t.index ["visited_id"], name: "index_notifications_on_visited_id"
     t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(version: 2022_07_21_072500) do
     t.datetime "remember_created_at"
     t.string "name", null: false
     t.string "profile"
-    t.boolean "is_active", default: true, null: false
+    t.integer "is_active", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

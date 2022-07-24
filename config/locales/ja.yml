@@ -1,5 +1,10 @@
 ja:
   enums:
+    user:
+      is_active:
+        active: "有効"
+        passive: "退会"
+        block: "ブロック"
     rank:
       rank:
         first_place: "1位"
@@ -12,7 +17,7 @@ ja:
         previous: '前'
         next: '次'
         truncate: '...'
-      
+
 
   activerecord:
     errors:

@@ -16,7 +16,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
 
       t.string :name, null: false
       t.string :profile
-      t.boolean :is_active, null: false, default: true
+      t.integer :is_active, default: 0
 
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false

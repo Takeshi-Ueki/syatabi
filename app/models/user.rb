@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  enum is_active: { active: 0, passive: 1, block: 2 }
+
   has_many :posts, dependent: :destroy
   has_many :ranks, dependent: :destroy
   has_many :post_comments, dependent: :destroy
