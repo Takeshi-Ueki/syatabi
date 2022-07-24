@@ -29,5 +29,11 @@ RSpec.describe 'Postモデルのテスト', type: :model do
         expect(Post.reflect_on_association(:user).macro).to eq :belongs_to
       end
     end
+
+    context 'Tagモデルとの関係' do
+      it 'N:Nとなっている' do
+        expect(Post.reflect_on_association(:tags).macro).to eq :has_many
+      end
+    end
   end
 end

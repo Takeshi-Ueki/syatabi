@@ -2,10 +2,10 @@
   <nav>
     <ul>
       <li>
-        <%= link_to "新規登録", new_user_registration_path, class: "btn mb-5" %>
+        <%= link_to "新規登録", new_user_registration_path, id: "sidebar-sign-up", class: "btn mb-5" %>
       </li>
       <li>
-        <%= link_to "ログイン", new_user_session_path, class: "btn mb-5" %>
+        <%= link_to "ログイン", new_user_session_path, id: "sidebar-log-in", class: "btn mb-5" %>
       </li>
       <li>
         <%= link_to "ゲストログイン(閲覧用)", users_guest_sign_in_path, method: :post, class: "btn guest-login-btn" %>
