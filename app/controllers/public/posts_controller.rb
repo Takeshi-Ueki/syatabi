@@ -6,7 +6,6 @@ class Public::PostsController < ApplicationController
   end
 
   def create
-    Rails.logger.debug post_params
     @post = current_user.posts.new(post_params)
     tag_list = params[:post][:tag_name].split(/,| |　/)
     if @post.save
@@ -73,9 +72,10 @@ class Public::PostsController < ApplicationController
     @tag_list = Tag.all
     @tag = Tag.find(params[:tag_id])
     if params[:sort].present?
-      @posts = Post.tag_posts(@tag.id).joins(:favorites).group(:post_id).order('count(post_id) desc')+(Post.no_favorite_posts)
+      posts = Post.tag_posts(@tag.id).joins(:favorites).group(:post_id).order('count(post_id) desc')+(Post.no_favorite_posts)
+      @posts = Kaminari.paginate_array(posts).page(params[:page]).per(10)
     else
-      @posts = @tag.posts.order(created_at: :desc)
+      @posts = @tag.posts.order(created_at: :desc).page(params[:page]).per(10)
     end
   end
 
