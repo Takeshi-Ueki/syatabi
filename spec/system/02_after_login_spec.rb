@@ -3,8 +3,8 @@ require 'rails_helper'
 describe '[STEP2] ユーザログイン後のテスト', type: :system, js: false do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
-  let(:post) { create(:post, user: user) }
-  let(:other_post) { create(:post, user: other_user)}
+  let!(:post) { create(:post, user: user) }
+  let!(:other_post) { create(:post, user: other_user)}
 
 
   before do
@@ -56,9 +56,7 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
         expect(current_path).to eq '/posts'
       end
       it '自分と他人の画像のリンク先が正しい' do
-        byebug
-        post_link = find_by_id("post-link-#{post.id}")
-        expect(page).to have_link post_link, href: post_path(post)
+        expect(page).to have_link post.body, href: post_path(post)
       end
     end
   end
