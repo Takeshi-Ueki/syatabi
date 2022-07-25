@@ -1,0 +1,10 @@
+<%= link_to admin_post_path(post.id) do %>
+  <div class="post-list mb-5">
+    <div class="p-3 text-center">
+      <% post.images.each do |image| %>
+        <%= image_tag image.variant(resize_to_limit: [200, 200]) %>
+      <% end %>
+    </div>
+    <div class="p-3"><%= post.body %></div>
+  </div>
+<% end %>
