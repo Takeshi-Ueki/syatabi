@@ -116,6 +116,7 @@ li{
 }
 
 .notifications{
+  font-size: 1.35rem;
   border-bottom: 1px solid #FFAD90;
 }
 
@@ -365,6 +366,11 @@ display: none;
 .rank-form{
   width: 200px;
   font-size: 0.85rem;
+}
+
+// public/notification
+.notification-comment{
+  font-size: 1rem;
 }
 
 // admin
