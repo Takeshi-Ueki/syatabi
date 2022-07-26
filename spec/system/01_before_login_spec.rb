@@ -128,4 +128,64 @@ describe '[STEP1] ユーザログイン前のテスト', type: :system, js: fals
       end
     end
   end
+
+  describe 'サイドバーのテスト: ログインしている場合' do
+    let(:user) { create(:user)}
+
+    before do
+      visit new_user_session_path
+      fill_in 'user[email]', with: user.email
+      fill_in 'user[password]', with: user.password
+      click_button 'ログイン'
+    end
+
+    context 'サイドバーの内容を確認' do
+      it 'HOMEリンクが表示され、内容が正しい' do
+        home_link = find_by_id('sidebar-home').native.inner_text
+        expect(page).to have_link home_link, href: posts_path
+      end
+      it 'マイページリンクが表示され、内容が正しい' do
+        mypage_link = find_by_id('sidebar-mypage').native.inner_text
+        expect(page).to have_link mypage_link, href: user_path(user.id)
+      end
+      it '通知リンクが表示され、内容が正しい' do
+        notification_link = find_by_id('sidebar-notification').native.inner_text
+        expect(page).to have_link notification_link, href: notifications_path
+      end
+      it 'リストリンクが表示され、内容が正しい' do
+        list_link = find_by_id('sidebar-list').native.inner_text
+        expect(page).to have_link list_link, href: user_lists_path(user.id)
+      end
+      it '新規投稿リンクが表示され、内容が正しい' do
+        new_post_link = find_by_id('sidebar-new-post').native.inner_text
+        expect(page).to have_link new_post_link, href: new_post_path
+      end
+      it 'ログアウトリンクが表示され、内容が正しい' do
+        log_out_link = find_by_id('sidebar-log-out').native.inner_text
+        expect(page).to have_link log_out_link, href: destroy_user_session_path
+      end
+    end
+  end
+
+  describe 'ユーザログアウトのテスト' do
+    let(:user) { create(:user) }
+
+    before do
+      visit new_user_session_path
+      fill_in 'user[email]', with: user.email
+      fill_in 'user[password]', with: user.password
+      click_button 'ログイン'
+      log_out_link = find_by_id('sidebar-log-out').native.inner_text
+      click_link log_out_link
+    end
+
+    context 'ログアウト機能のテスト' do
+      it '正しくログアウトできている: ログアウト後の遷移先でログインのリンクが存在する' do
+        expect(page).to have_link '', href: '/users/sign_in'
+      end
+      it 'ログアウト後の遷移先が、トップ画面になっている' do
+        expect(current_path).to eq '/'
+      end
+    end
+  end
 end

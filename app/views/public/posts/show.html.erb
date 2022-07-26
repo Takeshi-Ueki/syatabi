@@ -7,7 +7,7 @@
     <div class="row align-items-center">
       <div class="col-12 col-sm-2 offset-sm-1 text-center">
         <%= link_to user_path(@user.id) do %>
-          <%= image_tag @user.get_profile_image(100, 100), class: "profile-img" %>
+          <%= image_tag @user.get_profile_image(100, 100), id: "post-profile-img", class: "profile-img" %>
         <% end %>
       </div>
       <div class="favorite-buttons-<%= @post.id %> col-12 col-sm-4 my-3">

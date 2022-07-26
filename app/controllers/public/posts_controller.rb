@@ -17,10 +17,10 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    posts = current_user.my_posts_with_follower_posts
     if current_user.followings.empty?
       @posts = Post.page(params[:page]).per(10).order(created_at: :desc)
     else
+      posts = current_user.my_posts_with_follower_posts
       @posts = Kaminari.paginate_array(posts).page(params[:page]).per(10)
     end
   end
