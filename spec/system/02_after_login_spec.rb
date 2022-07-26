@@ -55,8 +55,64 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
       it 'URLが正しい' do
         expect(current_path).to eq '/posts'
       end
-      it '自分と他人の画像のリンク先が正しい' do
+      it '自分と他人の投稿内容が表示される' do
+        expect(page).to have_content post.body
+        expect(page).to have_content other_post.body
+      end
+      it '自分と他人の投稿のリンク先が正しい' do
         expect(page).to have_link post.body, href: post_path(post)
+        expect(page).to have_link other_post.body, href: post_path(other_post)
+      end
+    end
+  end
+
+  describe '新規投稿画面のテスト' do
+    before do
+      visit new_post_path
+    end
+
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/posts/new'
+      end
+      it 'imagesフォームが表示される' do
+        expect(page).to have_field 'post[images][]'
+      end
+      it '本文フォームが表示される' do
+        expect(page).to have_field 'post[body]'
+      end
+      it 'タグフォームが表示される' do
+        expect(page).to have_field 'post[tag_name]'
+      end
+      it '投稿ボタンが表示される' do
+        expect(page).to have_button
+      end
+    end
+
+    context '新規投稿成功のテスト' do
+      before do
+        fill_in 'post[body]', with: Faker::Lorem.characters(number: 20)
+        fill_in 'post[tag_name]', with: '空 夜景, 夕日　花'
+        attach_file 'post[images][]', 'spec/fixtures/test_image.jpg'
+      end
+
+      it '投稿が正しく新規登録される' do
+        expect { click_button '投稿する' }.to change(Post.all, :count).by(1)
+      end
+      it 'タグが正しく新規登録される' do
+        expect { click_button '投稿する' }.to change(Tag.all, :count).by(4)
+      end
+      it '新規投稿後の遷移先が、新規投稿した投稿の詳細画面になっている' do
+        click_button '投稿する'
+        expect(current_path).to eq '/posts'
+      end
+      it '新規投稿した投稿が、遷移先の投稿一覧画面に表示されている' do
+        click_button '投稿する'
+        expect(page).to have_content Post.last.body
+      end
+      it '新規投稿した投稿のリンク先が正しい' do
+        click_button '投稿する'
+        expect(page).to have_link Post.last.body, href: post_path(Post.last.id)
       end
     end
   end

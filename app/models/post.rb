@@ -89,11 +89,9 @@ class Post < ApplicationRecord
         visited_id: user_id,
         action: "favorite"
       )
-
-      if notification.visitor_id == notification.visited_id
-        notification.checked = true
+      if notification.visitor_id != notification.visited_id
+        notification.save
       end
-      notification.save
     end
   end
 

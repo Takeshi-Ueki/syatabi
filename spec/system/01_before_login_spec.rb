@@ -12,7 +12,7 @@ describe '[STEP1] ユーザログイン前のテスト', type: :system, js: fals
       it 'URLが正しい' do
         is_expected.to eq '/'
       end
-      it 'LOGOを押すと、トップ画面へ遷移する', js: true do
+      it 'LOGOを押すと、トップ画面へ遷移する' do
         top_link = find_by_id('logo').native.inner_text
         click_link top_link
         is_expected.to eq '/'
