@@ -2,8 +2,6 @@ class Public::RepostsController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-    old_repost = @post.reposts.where(user_id: current_user.id)
-    old_repost.destroy if old_repost.present?
     repost = current_user.reposts.new(post_id: @post.id)
     repost.save
     @post.create_notification_repost(current_user)
