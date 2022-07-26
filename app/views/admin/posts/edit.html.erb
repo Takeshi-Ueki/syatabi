@@ -3,16 +3,15 @@
 <div class="row main-top">
   <div class="col-12 col-xl-8 ml-xl-4">
     <div class="row align-items-center">
-      <div class="col-sm-2 offset-sm-1">
+      <div class="col-12 col-sm-2 text-center offset-sm-1 my-2">
         <%= link_to admin_user_path(@user.id) do %>
           <%= image_tag @user.get_profile_image(100, 100), class: "profile-img" %>
         <% end %>
       </div>
 
-      <div class="col-5 col-sm-3">
+      <div class="col-12 col-sm-3 text-center">
         <%= link_to "#{@post.favorites.count}件のいいね",post_favorites_path(@post.id), class: "mt-3" %>
       </div>
-
     </div>
 
     <div class="row mt-5 px-5 py-2">
@@ -28,10 +27,11 @@
     <div class="row mt-3 mb-3">
       <div class="col-12 text-center py-3">
         <% @post.images.each do |image| %>
-            <%= image_tag image.variant(resize_to_limit: [200, 200]), class: "post-show-img" %>
+            <%= image_tag image.variant(resize_to_limit: [200, 200]), class: "post-show-img mb-2" %>
         <% end %>
       </div>
     </div>
+
     <div class="row">
       <div class="col-10 mx-auto show-map">
         <div id="map"></div>
@@ -58,27 +58,30 @@
     <% end %>
   </div>
   <div class="col-12 col-xl-3 ml-xl-4">
-
-    <% @post_comments.each do |post_comment| %>
-      <div class="row my-4 comment-wrapper">
-        <div class="col-12 my-3">
-          <%= link_to(admin_user_path(post_comment.user.id), class: "no-border") do %>
-            <%= image_tag post_comment.user.get_profile_image(75, 75), class: "profile-img" %>
-          <% end %>
-          <span class="ml-2"><%= post_comment.user.name %></span>
-          <% if post_comment.is_active == false %>
-            <%= link_to "有効にする", admin_post_post_comment_path(post_comment.post.id, post_comment.id, status: true), method: :patch, data: { confirm: "コメント内容: '#{post_comment.comment}'を有効にしますか？" }, class: "ml-5 btn btn-sm btn-primary comment-btn" %>
-          <% else %>
-            <%= link_to "無効にする", admin_post_post_comment_path(post_comment.post.id, post_comment.id, status: false), method: :patch, data: { confirm: "コメント内容: '#{post_comment.comment}'を無効にしますか？" }, class: "ml-5 btn btn-sm btn-danger comment-btn" %>
-          <% end %>
+    <% if !@post_comments.blank? %>
+      <% @post_comments.each do |post_comment| %>
+        <div class="row my-4 comment-wrapper">
+          <div class="col-12 my-3">
+            <%= link_to(admin_user_path(post_comment.user.id), class: "no-border") do %>
+              <%= image_tag post_comment.user.get_profile_image(75, 75), class: "profile-img" %>
+            <% end %>
+            <span class="ml-2"><%= post_comment.user.name %></span>
+            <% if post_comment.is_active == false %>
+              <%= link_to "有効にする", admin_post_post_comment_path(post_comment.post.id, post_comment.id, status: true), method: :patch, data: { confirm: "コメント内容: '#{post_comment.comment}'を有効にしますか？" }, class: "ml-5 btn btn-sm btn-primary comment-btn" %>
+            <% else %>
+              <%= link_to "無効にする", admin_post_post_comment_path(post_comment.post.id, post_comment.id, status: false), method: :patch, data: { confirm: "コメント内容: '#{post_comment.comment}'を無効にしますか？" }, class: "ml-5 btn btn-sm btn-danger comment-btn" %>
+            <% end %>
+          </div>
+          <div class="col-12 mb-2">
+            <%= post_comment.comment %>
+          </div>
+          <div class="col-12 text-right">
+            <%= l post_comment.created_at %>
+          </div>
         </div>
-        <div class="col-12 mb-2">
-          <%= post_comment.comment %>
-        </div>
-        <div class="col-12 text-right">
-          <%= l post_comment.created_at %>
-        </div>
-      </div>
+      <% end %>
+    <% else %>
+      <%= content_tag(:div, "コメントはまだありません", class: "col-12 text-center") %>
     <% end %>
   </div>
 </div>

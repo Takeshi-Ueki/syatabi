@@ -3,16 +3,16 @@
     <div class="col-12 col-md-10 col-lg-10 mx-auto user-list">
       <%= link_to admin_user_path(user.id) do %>
         <div class="row p-3 align-items-center">
-          <div class="pl-2">
+          <div class="col-5 col-sm-2 my-2 pl-2">
             <%= image_tag user.get_profile_image(100, 100), class: "profile-img" %>
           </div>
-          <div class="col-3">
+          <div class="col-7 col-sm-2">
             <%= user.name %>
           </div>
-          <div class="col-6">
+          <div class="col-8 col-sm-6">
             <%= user.profile %>
           </div>
-          <div class="col-1">
+          <div class="col-4 col-sm-2 text-center">
             <% if user.is_active == "block" %>
               <span class="status-false align-middle">ブロック</span>
             <% elsif user.is_active == "passive" %>

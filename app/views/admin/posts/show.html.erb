@@ -2,7 +2,7 @@
 
 <div class="row main-top">
   <div class="col-12 col-xl-8 ml-xl-4">
-    <%= render 'info', user: @user %>
+    <%= render 'admin/users/info', user: @user %>
 
     <div class="row mt-3">
       <div class="col-6 mx-auto text-center">
@@ -27,11 +27,11 @@
     </div>
 
     <div class="row mt-3 mb-3">
+      <div class="col-12 text-center py-3">
       <% @post.images.each do |image| %>
-        <div class="col-12 text-center py-3">
-          <%= image_tag image.variant(resize_to_limit: [200, 200]), class: "post-show-img" %>
-        </div>
+        <%= image_tag image.variant(resize_to_limit: [200, 200]), class: "post-show-img mb-2" %>
       <% end %>
+      </div>
     </div>
 
     <div class="row">
@@ -41,9 +41,10 @@
     </div>
   </div>
   <div class="col-12 col-xl-3 ml-xl-4">
-
-    <%= render @post_comments %>
-
+    <div class="row my-4 comment-wrapper align-items-center">
+      <%= render @post_comments if !@post_comments.blank?%>
+      <%= content_tag(:div, "コメントはまだありません", class: "col-12 text-center") if @post_comments.blank? %>
+    </div>
   </div>
 </div>
 

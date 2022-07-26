@@ -1,23 +1,21 @@
-<div class="row my-4 comment-wrapper align-items-center">
-  <div class="col-3 my-3 text-center">
-    <%= link_to(admin_user_path(post_comment.user.id), class: "no-border") do %>
-      <%= image_tag post_comment.user.get_profile_image(75, 75), class: "profile-img" %>
-    <% end %>
-  </div>
-  <div class="col-3">
-    <%= post_comment.user.name %>
-  </div>
-  <div class="col-6 text-right">
-    <% if post_comment.is_active %>
-      <strong class="status-true ml-atuo mr-3">有効</strong>
-    <% else %>
-      <strong class="status-false ml-auto mr-3">無効</strong>
-    <% end %>
-  </div>
-  <div class="col-12 mb-2">
-    <%= post_comment.comment %>
-  </div>
-  <div class="col-12 text-right">
-    <%= l post_comment.created_at %>
-  </div>
+<div class="col-4 my-3 text-center">
+  <%= link_to(admin_user_path(post_comment.user.id), class: "no-border") do %>
+    <%= image_tag post_comment.user.get_profile_image(75, 75), class: "profile-img" %>
+  <% end %>
+</div>
+<div class="col-3">
+  <%= post_comment.user.name %>
+</div>
+<div class="col-5 text-right">
+  <% if post_comment.is_active %>
+    <strong class="status-true ml-atuo mr-3">有効</strong>
+  <% else %>
+    <strong class="status-false ml-auto mr-3">無効</strong>
+  <% end %>
+</div>
+<div class="col-12 mb-2">
+  <%= post_comment.comment %>
+</div>
+<div class="col-12 text-right">
+  <%= l post_comment.created_at %>
 </div>
