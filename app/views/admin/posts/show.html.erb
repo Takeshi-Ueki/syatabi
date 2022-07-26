@@ -10,13 +10,12 @@
       </div>
     </div>
 
-    <div class="row mt-5 px-5 py-2">
-      <%= @post.body %>
-    </div>
+    <%= content_tag(:div, content_tag(:strong, "この投稿は無効に設定されています", class: "status-false"), class: "col-12 text-center my-3 user-status") if @post.is_active == false %>
+    <%= content_tag(:div, @post.body, class: "row mt-5 px-5 py-2") %>
 
     <div class="row px-5">
       <% @post_tags.each do |tag| %>
-        <%= link_to "##{tag.name}", search_tag_path(tag_id: tag.id), class: "pr-2"%>
+        <%= link_to "##{tag.name}", search_tag_path(tag_id: tag.id), class: "pr-2" %>
       <% end %>
     </div>
 

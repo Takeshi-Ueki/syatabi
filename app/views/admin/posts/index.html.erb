@@ -9,6 +9,7 @@
           <div class="col-12 col-sm-3 text-center">
             <%= post.favorites.count %>件のいいね
           </div>
+          <%= content_tag(:div, content_tag(:strong, "この投稿は無効に設定されています", class: "status-false"), class: "col-12 text-center my-3 user-status") if post.is_active == false %>
           <div class="col-10 px-3 col-sm-4 my-3 mx-auto">
             <%= post.body %>
           </div>
