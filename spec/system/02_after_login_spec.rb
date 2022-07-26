@@ -187,4 +187,48 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
       end
     end
   end
+
+  describe '自分の投稿編集画面のテスト' do
+    before do
+      visit edit_post_path(post)
+    end
+
+    context '表示の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/posts/' + post.id.to_s + '/edit'
+      end
+      it 'imagesフォームが表示される' do
+        expect(page).to have_field 'post[images][]'
+      end
+      it 'bodyフォームが表示される' do
+        expect(page).to have_field 'post[body]'
+      end
+      it 'tagフォームが表示される' do
+        expect(page).to have_field 'post[tag_name]'
+      end
+      it '更新ボタンが表示される' do
+        expect(page).to have_button '更新する'
+      end
+
+      context '編集成功のテスト' do
+        before do
+          @book_old_body = post.body
+          @book_old_tags = post.tags
+          fill_in 'post[body]', with: Faker::Lorem.characters(number: 21)
+          fill_in 'post[tag_name]', with: "星空"
+          click_button '更新する'
+        end
+
+        it 'bodyが正しく更新される' do
+          expect(post.reload.body).not_to eq @post_old_body
+        end
+        it 'tagが正しく更新される' do
+          expect(post.reload.tags).not_to eq @post_old_tags
+        end
+        it 'リダイレクト先が、更新した投稿の詳細ページになっている' do
+          expect(current_path).to eq '/posts/' + post.id.to_s
+        end
+      end
+    end
+  end
 end
