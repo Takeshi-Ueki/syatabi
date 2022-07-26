@@ -21,6 +21,28 @@ RSpec.describe 'Postモデルのテスト', type: :model do
         is_expected.to eq false
       end
     end
+
+    context '複数画像の添付' do
+      it '画像が添付されていること' do
+        post.images = nil
+        is_expected.to eq false
+      end
+      it '画像が３枚以内であること: 3枚は○' do
+        post.images = nil
+        post.images.attach(io: File.open('spec/fixtures/test_image.jpg'), filename: 'test_image.jpg', content_type: 'image/jpg')
+        post.images.attach(io: File.open('spec/fixtures/test_image2.jpg'), filename: 'test_image.jpg', content_type: 'image/jpg')
+        post.images.attach(io: File.open('spec/fixtures/test_image3.jpg'), filename: 'test_image.jpg', content_type: 'image/jpg')
+        is_expected.to eq true
+      end
+      it '画像が３枚以内であること: 4枚はx' do
+        post.images = nil
+        post.images.attach(io: File.open('spec/fixtures/test_image.jpg'), filename: 'test_image.jpg', content_type: 'image/jpg')
+        post.images.attach(io: File.open('spec/fixtures/test_image2.jpg'), filename: 'test_image.jpg', content_type: 'image/jpg')
+        post.images.attach(io: File.open('spec/fixtures/test_image3.jpg'), filename: 'test_image.jpg', content_type: 'image/jpg')
+        post.images.attach(io: File.open('spec/fixtures/test_image4.jpg'), filename: 'test_image.jpg', content_type: 'image/jpg')
+        is_expected.to eq false
+      end
+    end
   end
 
   describe 'アソシエーションのテスト' do

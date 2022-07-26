@@ -116,4 +116,75 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
       end
     end
   end
+
+  describe '自分の投稿詳細画面のテスト' do
+    before do
+      visit post_path(post)
+    end
+
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/posts/' + post.id.to_s
+      end
+      it 'ユーザー画像のリンクが正しい' do
+        profile_img = find_by_id('post-profile-img').native.inner_text
+        expect(page).to have_link profile_img, href: user_path(post.user)
+      end
+      it '投稿のbodyが表示される' do
+        expect(page).to have_content post.body
+      end
+      it '投稿の編集リンクが表示される'do
+        expect(page).to have_link '編集', href: edit_post_path(post)
+      end
+      it '投稿の削除リンクが表示される'do
+        expect(page).to have_link '削除', href: post_path(post)
+      end
+      it 'Diaryの新規作成へのリンクが表示される' do
+        expect(page).to have_link 'Diary', href: new_post_diary_path(post)
+      end
+      it 'コメントフォームが表示される' do
+        expect(page).to have_field 'post_comment[comment]'
+      end
+      it 'コメントフォームの送信ボタンが表示される' do
+        expect(page).to have_button '送信する'
+      end
+    end
+
+    context '編集リンクのテスト' do
+      it '編集画面に遷移する' do
+        click_link '編集'
+        expect(current_path).to eq '/posts/' + post.id.to_s + '/edit'
+      end
+    end
+
+    context 'コメントの投稿のテスト', js: true do
+      before do
+        fill_in 'post_comment[comment]', with: Faker::Lorem.characters(number: 10)
+      end
+
+      it 'コメントが正しく新規登録される' do
+        expect { click_button '送信する'
+                find_by_id('logo') # 処理待ち
+               }.to change(PostComment.all, :count).by(1)
+      end
+      it 'コメント送信後に送信したコメントが表示されている' do
+        click_button '送信する'
+        find_by_id('logo') #処理待ち
+        expect(page).to have_content PostComment.last.comment
+      end
+    end
+
+    context '削除リンクのテスト' do
+      before do
+        click_link '削除'
+      end
+
+      it '正しく削除される' do
+        expect(Post.where(id: post.id).count).to eq 0
+      end
+      it 'リダイレクト先が投稿一覧画面になっている' do
+        expect(current_path).to eq '/users/' + user.id.to_s
+      end
+    end
+  end
 end
