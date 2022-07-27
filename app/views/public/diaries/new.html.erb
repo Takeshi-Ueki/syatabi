@@ -1,5 +1,7 @@
 <div class="row main-top">
   <div class="col-10 mx-auto">
+    <%= render 'post_link', post: @post %>
+
     <%= form_with model: [@post, @diary] do |f| %>
 
     <%= render 'form', f: f %>

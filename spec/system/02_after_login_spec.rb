@@ -231,4 +231,106 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
       end
     end
   end
+
+  describe 'diaryの新規投稿のテスト' do
+    before do
+      visit new_post_diary_path(post)
+    end
+
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/posts/' + post.id.to_s + '/diaries/new'
+      end
+      it 'タイトルフォームが表示される' do
+        expect(page).to have_field 'diary[title]'
+      end
+      it '本文フォームが表示される' do
+        expect(page).to have_field 'diary[body]'
+      end
+      it '公開設定ボタンが表示される' do
+        expect(page).to have_field 'diary[is_public]'
+      end
+      it '投稿ボタンが表示される' do
+        expect(page).to have_button
+      end
+      it '投稿に戻るリンクが表示される' do
+        expect(page).to have_link '投稿に戻る', href: '/posts/' + post.id.to_s
+      end
+    end
+
+    context '新規投稿成功のテスト' do
+      before do
+        fill_in 'diary[title]', with: Faker::Lorem.characters(number: 20)
+        fill_in 'diary[body]', with: Faker::Lorem.characters(number: 500)
+
+      end
+
+      it '投稿が正しく新規登録されるか' do
+        expect { click_button '投稿する' }.to change(Diary.all, :count).by(1)
+      end
+      it '新規登録後の遷移先が、新規登録したDiaryの詳細画面になっている' do
+        click_button '投稿する'
+        expect(current_path).to eq '/posts/' + post.id.to_s + '/diaries/' + Diary.last.id.to_s
+      end
+      it '新規投稿したDiaryのタイトルが、遷移先の詳細画面に表示されている' do
+        click_button '投稿する'
+        expect(page).to have_content Diary.last.title
+      end
+      it '新規投稿したDiaryの本文が、遷移先の詳細画面に表示されている' do
+        click_button '投稿する'
+        expect(page).to have_content Diary.last.body
+      end
+    end
+  end
+
+  describe '自分のDiaryの詳細画面のテスト' do
+    let!(:diary) { create(:diary, user: user, post: post) }
+
+    before do
+      visit post_diary_path(post, diary)
+    end
+
+
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/posts/' + post.id.to_s + '/diaries/' + diary.id.to_s
+      end
+    end
+  end
+
+
+
+
+    # describe '自分の投稿詳細画面のテスト' do
+    # before do
+    #   visit post_path(post)
+    # end
+
+    # context '表示内容の確認' do
+    #   it 'URLが正しい' do
+    #     expect(current_path).to eq '/posts/' + post.id.to_s
+    #   end
+    #   it 'ユーザー画像のリンクが正しい' do
+    #     profile_img = find_by_id('post-profile-img').native.inner_text
+    #     expect(page).to have_link profile_img, href: user_path(post.user)
+    #   end
+    #   it '投稿のbodyが表示される' do
+    #     expect(page).to have_content post.body
+    #   end
+    #   it '投稿の編集リンクが表示される'do
+    #     expect(page).to have_link '編集', href: edit_post_path(post)
+    #   end
+    #   it '投稿の削除リンクが表示される'do
+    #     expect(page).to have_link '削除', href: post_path(post)
+    #   end
+    #   it 'Diaryの新規作成へのリンクが表示される' do
+    #     expect(page).to have_link 'Diary', href: new_post_diary_path(post)
+    #   end
+    #   it 'コメントフォームが表示される' do
+    #     expect(page).to have_field 'post_comment[comment]'
+    #   end
+    #   it 'コメントフォームの送信ボタンが表示される' do
+    #     expect(page).to have_button '送信する'
+    #   end
+    # end
 end

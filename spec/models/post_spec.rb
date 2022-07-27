@@ -57,5 +57,11 @@ RSpec.describe 'Postモデルのテスト', type: :model do
         expect(Post.reflect_on_association(:tags).macro).to eq :has_many
       end
     end
+
+    context 'Diaryモデルとの関係' do
+      it '1:1となっている' do
+        expect(Post.reflect_on_association(:diary).macro).to eq :has_one
+      end
+    end
   end
 end
