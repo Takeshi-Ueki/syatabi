@@ -1,5 +1,5 @@
 <div class="row main-top">
-  <% if @diary.user == current_user || @diary.is_public  %>
+  <% if current_user?(@user) || @diary.is_public  %>
     <div class="col-8 mx-auto">
       <div class="row my-5">
         <div class="col p-3 diary-box">
@@ -10,7 +10,7 @@
         </div>
       </div>
 
-    <% if @diary.user == current_user %>
+    <% if current_user?(@user) %>
       <div class="row">
         <div class="col-3 offset-3 text-center">
           <%= link_to "編集する", edit_post_diary_path(@post.id, @diary.id), class: "btn btn-success" %>

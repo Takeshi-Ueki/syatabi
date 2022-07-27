@@ -3,7 +3,7 @@
     <% if @posts.present? %>
       <% @posts.each do |post| %>
         <div class="row align-items-center my-5">
-          <% if @user == current_user %>
+          <% if current_user?(@user) %>
             <% list = post.has_list(@user) %>
             <%= render 'public/lists/form', { post: post, list: list } %>
             <div class="col-3">

@@ -2,7 +2,7 @@
   <div class="col-12 text-center">
     <% if post.diary.present? %>
       <%= link_to "Diary #{post.diary.title}", post_diary_path(post.id, @diary.id) %>
-    <% elsif user == current_user %>
+    <% elsif current_user?(user) %>
       <%= link_to "Diaryを作成する", new_post_diary_path(post.id) %>
     <% else %>
       この投稿にはDiaryがまだありません

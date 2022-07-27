@@ -13,13 +13,13 @@
     </div>
     <div class="row">
       <div class="follow-buttons-<%= @user.id %> col-12 mb-5 py-5 text-center">
-        <%= link_to "編集する", edit_user_path, class: "btn btn-success btn-lg" if @user == current_user && @user.name != "ゲストユーザー" %>
+        <%= link_to "編集する", edit_user_path, class: "btn btn-success btn-lg" if current_user?(@user) && @user.name != "ゲストユーザー" %>
         <%= render 'public/relationships/follow_btn', user: @user %>
       </div>
     </div>
     <div class="row">
       <% @posts.each do |post| %>
-        <% if post.user == current_user && post.is_active == false %>
+        <% if current_user?(post.user) && !post.is_active %>
           <%= render 'limit_post', post: post %>
         <% elsif post.user == @user && post.is_active == true %>
           <%= render 'posts_short', {post: post, size: [200, 200]} %>
@@ -37,7 +37,7 @@
       <div class="col-12 mb-3 text-center">
         <h4>ランキング</h4>
       </div>
-      <% if @user == current_user %>
+      <% if current_user?(@user) %>
         <div class="col-12 text-center">
           <%= link_to "ランキングを設定する", user_ranks_path(@user.id) %>
         </div>
