@@ -9,12 +9,13 @@ class Public::DiariesController < ApplicationController
     post = Post.find(params[:post_id])
     @diary.post_id = post.id
     @diary.save
-    redirect_to post_diaries_path
+    redirect_to post_diary_path(post, @diary)
   end
 
   def show
     @post = Post.find(params[:post_id])
     @diary = Diary.find(params[:id])
+    @user = @diary.user
   end
 
   def edit
@@ -26,7 +27,7 @@ class Public::DiariesController < ApplicationController
     @diary = Diary.find(params[:id])
     @post = @diary.post
     @diary.update(diary_params)
-    redirect_to post_path(@post)
+    redirect_to post_diary_path(@post, @diary)
   end
 
   def destroy
