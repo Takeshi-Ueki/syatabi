@@ -41,6 +41,11 @@ class User < ApplicationRecord
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
 
+  # ユーザーが退会済みでないか判定
+  def active?
+    is_active == "active"
+  end
+
   # フォロー機能
   def follow(user_id)
     relationships.create(followed_id: user_id)

@@ -1,6 +1,7 @@
 <div class="row main-top">
   <div class="col-12 col-sm-11 col-lg-6 mx-auto">
-    <%= render @notifications %>
+    <%= render @notifications if @notifications.present? %>
+    <%= content_tag(:div, "通知はまだありません", class: "notifications my-3 p-2") if @notifications.empty? %>
     <%= paginate @notifications %>
   </div>
 </div>

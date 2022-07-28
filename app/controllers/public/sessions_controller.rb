@@ -25,17 +25,30 @@ class Public::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
+  def after_sign_in_path_for(resource)
+    user_path(current_user)
+  end
+
+  def after_sign_out_path_for(resource)
+    root_path
+  end
+
+  # ユーザーが退会済みでないか判定
   def user_state
+    # 入力されたemailからアカウントを取得
     @user = User.find_by(email: params[:user][:email])
+    # アカウントが取得できなければメソッド終了
     return if !@user
-    if @user.valid_password?(params[:user][:password]) && @user.is_active != "active"
+    # 取得したアカウントのパスワードと入力されたパスワードが一致しているか
+    # 取得したアカウントが退会済みであれば新規登録画面へ遷移
+    if @user.valid_password?(params[:user][:password]) && !@user.active?
       redirect_to new_user_registration_path, alert: "退会済みユーザーです、新しいアカウントを作り直してください"
     end
   end

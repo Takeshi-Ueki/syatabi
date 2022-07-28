@@ -1,4 +1,6 @@
 class Public::SearchesController < ApplicationController
+  before_action :authenticate_user!
+
   def search
     @word = params[:word]
     @range = params[:range]

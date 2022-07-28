@@ -295,11 +295,23 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
       it 'URLが正しい' do
         expect(current_path).to eq '/posts/' + post.id.to_s + '/diaries/' + diary.id.to_s
       end
+      it '投稿のtitleが表示されている' do
+        expect(page).to have_content diary.title
+      end
+      it '投稿のbodyが表示されている' do
+        expect(page).to have_content diary.body
+      end
+      it 'Diaryの編集リンクが表示される' do
+        expect(page).to have_link '編集する', href: edit_post_diary_path(post, diary)
+      end
+      it 'Diaryの削除リンクが表示される' do
+        expect(page).to have_link '削除する', href: post_diary_path(post, diary)
+      end
+      it '投稿に戻るリンクが表示される' do
+        expect(page).to have_link '投稿に戻る', href: post_path(post)
+      end
     end
   end
-
-
-
 
     # describe '自分の投稿詳細画面のテスト' do
     # before do

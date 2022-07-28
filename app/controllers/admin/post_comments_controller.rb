@@ -1,4 +1,6 @@
 class Admin::PostCommentsController < ApplicationController
+  before_action :authenticate_admin!
+
   def update
     post = Post.find(params[:post_id])
     status = params[:status]
