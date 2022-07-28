@@ -56,7 +56,7 @@ describe '[STEP1] ユーザログイン前のテスト', type: :system, js: fals
       it 'passwordフォームが表示される' do
         expect(page).to have_field 'user[password]'
       end
-      it 'nameフォームが表示される' do
+      it 'password_confimationフォームが表示される' do
         expect(page).to have_field 'user[password_confirmation]'
       end
       it '新規登録ボタンが表示される' do
@@ -130,7 +130,7 @@ describe '[STEP1] ユーザログイン前のテスト', type: :system, js: fals
   end
 
   describe 'サイドバーのテスト: ログインしている場合' do
-    let(:user) { create(:user)}
+    let(:user) { create(:user) }
 
     before do
       visit new_user_session_path

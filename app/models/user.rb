@@ -67,7 +67,7 @@ class User < ApplicationRecord
       my_posts << post
     end
     my_reposts = []
-    reposts_hash = Hash[*self.reposts.pluck(:post_id, :created_at).flatten]
+    reposts_hash = Hash[*reposts.pluck(:post_id, :created_at).flatten]
     repost_posts.each do |post|
       post.attached_at = reposts_hash[post.id]
       my_reposts << post
@@ -79,7 +79,7 @@ class User < ApplicationRecord
 
   # 自分のフォローしている人の投稿とリポストと自分の投稿とリポストを取得する
   def my_posts_with_follower_posts
-    my_posts = self.posts_with_reposts
+    my_posts = posts_with_reposts
 
     following_posts = []
     following_reposts = []
@@ -102,7 +102,7 @@ class User < ApplicationRecord
 
   # フォロー通知
   def create_notification_follow(current_user)
-    followed = Notification.where([ "visitor_id = ? and visited_id = ? and action = ?", current_user.id, id, "follow" ])
+    followed = Notification.where(["visitor_id = ? and visited_id = ? and action = ?", current_user.id, id, "follow"])
     if followed.blank?
       notification = current_user.active_notifications.new(
         visited_id: id,

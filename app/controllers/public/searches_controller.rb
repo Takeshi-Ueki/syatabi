@@ -10,7 +10,7 @@ class Public::SearchesController < ApplicationController
       @search_result = User.where("profile LIKE?", "%#{@word}%").page(params[:page]).per(10)
     else
       @range = "投稿"
-      @search_result = Post.where("body LIKE?","%#{@word}%").page(params[:page]).per(10)
+      @search_result = Post.where("body LIKE?", "%#{@word}%").page(params[:page]).per(10)
     end
   end
 end

@@ -4,8 +4,7 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
   let!(:post) { create(:post, user: user) }
-  let!(:other_post) { create(:post, user: other_user)}
-
+  let!(:other_post) { create(:post, user: other_user) }
 
   before do
     visit new_user_session_path
@@ -133,10 +132,10 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
       it '投稿のbodyが表示される' do
         expect(page).to have_content post.body
       end
-      it '投稿の編集リンクが表示される'do
+      it '投稿の編集リンクが表示される' do
         expect(page).to have_link '編集', href: edit_post_path(post)
       end
-      it '投稿の削除リンクが表示される'do
+      it '投稿の削除リンクが表示される' do
         expect(page).to have_link '削除', href: post_path(post)
       end
       it 'Diaryの新規作成へのリンクが表示される' do
@@ -163,13 +162,14 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
       end
 
       it 'コメントが正しく新規登録される' do
-        expect { click_button '送信する'
-                find_by_id('logo') # 処理待ち
-               }.to change(PostComment.all, :count).by(1)
+        expect do
+          click_button '送信する'
+          find_by_id('logo') # 処理待ち
+        end.to change(PostComment.all, :count).by(1)
       end
       it 'コメント送信後に送信したコメントが表示されている' do
         click_button '送信する'
-        find_by_id('logo') #処理待ち
+        find_by_id('logo') # 処理待ち
         expect(page).to have_content PostComment.last.comment
       end
     end
@@ -262,7 +262,6 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
       before do
         fill_in 'diary[title]', with: Faker::Lorem.characters(number: 20)
         fill_in 'diary[body]', with: Faker::Lorem.characters(number: 500)
-
       end
 
       it '投稿が正しく新規登録されるか' do
@@ -290,7 +289,6 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
       visit post_diary_path(post, diary)
     end
 
-
     context '表示内容の確認' do
       it 'URLが正しい' do
         expect(current_path).to eq '/posts/' + post.id.to_s + '/diaries/' + diary.id.to_s
@@ -313,36 +311,36 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
     end
   end
 
-    # describe '自分の投稿詳細画面のテスト' do
-    # before do
-    #   visit post_path(post)
-    # end
+  # describe '自分の投稿詳細画面のテスト' do
+  # before do
+  #   visit post_path(post)
+  # end
 
-    # context '表示内容の確認' do
-    #   it 'URLが正しい' do
-    #     expect(current_path).to eq '/posts/' + post.id.to_s
-    #   end
-    #   it 'ユーザー画像のリンクが正しい' do
-    #     profile_img = find_by_id('post-profile-img').native.inner_text
-    #     expect(page).to have_link profile_img, href: user_path(post.user)
-    #   end
-    #   it '投稿のbodyが表示される' do
-    #     expect(page).to have_content post.body
-    #   end
-    #   it '投稿の編集リンクが表示される'do
-    #     expect(page).to have_link '編集', href: edit_post_path(post)
-    #   end
-    #   it '投稿の削除リンクが表示される'do
-    #     expect(page).to have_link '削除', href: post_path(post)
-    #   end
-    #   it 'Diaryの新規作成へのリンクが表示される' do
-    #     expect(page).to have_link 'Diary', href: new_post_diary_path(post)
-    #   end
-    #   it 'コメントフォームが表示される' do
-    #     expect(page).to have_field 'post_comment[comment]'
-    #   end
-    #   it 'コメントフォームの送信ボタンが表示される' do
-    #     expect(page).to have_button '送信する'
-    #   end
-    # end
+  # context '表示内容の確認' do
+  #   it 'URLが正しい' do
+  #     expect(current_path).to eq '/posts/' + post.id.to_s
+  #   end
+  #   it 'ユーザー画像のリンクが正しい' do
+  #     profile_img = find_by_id('post-profile-img').native.inner_text
+  #     expect(page).to have_link profile_img, href: user_path(post.user)
+  #   end
+  #   it '投稿のbodyが表示される' do
+  #     expect(page).to have_content post.body
+  #   end
+  #   it '投稿の編集リンクが表示される'do
+  #     expect(page).to have_link '編集', href: edit_post_path(post)
+  #   end
+  #   it '投稿の削除リンクが表示される'do
+  #     expect(page).to have_link '削除', href: post_path(post)
+  #   end
+  #   it 'Diaryの新規作成へのリンクが表示される' do
+  #     expect(page).to have_link 'Diary', href: new_post_diary_path(post)
+  #   end
+  #   it 'コメントフォームが表示される' do
+  #     expect(page).to have_field 'post_comment[comment]'
+  #   end
+  #   it 'コメントフォームの送信ボタンが表示される' do
+  #     expect(page).to have_button '送信する'
+  #   end
+  # end
 end

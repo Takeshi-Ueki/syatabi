@@ -18,8 +18,8 @@ class Post < ApplicationRecord
   validates :body, presence: true, length: { maximum: 255 }
   validate :image_precense, :image_size, :image_length
 
-  scope :tag_posts, -> (tag_id) {where(id: PostTag.where(tag_id: tag_id).pluck(:post_id))}
-  scope :no_favorite_posts, -> {where.not(id: Favorite.pluck(:post_id).uniq).order(created_at: :desc)}
+  scope :tag_posts, -> (tag_id) { where(id: PostTag.where(tag_id: tag_id).pluck(:post_id)) }
+  scope :no_favorite_posts, -> { where.not(id: Favorite.pluck(:post_id).uniq).order(created_at: :desc) }
 
   def image_precense
     if !images.attached?
@@ -59,29 +59,29 @@ class Post < ApplicationRecord
   end
 
   def has_list(user)
-    list = self.lists.find_by(user_id: user.id)
+    lists.find_by(user_id: user.id)
   end
 
   def save_tag(sent_tags)
-    current_tags = self.tags.pluck(:name) if !self.tags.nil?
+    current_tags = tags.pluck(:name) if !tags.nil?
     old_tags = current_tags - sent_tags
     new_tags = sent_tags - current_tags
 
     old_tags.each do |old|
-      self.tags.delete Tag.find_by(name: old)
+      tags.delete Tag.find_by(name: old)
     end
 
     new_tags.each do |new|
       if !new.empty?
         new_post_tag = Tag.find_or_create_by(name: new)
-        self.tags << new_post_tag
+        tags << new_post_tag
       end
     end
   end
 
   # いいね通知
   def create_notification_favorite(current_user)
-    favorited = Notification.where([ "visitor_id = ? and visited_id = ? and post_id = ? and action = ?", current_user.id, user_id, id, "favorite" ])
+    favorited = Notification.where(["visitor_id = ? and visited_id = ? and post_id = ? and action = ?",current_user.id, user_id, id, "favorite"])
 
     if favorited.blank?
       notification = current_user.active_notifications.new(
@@ -97,7 +97,7 @@ class Post < ApplicationRecord
 
   # リポスト通知
   def create_notification_repost(current_user)
-    reposted = Notification.where([ "visitor_id = ? and visited_id = ? and post_id = ? and action = ?", current_user.id, user_id, id, "repost" ])
+    reposted = Notification.where(["visitor_id = ? and visited_id = ? and post_id = ? and action = ?", current_user.id, user_id, id, "repost"])
 
     if reposted.blank?
       notification = current_user.active_notifications.new(
@@ -127,7 +127,7 @@ class Post < ApplicationRecord
       post_comment_id: post_comment_id,
       visited_id: visited_id,
       action: "comment"
-      )
+    )
 
     notification.save
   end

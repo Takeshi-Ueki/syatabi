@@ -45,18 +45,19 @@ class Public::UsersController < ApplicationController
   end
 
   private
-    def user_params
-      params.require(:user).permit(:name, :profile, :profile_image)
-    end
 
-    def set_user
-      @user = User.find(params[:id])
-    end
+  def user_params
+    params.require(:user).permit(:name, :profile, :profile_image)
+  end
 
-    def ensure_guest_user
-      @user = User.find(params[:id])
-      if @user.name == "ゲストユーザー"
-        redirect_to user_path(current_user), notice: "ゲストユーザーはプロフィール編集はできません"
-      end
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def ensure_guest_user
+    @user = User.find(params[:id])
+    if @user.name == "ゲストユーザー"
+      redirect_to user_path(current_user), notice: "ゲストユーザーはプロフィール編集はできません"
     end
+  end
 end

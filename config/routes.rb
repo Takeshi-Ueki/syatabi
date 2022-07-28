@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-
   namespace :public do
     get 'notifications/index'
   end
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
-    sessions: "public/sessions"
+    sessions: "public/sessions",
   }
 
   devise_scope :user do
@@ -13,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
-    sessions: "admin/sessions"
+    sessions: "admin/sessions",
   }
 
   scope module: :public do
@@ -31,7 +30,6 @@ Rails.application.routes.draw do
       get 'followings' => 'relationships#followings', as: "followings"
       get 'followers' => 'relationships#followers', as: "followers"
     end
-
 
     get 'searches/search', as: "search"
     get 'posts/search_tag', as: "search_tag"

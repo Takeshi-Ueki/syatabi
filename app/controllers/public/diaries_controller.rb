@@ -1,6 +1,6 @@
 class Public::DiariesController < ApplicationController
   before_action :authenticate_user!
-  
+
   def new
     @post = Post.find(params[:post_id])
     @diary = Diary.new
@@ -40,7 +40,8 @@ class Public::DiariesController < ApplicationController
   end
 
   private
-    def diary_params
-      params.require(:diary).permit(:title, :body, :is_public)
-    end
+
+  def diary_params
+    params.require(:diary).permit(:title, :body, :is_public)
+  end
 end

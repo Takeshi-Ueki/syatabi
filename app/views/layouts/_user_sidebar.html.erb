@@ -8,7 +8,7 @@
         <%= link_to "マイページ", user_path(current_user.id), id: "sidebar-mypage", class: "btn mb-4" %>
       </li>
       <li>
-        <%= content_tag(:span, content_tag(:i, "", class: "fas fa-circle"), class: "notification-check") if unchecke_notificatons.any? %>
+        <%= content_tag(:span, content_tag(:i, "", class: "fas fa-circle"), class: "notification-check") if unchecked_notificatons.any? %>
         <%= link_to "通知", notifications_path, id: "sidebar-notification", class: "btn mb-4" %>
       </li>
       <li>

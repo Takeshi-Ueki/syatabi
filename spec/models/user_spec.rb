@@ -32,7 +32,7 @@ RSpec.describe 'Userモデルのテスト', type: :model do
         is_expected.to eq false
       end
 
-    context 'profileカラム'
+      context 'profileカラム'
       it '255文字以内であること: 255は○' do
         user.profile = Faker::Lorem.characters(number: 255)
         is_expected.to eq true

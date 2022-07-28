@@ -10,7 +10,7 @@ class Public::RanksController < ApplicationController
 
   def create
     current_user.ranks.destroy_all
-    rank_ids = params[:rank].values.map{|_hash| _hash.values }.flatten
+    rank_ids = params[:rank].values.map { |_hash| _hash.values }.flatten
     rank_ids.each do |rank_id|
       if rank_id.present?
         post_id, rank = rank_id.split("-")
@@ -29,7 +29,6 @@ class Public::RanksController < ApplicationController
   end
 
   def update
-
   end
 
   def destroy

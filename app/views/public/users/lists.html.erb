@@ -5,7 +5,7 @@
         <div class="row align-items-center my-5">
           <% if current_user?(@user) %>
             <% list = post.has_list(@user) %>
-            <%= render 'public/lists/form', { post: post, list: list } %>
+            <%= render 'public/lists/form', { post: post } %>
             <div class="col-3">
               保存日<%= l list.created_at %>
             </div>

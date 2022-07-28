@@ -1,8 +1,7 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :favorites
-  ]
-  
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :favorites]
+
   def new
     @post = Post.new
   end
@@ -48,7 +47,7 @@ class Public::PostsController < ApplicationController
     tag_list = params[:post][:tag_name].split(/,| |　/)
     if image_update.present?
       image_update.each do |image_id|
-        image= @post.images.find(image_id)
+        image = @post.images.find(image_id)
         image.purge
       end
     end
@@ -74,7 +73,7 @@ class Public::PostsController < ApplicationController
     @tag_list = Tag.all
     @tag = Tag.find(params[:tag_id])
     if params[:sort].present?
-      posts = Post.tag_posts(@tag.id).joins(:favorites).group(:post_id).order('count(post_id) desc')+(Post.no_favorite_posts)
+      posts = Post.tag_posts(@tag.id).joins(:favorites).group(:post_id).order('count(post_id) desc') + Post.no_favorite_posts
       @posts = Kaminari.paginate_array(posts).page(params[:page]).per(10)
     else
       @posts = @tag.posts.order(created_at: :desc).page(params[:page]).per(10)
@@ -82,11 +81,12 @@ class Public::PostsController < ApplicationController
   end
 
   private
-    def post_params
-      params.require(:post).permit(:body, :lat, :long, images: [])
-    end
 
-    def set_post
-      @post = Post.find(params[:id])
-    end
+  def post_params
+    params.require(:post).permit(:body, :lat, :long, images: [])
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
 end

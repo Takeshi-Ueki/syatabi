@@ -23,7 +23,8 @@ class Public::ListsController < ApplicationController
   end
 
   private
-    def list_params
-      params.require(:list).permit(:memo)
-    end
+
+  def list_params
+    params.require(:list).permit(:memo)
+  end
 end

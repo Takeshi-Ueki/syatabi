@@ -25,11 +25,12 @@ class Admin::PostsController < ApplicationController
   end
 
   private
-    def post_params
-      params.require(:post).permit(:is_active)
-    end
 
-    def set_post
-      @post = Post.find(params[:id])
-    end
+  def post_params
+    params.require(:post).permit(:is_active)
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
 end
