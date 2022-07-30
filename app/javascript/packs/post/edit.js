@@ -8,7 +8,7 @@ function initMap(){
 
   map = new google.maps.Map(document.getElementById('map'), {
     //初期位置 latが緯度、lngが経度を示す
-    center: {lat: 35.689009, lng: 139.700707},
+    center: {lat: gon.lat, lng: gon.long},
     // 表示領域の大きさ 数値は0〜21まで指定 数値が大きいほど拡大
     zoom: 12,
   });
