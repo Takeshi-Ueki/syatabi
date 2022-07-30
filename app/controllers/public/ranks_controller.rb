@@ -22,15 +22,4 @@ class Public::RanksController < ApplicationController
     end
     redirect_to user_path(current_user), notice: 'ランキングを設定しました'
   end
-
-  def edit
-    @posts = current_user.posts
-    @ranks = Rank.all
-  end
-
-  def update
-  end
-
-  def destroy
-  end
 end
