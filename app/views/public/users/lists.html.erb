@@ -5,7 +5,7 @@
         <div class="row align-items-center my-5">
           <% if current_user?(@user) %>
             <% list = post.has_list(@user) %>
-            <%= render 'public/lists/form', { post: post } %>
+            <%= render 'public/lists/form', { post: post, list: list } %>
             <div class="col-3">
               保存日<%= l list.created_at %>
             </div>
@@ -13,7 +13,7 @@
               <%= link_to "リストから削除", post_list_path(post.id, list.id), method: :delete, class: "btn btn-sm btn-danger list-btn" %>
             </div>
           <% end %>
-          <%= render 'posts_short', { post: post, size: [200, 200] } %>
+          <%= render 'posts_short', { post: post, width: 200, height: 200 } %>
         </div>
       <% end %>
     <% else %>
