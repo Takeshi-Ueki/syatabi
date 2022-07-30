@@ -310,37 +310,4 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
       end
     end
   end
-
-  # describe '自分の投稿詳細画面のテスト' do
-  # before do
-  #   visit post_path(post)
-  # end
-
-  # context '表示内容の確認' do
-  #   it 'URLが正しい' do
-  #     expect(current_path).to eq '/posts/' + post.id.to_s
-  #   end
-  #   it 'ユーザー画像のリンクが正しい' do
-  #     profile_img = find_by_id('post-profile-img').native.inner_text
-  #     expect(page).to have_link profile_img, href: user_path(post.user)
-  #   end
-  #   it '投稿のbodyが表示される' do
-  #     expect(page).to have_content post.body
-  #   end
-  #   it '投稿の編集リンクが表示される'do
-  #     expect(page).to have_link '編集', href: edit_post_path(post)
-  #   end
-  #   it '投稿の削除リンクが表示される'do
-  #     expect(page).to have_link '削除', href: post_path(post)
-  #   end
-  #   it 'Diaryの新規作成へのリンクが表示される' do
-  #     expect(page).to have_link 'Diary', href: new_post_diary_path(post)
-  #   end
-  #   it 'コメントフォームが表示される' do
-  #     expect(page).to have_field 'post_comment[comment]'
-  #   end
-  #   it 'コメントフォームの送信ボタンが表示される' do
-  #     expect(page).to have_button '送信する'
-  #   end
-  # end
 end

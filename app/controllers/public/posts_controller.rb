@@ -1,6 +1,7 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post, only: [:show, :edit, :update, :destroy, :favorites]
+  before_action :ensure_correct_user, only: [:edit]
 
   def new
     @post = Post.new
@@ -88,5 +89,11 @@ class Public::PostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
+  end
+
+  def ensure_correct_user
+    if @post.user != current_user
+      redirect_to posts_path
+    end
   end
 end

@@ -1,5 +1,7 @@
 class Public::DiariesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_diary, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_correct_user, only: [:edit]
 
   def new
     @post = Post.find(params[:post_id])
@@ -16,24 +18,20 @@ class Public::DiariesController < ApplicationController
 
   def show
     @post = Post.find(params[:post_id])
-    @diary = Diary.find(params[:id])
     @user = @diary.user
   end
 
   def edit
     @post = Post.find(params[:post_id])
-    @diary = Diary.find(params[:id])
   end
 
   def update
-    @diary = Diary.find(params[:id])
     @post = @diary.post
     @diary.update(diary_params)
     redirect_to post_diary_path(@post, @diary)
   end
 
   def destroy
-    @diary = Diary.find(params[:id])
     @post = @diary.post
     @diary.destroy
     redirect_to post_path(@post)
@@ -43,5 +41,15 @@ class Public::DiariesController < ApplicationController
 
   def diary_params
     params.require(:diary).permit(:title, :body, :is_public)
+  end
+
+  def set_diary
+    @diary = Diary.find(params[:id])
+  end
+
+  def ensure_correct_user
+    if @diary.user != current_user
+      redirect_to posts_path
+    end
   end
 end
