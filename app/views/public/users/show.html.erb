@@ -22,7 +22,7 @@
         <% if current_user?(post.user) && !post.is_active %>
           <%= render 'limit_post', post: post %>
         <% elsif post.user == @user && post.is_active == true %>
-          <%= render 'posts_short', {post: post, size: [200, 200]} %>
+          <%= render 'posts_short', { post: post, width: 200, height:200 } %>
         <% elsif post.is_active == false %>
           <!-- なにも表示しない -->
         <% else %>
@@ -48,7 +48,7 @@
             <%= post.rank.rank_i18n %>
           </h5>
           <div>
-            <%= render 'posts_short', {post: post, size: [100,100]} %>
+            <%= render 'posts_short', { post: post, width: 100, height: 100 } %>
           </div>
         <% end %>
       </div>
@@ -60,7 +60,7 @@
       </div>
       <% @favorite_posts.each do |post| %>
 
-        <%= render 'posts_short', {post: post, size: [100, 100]}  %>
+        <%= render 'posts_short', { post: post, width: 100, height: 100 }  %>
 
       <% end %>
       <div class="col-12 my-3 text-right">

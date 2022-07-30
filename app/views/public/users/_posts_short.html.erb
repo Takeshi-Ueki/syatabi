@@ -3,7 +3,7 @@
     <div class="mb-5">
       <div class="p-3 text-center">
         <% post.images.each do |image| %>
-          <%= image_tag image.variant(resize_to_limit: size), class: "m-1"%>
+          <%= image_tag get_image(image, width, height), class: "m-1"%>
         <% end %>
       </div>
       <div class="p-3">

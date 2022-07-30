@@ -28,7 +28,7 @@
         <div class="row">
           <% post.images.each do |image| %>
             <div class="mx-auto p-3">
-              <%= image_tag image.variant(resize_to_limit: [550, 550]), class: "post-show-img" %>
+              <%= image_tag get_image(image, 550, 550), class: "post-show-img" %>
             </div>
           <% end %>
         </div>
