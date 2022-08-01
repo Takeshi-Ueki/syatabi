@@ -20,7 +20,7 @@
 
 といったことがなく、ストレスなく景色を見に行ってほしいと思いこのアプリを作ろうと思いました。
 
-機能一覧
+機能一覧 
 https://docs.google.com/spreadsheets/d/19_5LVq3S_H3QbIHPC_mjMKJGLofSv-EAvJdhOCiPgy8/edit#gid=0
 
 ### ターゲットユーザ
