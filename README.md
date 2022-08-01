@@ -1,4 +1,5 @@
 # 写旅
+<img width="1440" alt="readme-top" src="https://user-images.githubusercontent.com/105714943/182116686-82ff415a-d0fe-4680-898d-fd19d70a9d92.png">
 
 ## サイト概要
 ### サイトテーマ
