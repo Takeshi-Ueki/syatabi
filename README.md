@@ -32,7 +32,7 @@
 - 自分の感動した景色を他の人に共有したいとき
 
 ## 設計書
-
+![syatabi_ER drawio](https://user-images.githubusercontent.com/105714943/182124312-01c89dcd-c9a2-400b-ab5e-25eb65cd668b.png)
 
 ## 開発環境
 - OS：Linux(CentOS)
