@@ -23,8 +23,7 @@
 機能一覧  
 https://docs.google.com/spreadsheets/d/19_5LVq3S_H3QbIHPC_mjMKJGLofSv-EAvJdhOCiPgy8/edit#gid=0
 
-### ターゲットユーザ
-- 20代~40代
+### ターゲットユーザ-
 - 旅行や写真好きな人
 - 景色の写真を見るのが好きな人
 
