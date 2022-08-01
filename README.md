@@ -20,6 +20,8 @@
 
 といったことがなく、ストレスなく景色を見に行ってほしいと思いこのアプリを作ろうと思いました。
 
+機能一覧
+https://docs.google.com/spreadsheets/d/19_5LVq3S_H3QbIHPC_mjMKJGLofSv-EAvJdhOCiPgy8/edit#gid=0
 
 ### ターゲットユーザ
 - 20代~40代
@@ -36,10 +38,10 @@
 
 ## 開発環境
 - OS：Linux(CentOS)
-- 言語：HTML,CSS,JavaScript,Ruby,SQL
-- フレームワーク：Ruby on Rails
-- JSライブラリ：jQuery
-- IDE：Cloud9
+- 言語：HTML, CSS, JavaScript, Ruby 2.6.3 , SQL
+- フレームワーク： Ruby on Rails 6.1.6
+- JSライブラリ： jQuery
+- IDE： Cloud9
 
 ## 使用素材
 フリー素材ぱくたそ（www.pakutaso.com）
