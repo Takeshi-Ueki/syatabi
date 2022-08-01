@@ -33,7 +33,7 @@ https://docs.google.com/spreadsheets/d/19_5LVq3S_H3QbIHPC_mjMKJGLofSv-EAvJdhOCiP
 - 自分の感動した景色を他の人に共有したいとき
 
 ## 設計書
-<img width="400" alt="er" src="https://user-images.githubusercontent.com/105714943/182124312-01c89dcd-c9a2-400b-ab5e-25eb65cd668b.png">  <img width="500" alt="er" src="https://user-images.githubusercontent.com/105714943/182125962-e3724e6b-8d67-4165-a2a5-69cf67ff3153.jpeg">
+<img width="400" alt="er" src="https://user-images.githubusercontent.com/105714943/182124312-01c89dcd-c9a2-400b-ab5e-25eb65cd668b.png"><img width="400" alt="er" src="https://user-images.githubusercontent.com/105714943/182125962-e3724e6b-8d67-4165-a2a5-69cf67ff3153.jpeg">
 
 ## 開発環境
 - OS：Linux(CentOS)
