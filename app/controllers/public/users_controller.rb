@@ -45,6 +45,10 @@ class Public::UsersController < ApplicationController
     @posts = Kaminari.paginate_array(posts).page(params[:page]).per(10)
   end
 
+  def account_recovery
+    
+  end
+
   private
 
   def user_params
