@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum is_active: { active: 0, passive: 1, block: 2 }
+  enum withdraw_status: { active: 0, passive: 1, block: 2 }
 
   has_many :posts, dependent: :destroy
   has_many :ranks, dependent: :destroy
@@ -43,7 +43,15 @@ class User < ApplicationRecord
 
   # ユーザーが退会済みでないか判定
   def active?
-    is_active == "active"
+    withdraw_status == "active"
+  end
+
+  def passive?
+    withdraw_status == "passive"
+  end
+
+  def block?
+    withdraw_status == "block"
   end
 
   # フォロー機能

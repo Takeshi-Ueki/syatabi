@@ -13,11 +13,11 @@
             <%= user.profile %>
           </div>
           <div class="col-4 col-sm-2 text-center">
-            <% if user.is_active == "block" %>
+            <% if user.withdraw_status == "block" %>
               <span class="status-false align-middle">ブロック</span>
-            <% elsif user.is_active == "passive" %>
+            <% elsif user.withdraw_status == "passive" %>
               <span class="status-false align-middle">退会</span>
-            <% else user.is_active == "passive" %>
+            <% else user.withdraw_status == "passive" %>
               <span class="status-true align-middle">有効</span>
             <% end %>
           </div>

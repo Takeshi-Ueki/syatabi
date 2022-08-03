@@ -1,5 +1,5 @@
 class Public::UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:destroy, :withdraw, :account_recovery]
   before_action :set_user
   before_action :ensure_correct_user, only: [:edit, :check]
   before_action :ensure_guest_user, only: [:edit]
@@ -24,13 +24,23 @@ class Public::UsersController < ApplicationController
     end
   end
 
+  def destroy
+    User.find(params[:id]).destroy
+    redirect_to new_user_registration_path, alert: "ユーザー情報を完全に削除しました。 再度利用する場合は新規登録してください。"
+  end
+
   def check
   end
 
   def withdraw
-    @user.update(is_active: "passive")
+    status = params[:status]
+    @user.update(withdraw_status: status)
     reset_session
-    redirect_to root_path, notice: '退会処理が完了しました'
+    if @user.passive?
+      redirect_to root_path, notice: '退会処理が完了しました'
+    elsif @user.active?
+      redirect_to new_user_session_path, notice: 'アカウントが復活しました'
+    end
   end
 
   def favorites
@@ -46,7 +56,6 @@ class Public::UsersController < ApplicationController
   end
 
   def account_recovery
-    
   end
 
   private

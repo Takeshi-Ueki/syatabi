@@ -23,8 +23,9 @@ Rails.application.routes.draw do
     get 'users/:id/favorites' => 'users#favorites', as: "user_favorites"
     get 'users/:id/lists' => 'users#lists', as: "user_lists"
     get 'users/:id/check' => 'users#check', as: "user_check"
+    get 'users/account_recovery' => 'users#account_recovery', as: "account_recovery"
     patch 'users/:id/withdraw' => 'users#withdraw', as: "user_withdraw"
-    resources :users, only: [:show, :edit, :update] do
+    resources :users, only: [:show, :edit, :update, :destroy] do
       resources :ranks, only: [:index]
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: "followings"

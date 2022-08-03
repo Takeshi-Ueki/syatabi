@@ -14,15 +14,11 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    @user.update(is_active: "block")
+    @user.update(withdraw_status: "block")
     redirect_to admin_user_path(@user.id)
   end
 
   private
-
-  def user_params
-    params.require(:user).permit(:is_active)
-  end
 
   def set_user
     @user = User.find(params[:id])
