@@ -3,6 +3,7 @@ class Public::UsersController < ApplicationController
   before_action :set_user
   before_action :ensure_correct_user, only: [:edit, :check]
   before_action :ensure_guest_user, only: [:edit]
+  before_action :ensure_block_user, only: [:account_recovery]
 
   def show
     posts = @user.posts_with_reposts
@@ -79,5 +80,10 @@ class Public::UsersController < ApplicationController
     if @user.name == "ゲストユーザー"
       redirect_to user_path(current_user), notice: "ゲストユーザーはプロフィール編集はできません"
     end
+  end
+
+  def ensure_block_user
+    @user = User.find(params[:id])
+    redirect_to new_user_session_path, alert: "このアカウントは管理者により利用を制限されています。" if @user.block?
   end
 end
