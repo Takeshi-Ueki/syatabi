@@ -1,7 +1,7 @@
 <div class="row pt-5">
   <div class="col-12 col-md-10 mx-auto">
     <% @tag_list.each do |tag| %>
-      <%= link_to "##{tag.name}", search_tag_path(tag_id: tag.id), class: "mr-2" %>
+      <%= link_to "##{tag.name}(#{tag.posts.count})", search_tag_path(tag_id: tag.id), class: "mr-2" %>
     <% end %>
   </div>
 

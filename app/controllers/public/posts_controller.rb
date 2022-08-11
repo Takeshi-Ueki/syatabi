@@ -71,7 +71,10 @@ class Public::PostsController < ApplicationController
   end
 
   def search_tag
-    @tag_list = Tag.all
+    @tag_list = Tag.all.sort { |a, b|
+      b.posts.size <=>
+      a.posts.size
+    }
     @tag = Tag.find(params[:tag_id])
     if params[:sort].present?
       posts = Post.tag_posts(@tag.id).joins(:favorites).group(:post_id).order('count(post_id) desc') + Post.no_favorite_posts
