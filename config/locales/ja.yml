@@ -1,7 +1,7 @@
 ja:
   enums:
     user:
-      is_active:
+      withdraw_status:
         active: "有効"
         passive: "退会"
         block: "ブロック"
@@ -10,6 +10,12 @@ ja:
         first_place: "1位"
         second_place: "2位"
         third_place: "3位"
+    report:
+      status:
+        waiting: "対応待ち"
+        keep: "保留"
+        finish: "対応済み"
+
   views:
       pagination:
         first: '最初'

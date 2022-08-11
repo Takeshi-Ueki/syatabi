@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
   namespace :public do
+    get 'reports/new'
+  end
+  namespace :admin do
+    get 'reports/index'
+    get 'reports/show'
+  end
+  namespace :public do
     get 'notifications/index'
   end
   devise_for :users, skip: [:passwords], controllers: {
@@ -26,6 +33,7 @@ Rails.application.routes.draw do
     get 'users/account_recovery' => 'users#account_recovery', as: "account_recovery"
     patch 'users/:id/withdraw' => 'users#withdraw', as: "user_withdraw"
     resources :users, only: [:show, :edit, :update, :destroy] do
+      resources :reports, only: [:new, :create]
       resources :ranks, only: [:index]
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: "followings"
@@ -50,6 +58,7 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :show, :edit, :update] do
       resources :post_comments, only: :update
     end
+    resources :reports, only: [:index, :show, :update]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

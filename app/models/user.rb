@@ -16,6 +16,10 @@ class User < ApplicationRecord
   has_many :repost_posts, through: :reposts, source: :post
   has_many :list_posts, through: :lists, source: :post
 
+  # 通報したユーザー、通報されたユーザー
+  has_many :reports, class_name: "Report", foreign_key: "reporter_id", dependent: :destroy
+  has_many :reverse_of_reports, class_name: "Report", foreign_key: "reported_id", dependent: :destroy
+
   # 通知を送ったユーザー、通知を送られたユーザー
   has_many :active_notifications, class_name: "Notification", foreign_key: "visitor_id", dependent: :destroy
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
