@@ -45,7 +45,6 @@ class User < ApplicationRecord
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
 
-  # ユーザーが退会済みでないか判定
   def active?
     withdraw_status == "active"
   end

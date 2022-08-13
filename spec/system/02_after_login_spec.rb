@@ -91,15 +91,11 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
     context '新規投稿成功のテスト' do
       before do
         fill_in 'post[body]', with: Faker::Lorem.characters(number: 20)
-        fill_in 'post[tag_name]', with: '空 夜景, 夕日　花'
         attach_file 'post[images][]', 'spec/fixtures/test_image.jpg'
       end
 
       it '投稿が正しく新規登録される' do
         expect { click_button '投稿する' }.to change(Post.all, :count).by(1)
-      end
-      it 'タグが正しく新規登録される' do
-        expect { click_button '投稿する' }.to change(Tag.all, :count).by(4)
       end
       it '新規投稿後の遷移先が、新規投稿した投稿の詳細画面になっている' do
         click_button '投稿する'
@@ -165,6 +161,7 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
         expect do
           click_button '送信する'
           find_by_id('logo') # 処理待ち
+          sleep(10)
         end.to change(PostComment.all, :count).by(1)
       end
       it 'コメント送信後に送信したコメントが表示されている' do
@@ -228,6 +225,27 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
         it 'リダイレクト先が、更新した投稿の詳細ページになっている' do
           expect(current_path).to eq '/posts/' + post.id.to_s
         end
+      end
+    end
+  end
+
+  describe 'tagのテスト' do
+    before do
+      visit new_post_path
+    end
+
+    context '新規投稿成功のテスト' do
+      before do
+        fill_in 'post[body]', with: Faker::Lorem.characters(number: 20)
+        fill_in 'post[tag_name]', with: '空 夜景, 夕日　花'
+        attach_file 'post[images][]', 'spec/fixtures/test_image.jpg'
+      end
+
+      it 'タグが正しく新規登録される' do
+        expect { click_button '投稿する' }.to change(Tag.all, :count).by(4)
+      end
+      it '' do
+
       end
     end
   end
