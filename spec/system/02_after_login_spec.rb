@@ -161,6 +161,7 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
         expect do
           click_button '送信する'
           find_by_id('logo') # 処理待ち
+          sleep(10)
         end.to change(PostComment.all, :count).by(1)
       end
       it 'コメント送信後に送信したコメントが表示されている' do
