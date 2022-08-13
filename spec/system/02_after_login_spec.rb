@@ -161,7 +161,7 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
         expect do
           click_button '送信する'
           find_by_id('logo') # 処理待ち
-          sleep(10)
+          sleep(5)
         end.to change(PostComment.all, :count).by(1)
       end
       it 'コメント送信後に送信したコメントが表示されている' do
@@ -244,9 +244,6 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
       it 'タグが正しく新規登録される' do
         expect { click_button '投稿する' }.to change(Tag.all, :count).by(4)
       end
-      it '' do
-
-      end
     end
   end
 
@@ -325,6 +322,21 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
       end
       it '投稿に戻るリンクが表示される' do
         expect(page).to have_link '投稿に戻る', href: post_path(post)
+      end
+    end
+  end
+
+  describe '自分ではないユーザー詳細画面のテスト' do
+    subject { current_path }
+
+    before do
+      visit user_path(other_user.id)
+    end
+
+    context 'リンクの確認' do
+      it '通報の新規作成リンクが表示される' do
+        click_link 'user-report'
+        is_expected.to eq '/users/' + other_user.id.to_s + '/reports/new'
       end
     end
   end

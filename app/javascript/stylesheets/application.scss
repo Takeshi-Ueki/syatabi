@@ -279,10 +279,13 @@ display: none;
   padding-bottom: 100px;
 }
 
-.show-favorite-box{
-
+.report-link{
+  font-size: 2rem;
+  color: #FFDBC9;
 }
-
+.report-link:hover{
+  color: #FFAD90;
+}
 
 // public/post
 .post-introduction{
