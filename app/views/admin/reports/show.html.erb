@@ -1,2 +1,25 @@
-<h1>Admin::Reports#show</h1>
-<p>Find me in app/views/admin/reports/show.html.erb</p>
+<table class="table table-hover col-10 mx-auto mt-5">
+  <thead>
+    <tr>
+      <th>会員名</th>
+      <td><%= link_to @report.reported.name, admin_user_path(@report.reported.id) %></td>
+    </tr>
+    <tr>
+      <th>理由</th>
+      <td><%= @report.reason %></td>
+    </tr>
+    <tr>
+      <th>URL</th>
+      <td><%= @report.url %></td>
+    </tr>
+    <tr>
+      <th>対応ステータス</th>
+      <td>
+        <%= form_with model: @report, url: admin_report_path, method: :patch do |f| %>
+          <%= f.select :status, Report.statuses.keys.map { |status| [Report.statuses_i18n[status], status] } %>
+          <%= f.submit "更新", class: "btn btn-success btn-sm mx-5" %>
+        <% end %>
+      </td>
+    </tr>
+  </thead>
+</table>

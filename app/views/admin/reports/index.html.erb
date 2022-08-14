@@ -1,2 +1,28 @@
-<h1>Admin::Reports#index</h1>
-<p>Find me in app/views/admin/reports/index.html.erb</p>
+<table class="table table-hover col-10 mx-auto mt-5">
+  <thead>
+    <tr>
+      <th>通報ID</th>
+      <th>ユーザー名</th>
+      <th>通報者</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reports.each do |report| %>
+      <tr>
+        <td>
+          <%= link_to report.id, admin_report_path(report) %>
+        </td>
+        <td>
+          <%= report.reported.name %>
+        </td>
+        <td>
+          <%= report.reporter.name %>
+        </td>
+        <td>
+          <%= report.status_i18n %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
