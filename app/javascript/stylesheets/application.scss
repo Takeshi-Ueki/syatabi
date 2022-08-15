@@ -16,6 +16,37 @@ li{
   list-style: none;
 }
 
+button{
+  border: none;
+  background-color: #FFF;
+  border-radius: 40%;
+  padding: 0;
+}
+
+button:focus{
+  outline: 0.5pxZ;
+  outline-color: #FFDBC9;
+  border-radius: 40%;
+}
+
+.table{
+  color: #555;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #FFDBC9;
+}
+
+.table th, .table td {
+    padding: 1.25rem;
+    border-top: 1px solid #FFDBC9;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #FFDBC9;
+}
+
 #map{
  width: 100%;
  height: 90%;

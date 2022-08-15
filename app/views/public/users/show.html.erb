@@ -4,13 +4,7 @@
   <div class="col-lg-6 offset-lg-1 mb-5">
 
     <% if !current_user?(@user) %>
-      <div class="row">
-        <div class="col-12 text-right">
-          <%= link_to new_user_report_path(@user), id: "user-report" do %>
-            <i class="fas fa-exclamation-circle report-link"></i>
-          <% end %>
-        </div>
-      </div>
+      <%= render 'public/reports/form', { user: @user, report: @report } %>
     <% end %>
 
     <%= render 'info', user: @user %>

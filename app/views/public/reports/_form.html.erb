@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-12 text-right">
+<!-- Button trigger modal -->
+    <button type="button" class="" data-toggle="modal" data-target="#exampleModalCenter">
+      <i class="fas fa-exclamation-circle report-link"></i>
+    </button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">
+          <%= user.name%>さんを通報しますか？
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_with model: [user, report], url: user_reports_path(user) do |f| %>
+
+          <div class="form-group">
+            <%= f.label :reason, "理由(255文字まで)" %>
+            <%= f.text_area :reason, rows: 5, maxlength: 255, class: "form-control" %>
+          </div>
+
+          <div class="form-group my-5">
+            <%= f.label :url, "問題のある投稿やコメントのURLがあれば入力してください" %>
+            <%= f.text_field :url, maxlength: 255, class: "form-control" %>
+          </div>
+
+          <div class="text-center">
+            <%= f.submit "通報する", class: "btn btn-primary mt-3" %>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

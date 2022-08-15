@@ -1,5 +1,5 @@
 <table class="table table-hover col-10 mx-auto mt-5">
-  <thead>
+  <tbody>
     <tr>
       <th>会員名</th>
       <td><%= link_to @report.reported.name, admin_user_path(@report.reported.id) %></td>
@@ -21,5 +21,5 @@
         <% end %>
       </td>
     </tr>
-  </thead>
+  </tbody>
 </table>

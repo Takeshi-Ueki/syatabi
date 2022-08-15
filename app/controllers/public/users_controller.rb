@@ -12,6 +12,7 @@ class Public::UsersController < ApplicationController
     @favorite_posts = Post.find(favorites)
     ranks = @user.ranks.order(rank: :asc).pluck(:post_id)
     @rank_posts = Post.find(ranks)
+    @report = Report.new
   end
 
   def edit

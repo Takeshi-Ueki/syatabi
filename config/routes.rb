@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     get 'users/account_recovery' => 'users#account_recovery', as: "account_recovery"
     patch 'users/:id/withdraw' => 'users#withdraw', as: "user_withdraw"
     resources :users, only: [:show, :edit, :update, :destroy] do
-      resources :reports, only: [:new, :create]
+      resources :reports, only: [:create]
       resources :ranks, only: [:index]
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: "followings"

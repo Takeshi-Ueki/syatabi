@@ -2,10 +2,13 @@
   <nav>
     <ul>
       <li>
-        <%= link_to "投稿一覧",admin_posts_path, class: "btn mb-5" %>
+        <%= link_to "投稿一覧", admin_posts_path, class: "btn mb-5" %>
       </li>
       <li>
-        <%= link_to "ユーザー一覧",admin_users_path, class: "btn mb-5" %>
+        <%= link_to "ユーザー一覧", admin_users_path, class: "btn mb-5" %>
+      </li>
+      <li>
+        <%= link_to "通報一覧", admin_reports_path, class: "btn mb-5" %>
       </li>
       <li>
         <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn" %>
