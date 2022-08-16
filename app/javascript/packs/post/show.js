@@ -15,7 +15,6 @@ function initMap(){
 
   //positionに指定した座標にピンを表示させる
   marker = new google.maps.Marker({
-    // position: {lat: 35.689009, lng: 139.700707},
     position: {lat: gon.lat, lng: gon.long},
     map: map
   });
