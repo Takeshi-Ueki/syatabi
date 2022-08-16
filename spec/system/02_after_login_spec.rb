@@ -332,38 +332,5 @@ describe '[STEP2] ユーザログイン後のテスト', type: :system, js: fals
     before do
       visit user_path(other_user.id)
     end
-
-    context 'リンクの確認' do
-      it '通報の新規作成リンクが表示される' do
-        click_link 'user-report'
-        is_expected.to eq '/users/' + other_user.id.to_s + '/reports/new'
-      end
-    end
-  end
-
-  describe 'Report画面のテスト' do
-    before do
-      visit new_user_report_path(other_user.id)
-    end
-
-    context '表示内容の確認' do
-      it 'URLが正しい' do
-        expect(current_path).to eq '/users/' + other_user.id.to_s + '/reports/new'
-      end
-
-      it '理由のフォームが表示されるか' do
-        expect(page).to have_field 'report[reason]'
-      end
-      it 'URLのフォームが表示されるか' do
-        expect(page).to have_field 'report[url]'
-      end
-      it '投稿ボタンが表示される' do
-        expect(page).to have_button
-      end
-      it 'ユーザーページへ戻るリンクが表示されるか' do
-        expect(page).to have_link '戻る', href: user_path(other_user)
-      end
-    end
-
   end
 end
