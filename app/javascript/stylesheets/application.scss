@@ -16,19 +16,6 @@ li{
   list-style: none;
 }
 
-button{
-  border: none;
-  background-color: #FFF;
-  border-radius: 40%;
-  padding: 0;
-}
-
-button:focus{
-  outline: 0.5pxZ;
-  outline-color: #FFDBC9;
-  border-radius: 40%;
-}
-
 .table{
   color: #555;
 }
@@ -316,6 +303,19 @@ display: none;
 }
 .report-link:hover{
   color: #FFAD90;
+}
+
+.report-btn{
+  border: none;
+  background-color: #FFF;
+  border-radius: 50%;
+  padding: 0;
+}
+
+.report-btn:focus{
+  outline: 0.5px;
+  outline-color: #FFDBC9;
+  border-radius: 50%;
 }
 
 // public/post
