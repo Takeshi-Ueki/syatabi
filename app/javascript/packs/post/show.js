@@ -74,6 +74,4 @@ function codeAddress(geocoder, resultMap){
   });
 }
 
-
-
 window.initMap = initMap;
