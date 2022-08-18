@@ -10,8 +10,11 @@
       </div>
     </div>
 
-    <%= content_tag(:div, content_tag(:strong, "この投稿は無効に設定されています", class: "status-false"), class: "col-12 text-center my-3 user-status") if @post.is_active == false %>
-    <%= content_tag(:div, @post.body, class: "row mt-5 px-5 py-2") %>
+    <%= content_tag(:div, content_tag(:strong, "この投稿は無効に設定されています", class: "status-false"), class: "col-12 text-center my-3 user-status") if !@post.is_active? %>
+
+    <div class="row mt-5 px-5 py-2">
+      <%= simple_format(h(@post.body), {}, sanitize: false, wrapper: "div") %>
+    </div>
 
     <div class="row px-5">
       <% @post_tags.each do |tag| %>

@@ -13,7 +13,7 @@
     </div>
 
     <div class="row mt-5 px-5 py-2">
-      <%= @post.body %>
+      <%= simple_format(h(@post.body), {}, sanitize: false, wrapper: "div") %>
     </div>
 
     <div class="row">

@@ -20,10 +20,10 @@ class Public::PostsController < ApplicationController
 
   def index
     if current_user.followings.empty?
-      @posts = Post.page(params[:page]).per(10).order(created_at: :desc)
+      @posts = Post.page(params[:page]).order(created_at: :desc)
     else
       posts = current_user.my_posts_with_follower_posts
-      @posts = Kaminari.paginate_array(posts).page(params[:page]).per(10)
+      @posts = Kaminari.paginate_array(posts).page(params[:page])
     end
   end
 
@@ -78,9 +78,9 @@ class Public::PostsController < ApplicationController
     @tag = Tag.find(params[:tag_id])
     if params[:sort].present?
       posts = Post.tag_posts(@tag.id).joins(:favorites).group(:post_id).order('count(post_id) desc') + Post.no_favorite_posts
-      @posts = Kaminari.paginate_array(posts).page(params[:page]).per(10)
+      @posts = Kaminari.paginate_array(posts).page(params[:page])
     else
-      @posts = @tag.posts.order(created_at: :desc).page(params[:page]).per(10)
+      @posts = @tag.posts.order(created_at: :desc).page(params[:page])
     end
   end
 

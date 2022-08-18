@@ -19,7 +19,7 @@
           <%= image_tag get_image(post.images.first, 200, 200), class: "my-3" %>
         </div>
         <div class="mb-2">
-          <%= post.body %>
+          <%= simple_format(h(post.body), {}, sanitize: false, wrapper: "div") %>
         </div>
         <div>
           投稿日: <%= l post.created_at %>

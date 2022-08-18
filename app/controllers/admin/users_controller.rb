@@ -3,11 +3,11 @@ class Admin::UsersController < ApplicationController
   before_action :set_user, except: [:index]
 
   def index
-    @users = User.page(params[:page]).per(10)
+    @users = User.page(params[:page])
   end
 
   def show
-    @posts = @user.posts
+    @posts = @user.posts.page(params[:page])
   end
 
   def edit
