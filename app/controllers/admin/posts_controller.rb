@@ -3,7 +3,7 @@ class Admin::PostsController < ApplicationController
   before_action :set_post, except: [:index]
 
   def index
-    @posts = Post.includes(:user, :tags).with_attached_images.order(created_at: :desc).page(params[:page]).per(10)
+    @posts = Post.includes(:user, :tags).with_attached_images.order(created_at: :desc).page(params[:page])
   end
 
   def show

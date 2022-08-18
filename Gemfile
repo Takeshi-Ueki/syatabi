@@ -64,6 +64,7 @@ gem 'kaminari', '~> 1.2.1'
 gem 'gon'
 gem 'pry-byebug', group: :development
 gem 'dotenv-rails'
+gem 'rails_autolink'
 
 group :production do
   gem 'mysql2'

@@ -10,7 +10,7 @@
             <%= post.favorites.count %>件のいいね
           </div>
           <div class="col-12 px-3 col-sm-5">
-            <%= post.body %>
+            <%= simple_format(h(post.body), {}, sanitize: false, wrapper: "div") %>
           </div>
           <div class="col-3">
             <%= l post.created_at %>

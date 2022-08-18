@@ -48,13 +48,13 @@ class Public::UsersController < ApplicationController
   def favorites
     favorites = @user.favorites.order(created_at: :desc).pluck(:post_id)
     favorite_posts = Post.find(favorites)
-    @favorite_posts = Kaminari.paginate_array(favorite_posts).page(params[:page]).per(10)
+    @favorite_posts = Kaminari.paginate_array(favorite_posts).page(params[:page])
   end
 
   def lists
     lists = @user.lists.order(created_at: :desc).pluck(:post_id)
     posts = Post.find(lists)
-    @posts = Kaminari.paginate_array(posts).page(params[:page]).per(10)
+    @posts = Kaminari.paginate_array(posts).page(params[:page])
   end
 
   def account_recovery

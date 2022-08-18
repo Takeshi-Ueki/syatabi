@@ -1,6 +1,6 @@
 class Admin::ReportsController < ApplicationController
   def index
-    @reports = Report.page(params[:page]).per(10)
+    @reports = Report.page(params[:page])
   end
 
   def show
