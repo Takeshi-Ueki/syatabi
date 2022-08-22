@@ -1,2 +1,45 @@
 <%= render 'shared/notice' %>
-<%= render 'public/users/post_list', posts: @posts %>
+
+<div class="row main-top">
+  <% @posts.each do |post| %>
+    <div class="col-12 col-md-10 col mx-auto pb-5 post-list">
+      <%= link_to post_path(post.id), id: "post-link-#{post.id}" do %>
+        <div class="row pt-3 align-items-center">
+          <div class="col-12 text-right col-sm-2">
+            <%= image_tag post.user.get_profile_image(100, 100), class: "profile-img" %>
+          </div>
+          <div class="col-12 col-sm-2">
+            <%= post.favorites.count %>件のいいね
+          </div>
+          <div class="col-12 px-3 col-sm-5">
+            <%= simple_format(h(post.body), {}, sanitize: false, wrapper: "div") %>
+          </div>
+          <div class="col-3">
+            <%= l post.created_at %>
+          </div>
+        </div>
+
+        <div class="row post-tag mt-3">
+          <div class="col-8 mx-auto">
+            <% post.tags.each do |tag| %>
+              <span class="mr-2">#<%= tag.name %></span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row">
+          <% post.images.each do |image| %>
+            <div class="mx-auto p-3">
+              <%= image_tag get_image(image, 550, 550), class: "post-show-img" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="col-12 mt-5">
+    <%= paginate @posts %>
+  </div>
+</div>
+
+<%#= render 'public/users/post_list', posts: @posts %>

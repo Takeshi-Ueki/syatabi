@@ -2,7 +2,7 @@ class Public::RanksController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @posts = current_user.posts
+    @posts = current_user.posts.includes(:rank)
     @rank = Rank.new
     ranks = current_user.ranks.order(rank: :asc).pluck(:post_id)
     @rank_posts = Post.find(ranks)

@@ -7,7 +7,7 @@
   <%= post_comment.user.name %>
 </div>
 <div class="col-5 text-right">
-  <% if post_comment.is_active %>
+  <% if post_comment.is_active? %>
     <strong class="status-true ml-atuo mr-3">有効</strong>
   <% else %>
     <strong class="status-false ml-auto mr-3">無効</strong>

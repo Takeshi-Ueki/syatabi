@@ -33,6 +33,7 @@ class Public::PostsController < ApplicationController
     gon.long = @post.long.to_f
     @post_tags = @post.tags
     @post_comment = PostComment.new
+    @post_comments = @post.post_comments.includes(:user)
     @list = List.new
     @diary = @post.diary if @post.diary.present?
   end
@@ -72,8 +73,7 @@ class Public::PostsController < ApplicationController
 
   def search_tag
     @tag_list = Tag.all.sort { |a, b|
-      b.posts.size <=>
-      a.posts.size
+      b.posts.size <=>a.posts.size
     }
     @tag = Tag.find(params[:tag_id])
     if params[:sort].present?

@@ -1,4 +1,4 @@
-<% post.post_comments.each do |post_comment| %>
+<% post_comments.each do |post_comment| %>
   <div class="col-12 my-3">
     <%= link_to(user_path(post_comment.user.id), class: "no-border") do %>
       <%= image_tag post_comment.user.get_profile_image(75, 75), class: "profile-img" %>
@@ -7,7 +7,7 @@
   </div>
 
   <div class="col-12 mb-2">
-    <% if post_comment.is_active == false %>
+    <% if !post_comment.is_active? %>
       <span class="status-false">このコメントは管理者によって制限されています</span>
     <% else %>
       <%= post_comment.comment %>

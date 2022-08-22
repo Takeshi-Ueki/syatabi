@@ -1,2 +1,2 @@
 $('.comment-form').val("");
-$('.comment-index-<%= @post.id %>').html("<%= j(render 'public/post_comments/index', post: @post) %>");
+$('.comment-index-<%= @post.id %>').html("<%= j(render 'public/post_comments/index', post_comments: @post_comments) %>");

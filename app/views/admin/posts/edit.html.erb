@@ -58,7 +58,7 @@
               <%= image_tag post_comment.user.get_profile_image(75, 75), class: "profile-img" %>
             <% end %>
             <span class="ml-2"><%= post_comment.user.name %></span>
-            <% if post_comment.is_active == false %>
+            <% if !post_comment.is_active? %>
               <%= link_to "有効にする", admin_post_post_comment_path(post_comment.post.id, post_comment.id, status: true), method: :patch, data: { confirm: "コメント内容: '#{post_comment.comment}'を有効にしますか？" }, class: "ml-5 btn btn-sm btn-primary comment-btn" %>
             <% else %>
               <%= link_to "無効にする", admin_post_post_comment_path(post_comment.post.id, post_comment.id, status: false), method: :patch, data: { confirm: "コメント内容: '#{post_comment.comment}'を無効にしますか？" }, class: "ml-5 btn btn-sm btn-danger comment-btn" %>

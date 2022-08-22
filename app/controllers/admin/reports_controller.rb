@@ -1,6 +1,6 @@
 class Admin::ReportsController < ApplicationController
   def index
-    @reports = Report.page(params[:page])
+    @reports = Report.includes(:reporter, :reported).page(params[:page])
   end
 
   def show

@@ -18,9 +18,9 @@
 
     <div class="row">
       <div class="col-12 text-center user-status">
-        <% if @user.withdraw_status == "block" %>
+        <% if @user.block? %>
           <strong class="status-false">ブロックした</strong>
-        <% elsif @user.withdraw_status == "passive" %>
+        <% elsif @user.passive? %>
           <strong class="status-false">無効な</strong>
         <% else %>
           <strong class="status-true">有効な</strong>
