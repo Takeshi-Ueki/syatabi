@@ -44,8 +44,8 @@
   </div>
   <div class="col-12 col-xl-3 ml-xl-4">
     <div class="row my-4 comment-wrapper align-items-center">
-      <%= render @post_comments if !@post_comments.blank?%>
-      <%= content_tag(:div, "コメントはまだありません", class: "col-12 text-center") if @post_comments.blank? %>
+      <%= render @post_comments if !@post_comments.empty? %>
+      <%= content_tag(:div, "コメントはまだありません", class: "col-12 text-center") if @post_comments.empty? %>
     </div>
   </div>
 </div>

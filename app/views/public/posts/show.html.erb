@@ -25,7 +25,7 @@
       <% end %>
     </div>
 
-    <% if @post.is_active == false %>
+    <% if !@post.is_active? %>
       <div class="row mt-5">
         <div class="col-12 text-center limit-post">この投稿は管理者によって制限されています</div>
       </div>
@@ -65,7 +65,7 @@
     <%= render 'public/post_comments/form', { post: @post, post_comment: @post_comment } %>
 
     <div class="comment-index-<%= @post.id %> row my-4 comment-wrapper">
-      <%= render 'public/post_comments/index', post: @post %>
+      <%= render 'public/post_comments/index', post_comments: @post_comments %>
     </div>
   </div>
 </div>

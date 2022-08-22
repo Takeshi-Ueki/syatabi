@@ -3,11 +3,11 @@ class Admin::UsersController < ApplicationController
   before_action :set_user, except: [:index]
 
   def index
-    @users = User.page(params[:page])
+    @users = User.with_attached_profile_image.page(params[:page])
   end
 
   def show
-    @posts = @user.posts.page(params[:page])
+    @posts = @user.posts.with_attached_images.page(params[:page])
   end
 
   def edit
