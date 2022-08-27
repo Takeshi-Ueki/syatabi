@@ -26,13 +26,18 @@ Rails.application.routes.draw do
     root "homes#top"
 
     resources :notifications, only: [:index]
+    resources :ranks, only: [:create]
 
-    get 'users/:id/favorites' => 'users#favorites', as: "user_favorites"
-    get 'users/:id/lists' => 'users#lists', as: "user_lists"
-    get 'users/:id/check' => 'users#check', as: "user_check"
-    get 'users/account_recovery' => 'users#account_recovery', as: "account_recovery"
-    patch 'users/:id/withdraw' => 'users#withdraw', as: "user_withdraw"
     resources :users, only: [:show, :edit, :update, :destroy] do
+      member do
+        get 'favorites'
+        get 'lists'
+        get 'check'
+        patch 'withdraw'
+      end
+      collection do
+        get 'account_recovery'
+      end
       resources :reports, only: [:create]
       resources :ranks, only: [:index]
       resource :relationships, only: [:create, :destroy]
@@ -47,7 +52,6 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
       resources :lists, only: [:create, :update, :destroy]
-      resources :ranks, only: [:create, :destroy]
       resource :reposts, only: [:create, :destroy]
       resources :diaries, only: [:new, :create, :show, :edit, :update, :destroy]
     end

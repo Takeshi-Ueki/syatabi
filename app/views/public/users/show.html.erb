@@ -13,7 +13,7 @@
         <%= render 'public/relationships/follow_list', user: @user %>
       </div>
       <div class="col-4">
-        <%= link_to "行きたいところリスト", user_lists_path(@user) %>
+        <%= link_to "行きたいところリスト", lists_user_path(@user) %>
       </div>
     </div>
     <div class="row">
@@ -63,7 +63,7 @@
 
     <div class="row mt-5 p-3 border-box">
       <div class="col-12 mb-3">
-        <%= link_to "いいねした投稿", user_favorites_path(@user.id) %>
+        <%= link_to "いいねした投稿", favorites_user_path(@user.id) %>
       </div>
       <% @favorite_posts.each do |post| %>
 
@@ -71,7 +71,7 @@
 
       <% end %>
       <div class="col-12 my-3 text-right">
-        <%= link_to ">> 一覧を見る", user_favorites_path(@user.id) %>
+        <%= link_to ">> 一覧を見る", favorites_user_path(@user.id) %>
       </div>
     </div>
   </div>

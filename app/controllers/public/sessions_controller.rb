@@ -49,7 +49,7 @@ class Public::SessionsController < Devise::SessionsController
     # 取得したアカウントのパスワードと入力されたパスワードが一致しているか
     # 取得したアカウントが退会済みであれば新規登録画面へ遷移
     if @user.valid_password?(params[:user][:password])
-      redirect_to account_recovery_path(id: @user.id) if @user.passive?
+      redirect_to account_recovery_users_path(id: @user.id) if @user.passive?
       redirect_to new_user_session_path, alert: "このアカウントは管理者により利用を制限されています。" if @user.block?
     end
   end

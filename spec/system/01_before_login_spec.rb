@@ -154,7 +154,7 @@ describe '[STEP1] ユーザログイン前のテスト', type: :system, js: fals
       end
       it 'リストリンクが表示され、内容が正しい' do
         list_link = find_by_id('sidebar-list').native.inner_text
-        expect(page).to have_link list_link, href: user_lists_path(user.id)
+        expect(page).to have_link list_link, href: lists_user_path(user.id)
       end
       it '新規投稿リンクが表示され、内容が正しい' do
         new_post_link = find_by_id('sidebar-new-post').native.inner_text

@@ -1,1 +1,10 @@
+<div class="row mt-5 align-items-center">
+  <div class="h4 col-12 col-md-5 offset-md-1">
+    <%= @user.name %>さんのフォロワー
+  </div>
+  <div class="col-12 col-md-5 text-right mr-5">
+    <%= link_to "戻る", :back %>
+  </div>
+</div>
+
 <%= render 'public/posts/user_list', users: @followers %>
