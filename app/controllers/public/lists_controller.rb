@@ -6,20 +6,20 @@ class Public::ListsController < ApplicationController
     @list = current_user.lists.new
     @list.post_id = @post.id
     @list.save
-    redirect_to user_lists_path(current_user)
+    redirect_to lists_user_path(current_user)
   end
 
   def update
     @list = List.find(params[:id])
     @list.update(list_params)
-    redirect_to user_lists_path(current_user)
+    redirect_to lists_user_path(current_user)
   end
 
   def destroy
     post = Post.find(params[:post_id])
     list = post.has_list(current_user)
     list.destroy
-    redirect_to user_lists_path(current_user)
+    redirect_to lists_user_path(current_user)
   end
 
   private
